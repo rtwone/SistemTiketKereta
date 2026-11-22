@@ -9,6 +9,7 @@
 ![FlatLaf](https://img.shields.io/badge/Theme-FlatLaf%203.5.4-F37021?style=for-the-badge)
 ![Gson](https://img.shields.io/badge/JSON-Gson%202.10.1-16A34A?style=for-the-badge)
 ![NetBeans](https://img.shields.io/badge/IDE-NetBeans%208.2-1B6AC6?style=for-the-badge&logo=apachenetbeanside&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge)
 
 *Tugas Mata Kuliah Pemrograman Berorientasi Objek (PBO) — arsitektur OOP bersih, persistensi JSON berbasis `ArrayList`, UI modern responsif HiDPI, dan kompatibel penuh dengan NetBeans GUI Builder.*
 
@@ -157,6 +158,12 @@ ant clean jar
 # Jalankan aplikasi
 java -jar dist/SistemTiketKereta.jar
 ```
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dirilis di bawah lisensi **[MIT License](LICENSE)**.
 
 ---
 
