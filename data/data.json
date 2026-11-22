@@ -1,0 +1,2747 @@
+{
+  "fare_rounding": 1000,
+  "class_multipliers": {
+    "Ekonomi": 1.0,
+    "Ekonomi Premium": 1.2,
+    "Bisnis": 1.4,
+    "Eksekutif": 1.8
+  },
+  "stasiun": [
+    {
+      "id": 1,
+      "code": "KLA",
+      "name": "Stasiun Kalianget",
+      "district": "Kalianget",
+      "regency": "Sumenep",
+      "class": "II",
+      "distance_km": 0
+    },
+    {
+      "id": 2,
+      "code": "SMP",
+      "name": "Stasiun Sumenep",
+      "district": "Kota Sumenep",
+      "regency": "Sumenep",
+      "class": "I",
+      "distance_km": 8
+    },
+    {
+      "id": 3,
+      "code": "SRG",
+      "name": "Stasiun Saronggi",
+      "district": "Saronggi",
+      "regency": "Sumenep",
+      "class": "III",
+      "distance_km": 19
+    },
+    {
+      "id": 4,
+      "code": "BLT",
+      "name": "Stasiun Bluto",
+      "district": "Bluto",
+      "regency": "Sumenep",
+      "class": "III",
+      "distance_km": 30
+    },
+    {
+      "id": 5,
+      "code": "PRG",
+      "name": "Stasiun Pragaan",
+      "district": "Pragaan",
+      "regency": "Sumenep",
+      "class": "III",
+      "distance_km": 42
+    },
+    {
+      "id": 6,
+      "code": "LRG",
+      "name": "Stasiun Larangan",
+      "district": "Larangan",
+      "regency": "Pamekasan",
+      "class": "III",
+      "distance_km": 52
+    },
+    {
+      "id": 7,
+      "code": "GLS",
+      "name": "Stasiun Galis",
+      "district": "Galis",
+      "regency": "Pamekasan",
+      "class": "III",
+      "distance_km": 58
+    },
+    {
+      "id": 8,
+      "code": "PMK",
+      "name": "Stasiun Pamekasan",
+      "district": "Kota Pamekasan",
+      "regency": "Pamekasan",
+      "class": "I",
+      "distance_km": 63
+    },
+    {
+      "id": 9,
+      "code": "TLK",
+      "name": "Stasiun Tlanakan",
+      "district": "Tlanakan",
+      "regency": "Pamekasan",
+      "class": "III",
+      "distance_km": 70
+    },
+    {
+      "id": 10,
+      "code": "CPL",
+      "name": "Stasiun Camplong",
+      "district": "Camplong",
+      "regency": "Sampang",
+      "class": "III",
+      "distance_km": 80
+    },
+    {
+      "id": 11,
+      "code": "SPG",
+      "name": "Stasiun Sampang",
+      "district": "Sampang",
+      "regency": "Sampang",
+      "class": "I",
+      "distance_km": 92
+    },
+    {
+      "id": 12,
+      "code": "TRJ",
+      "name": "Stasiun Torjun",
+      "district": "Torjun",
+      "regency": "Sampang",
+      "class": "III",
+      "distance_km": 102
+    },
+    {
+      "id": 13,
+      "code": "JRK",
+      "name": "Stasiun Jrengik",
+      "district": "Jrengik",
+      "regency": "Sampang",
+      "class": "III",
+      "distance_km": 112
+    },
+    {
+      "id": 14,
+      "code": "BGA",
+      "name": "Stasiun Blega",
+      "district": "Blega",
+      "regency": "Bangkalan",
+      "class": "II",
+      "distance_km": 124
+    },
+    {
+      "id": 15,
+      "code": "KWR",
+      "name": "Stasiun Kwanyar",
+      "district": "Kwanyar",
+      "regency": "Bangkalan",
+      "class": "III",
+      "distance_km": 133
+    },
+    {
+      "id": 16,
+      "code": "TNM",
+      "name": "Stasiun Tanah Merah",
+      "district": "Tanah Merah",
+      "regency": "Bangkalan",
+      "class": "III",
+      "distance_km": 141
+    },
+    {
+      "id": 17,
+      "code": "BNH",
+      "name": "Stasiun Burneh",
+      "district": "Burneh",
+      "regency": "Bangkalan",
+      "class": "III",
+      "distance_km": 148
+    },
+    {
+      "id": 18,
+      "code": "BKL",
+      "name": "Stasiun Bangkalan",
+      "district": "Bangkalan",
+      "regency": "Bangkalan",
+      "class": "I",
+      "distance_km": 153
+    },
+    {
+      "id": 19,
+      "code": "SOC",
+      "name": "Stasiun Socah",
+      "district": "Socah",
+      "regency": "Bangkalan",
+      "class": "III",
+      "distance_km": 160
+    },
+    {
+      "id": 20,
+      "code": "TLA",
+      "name": "Stasiun Telang",
+      "district": "Kamal",
+      "regency": "Bangkalan",
+      "class": "III",
+      "distance_km": 166
+    },
+    {
+      "id": 21,
+      "code": "KML",
+      "name": "Stasiun Kamal",
+      "district": "Kamal",
+      "regency": "Bangkalan",
+      "class": "II",
+      "distance_km": 170
+    }
+  ],
+  "kereta": [
+    {
+      "train_number": "KA 101",
+      "name": "KA Jokotole",
+      "carriages": [
+        {
+          "class": "Eksekutif",
+          "count": 3,
+          "seats_per_carriage": 50
+        },
+        {
+          "class": "Bisnis",
+          "count": 3,
+          "seats_per_carriage": 64
+        }
+      ],
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "service_type": "Antarkota",
+      "base_fare": 85000
+    },
+    {
+      "train_number": "KA 102",
+      "name": "KA Trunojoyo",
+      "carriages": [
+        {
+          "class": "Eksekutif",
+          "count": 6,
+          "seats_per_carriage": 50
+        }
+      ],
+      "origin_code": "BKL",
+      "destination_code": "KLA",
+      "service_type": "Antarkota",
+      "base_fare": 110000
+    },
+    {
+      "train_number": "KA 103",
+      "name": "KA Arya Wiraraja",
+      "carriages": [
+        {
+          "class": "Eksekutif",
+          "count": 3,
+          "seats_per_carriage": 50
+        },
+        {
+          "class": "Ekonomi",
+          "count": 4,
+          "seats_per_carriage": 80
+        }
+      ],
+      "origin_code": "SMP",
+      "destination_code": "BKL",
+      "service_type": "Antarkota",
+      "base_fare": 65000
+    },
+    {
+      "train_number": "KA 104",
+      "name": "KA Cakraningrat",
+      "carriages": [
+        {
+          "class": "Bisnis",
+          "count": 3,
+          "seats_per_carriage": 64
+        },
+        {
+          "class": "Ekonomi",
+          "count": 4,
+          "seats_per_carriage": 80
+        }
+      ],
+      "origin_code": "BKL",
+      "destination_code": "SMP",
+      "service_type": "Antarkota",
+      "base_fare": 55000
+    },
+    {
+      "train_number": "KA 105",
+      "name": "KA Pangeran Ronggosukowati",
+      "carriages": [
+        {
+          "class": "Bisnis",
+          "count": 5,
+          "seats_per_carriage": 64
+        }
+      ],
+      "origin_code": "BKL",
+      "destination_code": "PMK",
+      "service_type": "Antarkota",
+      "base_fare": 60000
+    },
+    {
+      "train_number": "KA 106",
+      "name": "KA Kerapan Sapi Ekspres",
+      "carriages": [
+        {
+          "class": "Eksekutif",
+          "count": 5,
+          "seats_per_carriage": 50
+        }
+      ],
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "service_type": "Ekspres",
+      "base_fare": 130000
+    },
+    {
+      "train_number": "KA 107",
+      "name": "KA Sakera",
+      "carriages": [
+        {
+          "class": "Ekonomi",
+          "count": 6,
+          "seats_per_carriage": 80
+        }
+      ],
+      "origin_code": "KML",
+      "destination_code": "SPG",
+      "service_type": "Lokal",
+      "base_fare": 25000
+    },
+    {
+      "train_number": "KA 108",
+      "name": "KA Potre Koneng",
+      "carriages": [
+        {
+          "class": "Ekonomi Premium",
+          "count": 5,
+          "seats_per_carriage": 80
+        }
+      ],
+      "origin_code": "KLA",
+      "destination_code": "PMK",
+      "service_type": "Lokal",
+      "base_fare": 35000
+    },
+    {
+      "train_number": "KA 109",
+      "name": "KA Mega Remmeng",
+      "carriages": [
+        {
+          "class": "Ekonomi",
+          "count": 4,
+          "seats_per_carriage": 90
+        }
+      ],
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "service_type": "Komuter",
+      "base_fare": 15000
+    },
+    {
+      "train_number": "KA 110",
+      "name": "KA Gili Iyang",
+      "carriages": [
+        {
+          "class": "Ekonomi",
+          "count": 4,
+          "seats_per_carriage": 80
+        }
+      ],
+      "origin_code": "KLA",
+      "destination_code": "SPG",
+      "service_type": "Lokal",
+      "base_fare": 12000
+    }
+  ],
+  "jadwal": [
+    {
+      "schedule_id": "JD-101-01",
+      "train_number": "KA 101",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "05:30"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "06:14",
+          "departure": "06:16"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "06:39",
+          "departure": "06:41"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "07:07",
+          "departure": "07:09"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "07:32",
+          "departure": "07:34"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "07:48"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-101-02",
+      "train_number": "KA 101",
+      "direction": "balik",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "08:20"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "08:34",
+          "departure": "08:36"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "08:59",
+          "departure": "09:01"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "09:27",
+          "departure": "09:29"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "09:52",
+          "departure": "09:54"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "10:38"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-101-03",
+      "train_number": "KA 101",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "12:10"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "12:54",
+          "departure": "12:56"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "13:19",
+          "departure": "13:21"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "13:47",
+          "departure": "13:49"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "14:12",
+          "departure": "14:14"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "14:28"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-101-04",
+      "train_number": "KA 101",
+      "direction": "balik",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "15:00"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "15:14",
+          "departure": "15:16"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "15:39",
+          "departure": "15:41"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "16:07",
+          "departure": "16:09"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "16:32",
+          "departure": "16:34"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "17:18"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-102-01",
+      "train_number": "KA 102",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "06:00"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "06:23",
+          "departure": "06:25"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "06:51",
+          "departure": "06:53"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "07:16",
+          "departure": "07:18"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "08:02",
+          "departure": "08:04"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "08:10"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-102-02",
+      "train_number": "KA 102",
+      "direction": "balik",
+      "origin_code": "KLA",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "08:40"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "08:46",
+          "departure": "08:48"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "09:32",
+          "departure": "09:34"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "09:57",
+          "departure": "09:59"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "10:25",
+          "departure": "10:27"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "10:50"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-102-03",
+      "train_number": "KA 102",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "12:20"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "12:43",
+          "departure": "12:45"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "13:11",
+          "departure": "13:13"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "13:36",
+          "departure": "13:38"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "14:22",
+          "departure": "14:24"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "14:30"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-102-04",
+      "train_number": "KA 102",
+      "direction": "balik",
+      "origin_code": "KLA",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "15:00"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "15:06",
+          "departure": "15:08"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "15:52",
+          "departure": "15:54"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "16:17",
+          "departure": "16:19"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "16:45",
+          "departure": "16:47"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "17:10"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-103-01",
+      "train_number": "KA 103",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "06:15"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "06:59",
+          "departure": "07:01"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "07:24",
+          "departure": "07:26"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "07:52",
+          "departure": "07:54"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "08:17"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-103-02",
+      "train_number": "KA 103",
+      "direction": "balik",
+      "origin_code": "BKL",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "08:50"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "09:13",
+          "departure": "09:15"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "09:41",
+          "departure": "09:43"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "10:06",
+          "departure": "10:08"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "10:52"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-103-03",
+      "train_number": "KA 103",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "12:25"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "13:09",
+          "departure": "13:11"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "13:34",
+          "departure": "13:36"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "14:02",
+          "departure": "14:04"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "14:27"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-103-04",
+      "train_number": "KA 103",
+      "direction": "balik",
+      "origin_code": "BKL",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "15:00"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "15:23",
+          "departure": "15:25"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "15:51",
+          "departure": "15:53"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "16:16",
+          "departure": "16:18"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "17:02"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-104-01",
+      "train_number": "KA 104",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "05:15"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "05:38",
+          "departure": "05:40"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "06:06",
+          "departure": "06:08"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "06:31",
+          "departure": "06:33"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "07:17"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-104-02",
+      "train_number": "KA 104",
+      "direction": "balik",
+      "origin_code": "SMP",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "07:50"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "08:34",
+          "departure": "08:36"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "08:59",
+          "departure": "09:01"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "09:27",
+          "departure": "09:29"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "09:52"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-104-03",
+      "train_number": "KA 104",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "11:25"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "11:48",
+          "departure": "11:50"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "12:16",
+          "departure": "12:18"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "12:41",
+          "departure": "12:43"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "13:27"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-104-04",
+      "train_number": "KA 104",
+      "direction": "balik",
+      "origin_code": "SMP",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "14:00"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "14:44",
+          "departure": "14:46"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "15:09",
+          "departure": "15:11"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "15:37",
+          "departure": "15:39"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "16:02"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-01",
+      "train_number": "KA 105",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "06:30"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "06:53",
+          "departure": "06:55"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "07:21",
+          "departure": "07:23"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "07:46"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-02",
+      "train_number": "KA 105",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "08:20"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "08:43",
+          "departure": "08:45"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "09:11",
+          "departure": "09:13"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "09:36"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-03",
+      "train_number": "KA 105",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "10:40"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "11:03",
+          "departure": "11:05"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "11:31",
+          "departure": "11:33"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "11:56"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-04",
+      "train_number": "KA 105",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "12:30"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "12:53",
+          "departure": "12:55"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "13:21",
+          "departure": "13:23"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "13:46"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-05",
+      "train_number": "KA 105",
+      "direction": "pergi",
+      "origin_code": "BKL",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "BKL",
+          "departure": "14:50"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "15:13",
+          "departure": "15:15"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "15:41",
+          "departure": "15:43"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "16:06"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-105-06",
+      "train_number": "KA 105",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "BKL",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "16:40"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "17:03",
+          "departure": "17:05"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "17:31",
+          "departure": "17:33"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "17:56"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-106-01",
+      "train_number": "KA 106",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "07:00"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "07:37",
+          "departure": "07:38"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "07:57",
+          "departure": "07:58"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "08:39",
+          "departure": "08:40"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "08:51"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-106-02",
+      "train_number": "KA 106",
+      "direction": "balik",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "09:25"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "09:36",
+          "departure": "09:37"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "10:18",
+          "departure": "10:19"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "10:38",
+          "departure": "10:39"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "11:16"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-106-03",
+      "train_number": "KA 106",
+      "direction": "pergi",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "12:50"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "13:27",
+          "departure": "13:28"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "13:47",
+          "departure": "13:48"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "14:29",
+          "departure": "14:30"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "14:41"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-106-04",
+      "train_number": "KA 106",
+      "direction": "balik",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "15:15"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "15:26",
+          "departure": "15:27"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "16:08",
+          "departure": "16:09"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "16:28",
+          "departure": "16:29"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "17:06"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-01",
+      "train_number": "KA 107",
+      "direction": "pergi",
+      "origin_code": "KML",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "05:00"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "05:04",
+          "departure": "05:06"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "05:12",
+          "departure": "05:14"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "05:21",
+          "departure": "05:23"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "05:28",
+          "departure": "05:30"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "05:37",
+          "departure": "05:39"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "05:47",
+          "departure": "05:49"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "05:58",
+          "departure": "06:00"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "06:12",
+          "departure": "06:14"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "06:24",
+          "departure": "06:26"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "06:36"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-02",
+      "train_number": "KA 107",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "07:10"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "07:20",
+          "departure": "07:22"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "07:32",
+          "departure": "07:34"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "07:46",
+          "departure": "07:48"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "07:57",
+          "departure": "07:59"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "08:07",
+          "departure": "08:09"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "08:16",
+          "departure": "08:18"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "08:23",
+          "departure": "08:25"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "08:32",
+          "departure": "08:34"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "08:40",
+          "departure": "08:42"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "08:46"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-03",
+      "train_number": "KA 107",
+      "direction": "pergi",
+      "origin_code": "KML",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "09:50"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "09:54",
+          "departure": "09:56"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "10:02",
+          "departure": "10:04"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "10:11",
+          "departure": "10:13"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "10:18",
+          "departure": "10:20"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "10:27",
+          "departure": "10:29"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "10:37",
+          "departure": "10:39"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "10:48",
+          "departure": "10:50"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "11:02",
+          "departure": "11:04"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "11:14",
+          "departure": "11:16"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "11:26"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-04",
+      "train_number": "KA 107",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "12:00"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "12:10",
+          "departure": "12:12"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "12:22",
+          "departure": "12:24"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "12:36",
+          "departure": "12:38"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "12:47",
+          "departure": "12:49"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "12:57",
+          "departure": "12:59"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "13:06",
+          "departure": "13:08"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "13:13",
+          "departure": "13:15"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "13:22",
+          "departure": "13:24"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "13:30",
+          "departure": "13:32"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "13:36"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-05",
+      "train_number": "KA 107",
+      "direction": "pergi",
+      "origin_code": "KML",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "14:40"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "14:44",
+          "departure": "14:46"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "14:52",
+          "departure": "14:54"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "15:01",
+          "departure": "15:03"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "15:08",
+          "departure": "15:10"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "15:17",
+          "departure": "15:19"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "15:27",
+          "departure": "15:29"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "15:38",
+          "departure": "15:40"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "15:52",
+          "departure": "15:54"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "16:04",
+          "departure": "16:06"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "16:16"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-107-06",
+      "train_number": "KA 107",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "16:50"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "17:00",
+          "departure": "17:02"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "17:12",
+          "departure": "17:14"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "17:26",
+          "departure": "17:28"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "17:37",
+          "departure": "17:39"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "17:47",
+          "departure": "17:49"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "17:56",
+          "departure": "17:58"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "18:03",
+          "departure": "18:05"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "18:12",
+          "departure": "18:14"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "18:20",
+          "departure": "18:22"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "18:26"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-01",
+      "train_number": "KA 108",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "05:00"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "05:08",
+          "departure": "05:10"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "05:21",
+          "departure": "05:23"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "05:34",
+          "departure": "05:36"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "05:48",
+          "departure": "05:50"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "06:00",
+          "departure": "06:02"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "06:08",
+          "departure": "06:10"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "06:15"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-02",
+      "train_number": "KA 108",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "06:45"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "06:50",
+          "departure": "06:52"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "06:58",
+          "departure": "07:00"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "07:10",
+          "departure": "07:12"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "07:24",
+          "departure": "07:26"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "07:37",
+          "departure": "07:39"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "07:50",
+          "departure": "07:52"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "08:00"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-03",
+      "train_number": "KA 108",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "09:00"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "09:08",
+          "departure": "09:10"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "09:21",
+          "departure": "09:23"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "09:34",
+          "departure": "09:36"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "09:48",
+          "departure": "09:50"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "10:00",
+          "departure": "10:02"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "10:08",
+          "departure": "10:10"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "10:15"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-04",
+      "train_number": "KA 108",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "10:45"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "10:50",
+          "departure": "10:52"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "10:58",
+          "departure": "11:00"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "11:10",
+          "departure": "11:12"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "11:24",
+          "departure": "11:26"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "11:37",
+          "departure": "11:39"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "11:50",
+          "departure": "11:52"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "12:00"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-05",
+      "train_number": "KA 108",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "PMK",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "13:00"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "13:08",
+          "departure": "13:10"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "13:21",
+          "departure": "13:23"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "13:34",
+          "departure": "13:36"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "13:48",
+          "departure": "13:50"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "14:00",
+          "departure": "14:02"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "14:08",
+          "departure": "14:10"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "14:15"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-108-06",
+      "train_number": "KA 108",
+      "direction": "balik",
+      "origin_code": "PMK",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "PMK",
+          "departure": "14:45"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "14:50",
+          "departure": "14:52"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "14:58",
+          "departure": "15:00"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "15:10",
+          "departure": "15:12"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "15:24",
+          "departure": "15:26"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "15:37",
+          "departure": "15:39"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "15:50",
+          "departure": "15:52"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "16:00"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-109-01",
+      "train_number": "KA 109",
+      "direction": "pergi",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "05:30"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "05:34",
+          "departure": "05:36"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "05:42",
+          "departure": "05:44"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "05:51",
+          "departure": "05:53"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "05:58",
+          "departure": "06:00"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "06:07",
+          "departure": "06:09"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "06:17",
+          "departure": "06:19"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "06:28",
+          "departure": "06:30"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "06:42",
+          "departure": "06:44"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "06:54",
+          "departure": "06:56"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "07:06",
+          "departure": "07:08"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "07:20",
+          "departure": "07:22"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "07:32",
+          "departure": "07:34"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "07:41",
+          "departure": "07:43"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "07:48",
+          "departure": "07:50"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "07:56",
+          "departure": "07:58"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "08:08",
+          "departure": "08:10"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "08:22",
+          "departure": "08:24"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "08:35",
+          "departure": "08:37"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "08:48"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-109-02",
+      "train_number": "KA 109",
+      "direction": "balik",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "09:20"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "09:31",
+          "departure": "09:33"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "09:44",
+          "departure": "09:46"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "09:58",
+          "departure": "10:00"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "10:10",
+          "departure": "10:12"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "10:18",
+          "departure": "10:20"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "10:25",
+          "departure": "10:27"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "10:34",
+          "departure": "10:36"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "10:46",
+          "departure": "10:48"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "11:00",
+          "departure": "11:02"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "11:12",
+          "departure": "11:14"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "11:24",
+          "departure": "11:26"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "11:38",
+          "departure": "11:40"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "11:49",
+          "departure": "11:51"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "11:59",
+          "departure": "12:01"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "12:08",
+          "departure": "12:10"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "12:15",
+          "departure": "12:17"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "12:24",
+          "departure": "12:26"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "12:32",
+          "departure": "12:34"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "12:38"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-109-03",
+      "train_number": "KA 109",
+      "direction": "pergi",
+      "origin_code": "KML",
+      "destination_code": "SMP",
+      "stops": [
+        {
+          "station_code": "KML",
+          "departure": "13:40"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "13:44",
+          "departure": "13:46"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "13:52",
+          "departure": "13:54"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "14:01",
+          "departure": "14:03"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "14:08",
+          "departure": "14:10"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "14:17",
+          "departure": "14:19"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "14:27",
+          "departure": "14:29"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "14:38",
+          "departure": "14:40"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "14:52",
+          "departure": "14:54"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "15:04",
+          "departure": "15:06"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "15:16",
+          "departure": "15:18"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "15:30",
+          "departure": "15:32"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "15:42",
+          "departure": "15:44"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "15:51",
+          "departure": "15:53"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "15:58",
+          "departure": "16:00"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "16:06",
+          "departure": "16:08"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "16:18",
+          "departure": "16:20"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "16:32",
+          "departure": "16:34"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "16:45",
+          "departure": "16:47"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "16:58"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-109-04",
+      "train_number": "KA 109",
+      "direction": "balik",
+      "origin_code": "SMP",
+      "destination_code": "KML",
+      "stops": [
+        {
+          "station_code": "SMP",
+          "departure": "17:30"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "17:41",
+          "departure": "17:43"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "17:54",
+          "departure": "17:56"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "18:08",
+          "departure": "18:10"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "18:20",
+          "departure": "18:22"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "18:28",
+          "departure": "18:30"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "18:35",
+          "departure": "18:37"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "18:44",
+          "departure": "18:46"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "18:56",
+          "departure": "18:58"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "19:10",
+          "departure": "19:12"
+        },
+        {
+          "station_code": "TRJ",
+          "arrival": "19:22",
+          "departure": "19:24"
+        },
+        {
+          "station_code": "JRK",
+          "arrival": "19:34",
+          "departure": "19:36"
+        },
+        {
+          "station_code": "BGA",
+          "arrival": "19:48",
+          "departure": "19:50"
+        },
+        {
+          "station_code": "KWR",
+          "arrival": "19:59",
+          "departure": "20:01"
+        },
+        {
+          "station_code": "TNM",
+          "arrival": "20:09",
+          "departure": "20:11"
+        },
+        {
+          "station_code": "BNH",
+          "arrival": "20:18",
+          "departure": "20:20"
+        },
+        {
+          "station_code": "BKL",
+          "arrival": "20:25",
+          "departure": "20:27"
+        },
+        {
+          "station_code": "SOC",
+          "arrival": "20:34",
+          "departure": "20:36"
+        },
+        {
+          "station_code": "TLA",
+          "arrival": "20:42",
+          "departure": "20:44"
+        },
+        {
+          "station_code": "KML",
+          "arrival": "20:48"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-01",
+      "train_number": "KA 110",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "05:45"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "05:53",
+          "departure": "05:55"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "06:06",
+          "departure": "06:08"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "06:19",
+          "departure": "06:21"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "06:33",
+          "departure": "06:35"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "06:45",
+          "departure": "06:47"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "06:53",
+          "departure": "06:55"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "07:00",
+          "departure": "07:02"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "07:09",
+          "departure": "07:11"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "07:21",
+          "departure": "07:23"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "07:35"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-02",
+      "train_number": "KA 110",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "08:05"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "08:17",
+          "departure": "08:19"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "08:29",
+          "departure": "08:31"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "08:38",
+          "departure": "08:40"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "08:45",
+          "departure": "08:47"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "08:53",
+          "departure": "08:55"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "09:05",
+          "departure": "09:07"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "09:19",
+          "departure": "09:21"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "09:32",
+          "departure": "09:34"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "09:45",
+          "departure": "09:47"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "09:55"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-03",
+      "train_number": "KA 110",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "10:55"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "11:03",
+          "departure": "11:05"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "11:16",
+          "departure": "11:18"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "11:29",
+          "departure": "11:31"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "11:43",
+          "departure": "11:45"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "11:55",
+          "departure": "11:57"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "12:03",
+          "departure": "12:05"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "12:10",
+          "departure": "12:12"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "12:19",
+          "departure": "12:21"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "12:31",
+          "departure": "12:33"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "12:45"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-04",
+      "train_number": "KA 110",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "13:15"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "13:27",
+          "departure": "13:29"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "13:39",
+          "departure": "13:41"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "13:48",
+          "departure": "13:50"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "13:55",
+          "departure": "13:57"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "14:03",
+          "departure": "14:05"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "14:15",
+          "departure": "14:17"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "14:29",
+          "departure": "14:31"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "14:42",
+          "departure": "14:44"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "14:55",
+          "departure": "14:57"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "15:05"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-05",
+      "train_number": "KA 110",
+      "direction": "pergi",
+      "origin_code": "KLA",
+      "destination_code": "SPG",
+      "stops": [
+        {
+          "station_code": "KLA",
+          "departure": "16:05"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "16:13",
+          "departure": "16:15"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "16:26",
+          "departure": "16:28"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "16:39",
+          "departure": "16:41"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "16:53",
+          "departure": "16:55"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "17:05",
+          "departure": "17:07"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "17:13",
+          "departure": "17:15"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "17:20",
+          "departure": "17:22"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "17:29",
+          "departure": "17:31"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "17:41",
+          "departure": "17:43"
+        },
+        {
+          "station_code": "SPG",
+          "arrival": "17:55"
+        }
+      ]
+    },
+    {
+      "schedule_id": "JD-110-06",
+      "train_number": "KA 110",
+      "direction": "balik",
+      "origin_code": "SPG",
+      "destination_code": "KLA",
+      "stops": [
+        {
+          "station_code": "SPG",
+          "departure": "18:25"
+        },
+        {
+          "station_code": "CPL",
+          "arrival": "18:37",
+          "departure": "18:39"
+        },
+        {
+          "station_code": "TLK",
+          "arrival": "18:49",
+          "departure": "18:51"
+        },
+        {
+          "station_code": "PMK",
+          "arrival": "18:58",
+          "departure": "19:00"
+        },
+        {
+          "station_code": "GLS",
+          "arrival": "19:05",
+          "departure": "19:07"
+        },
+        {
+          "station_code": "LRG",
+          "arrival": "19:13",
+          "departure": "19:15"
+        },
+        {
+          "station_code": "PRG",
+          "arrival": "19:25",
+          "departure": "19:27"
+        },
+        {
+          "station_code": "BLT",
+          "arrival": "19:39",
+          "departure": "19:41"
+        },
+        {
+          "station_code": "SRG",
+          "arrival": "19:52",
+          "departure": "19:54"
+        },
+        {
+          "station_code": "SMP",
+          "arrival": "20:05",
+          "departure": "20:07"
+        },
+        {
+          "station_code": "KLA",
+          "arrival": "20:15"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "role": "ADMIN",
+      "username": "admin",
+      "full_name": "Administrator",
+      "password": "admin123"
+    },
+    {
+      "role": "PELANGGAN",
+      "id_type": "KTP",
+      "id_number": "3529000000000001",
+      "full_name": "Budi Santoso",
+      "phone": "081234567890",
+      "password": "budi123"
+    },
+    {
+      "role": "PELANGGAN",
+      "id_type": "PASPOR",
+      "id_number": "A1234567",
+      "full_name": "Sari Wulandari",
+      "phone": "081298765432",
+      "password": "sari123"
+    },
+    {
+      "role": "PELANGGAN",
+      "id_type": "KTP",
+      "id_number": "3529023001070001",
+      "full_name": "Irfan Hariyanto",
+      "phone": "08988898828",
+      "password": "irfan123"
+    }
+  ],
+  "pemesanan": [
+    {
+      "booking_code": "TKT-0001",
+      "user_identifier": "3529023001070001",
+      "schedule_id": "JD-110-01",
+      "train_number": "KA 110",
+      "train_name": "KA Gili Iyang",
+      "kelas": "Ekonomi",
+      "origin_code": "KLA",
+      "destination_code": "SMP",
+      "departure_time": "05:45",
+      "arrival_time": "05:53",
+      "penumpang": [
+        {
+          "nama": "Irfan Hariyanto",
+          "id_type": "KTP",
+          "id_number": "3529023001070001",
+          "kode_kursi": "G1-1A"
+        }
+      ],
+      "tarif_per_penumpang": 5000,
+      "total_bayar": 5000,
+      "status": "Dibatalkan",
+      "created_at": "2026-11-22 21:03"
+    },
+    {
+      "booking_code": "TKT-0002",
+      "user_identifier": "3529023001070001",
+      "schedule_id": "JD-110-05",
+      "train_number": "KA 110",
+      "train_name": "KA Gili Iyang",
+      "kelas": "Ekonomi",
+      "origin_code": "KLA",
+      "destination_code": "SRG",
+      "departure_time": "16:05",
+      "arrival_time": "16:26",
+      "penumpang": [
+        {
+          "nama": "Irfan Hariyanto",
+          "id_type": "KTP",
+          "id_number": "3529023001070001",
+          "kode_kursi": "G1-1B"
+        }
+      ],
+      "tarif_per_penumpang": 5000,
+      "total_bayar": 5000,
+      "status": "Lunas",
+      "created_at": "2026-11-22 21:04"
+    }
+  ]
+}
