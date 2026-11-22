@@ -96,7 +96,8 @@ public class BackupRestorePanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();
@@ -153,7 +154,8 @@ public class BackupRestorePanel extends javax.swing.JPanel {
         lblBackupTitle.setText("Export / Backup JSON");
         pnlBackupText.add(lblBackupTitle);
 
-        lblBackupDesc.setText("Simpan seluruh stasiun, kereta, jadwal, akun, dan pemesanan ke file .json pilihan Anda.");
+        lblBackupDesc
+                .setText("Simpan seluruh stasiun, kereta, jadwal, akun, dan pemesanan ke file .json pilihan Anda.");
         pnlBackupText.add(lblBackupDesc);
 
         pnlBackupCard.add(pnlBackupText, java.awt.BorderLayout.CENTER);
@@ -170,7 +172,8 @@ public class BackupRestorePanel extends javax.swing.JPanel {
         lblRestoreTitle.setText("Import / Restore JSON");
         pnlRestoreText.add(lblRestoreTitle);
 
-        lblRestoreDesc.setText("Muat ulang data dari file JSON valid (wajib memiliki minimal 1 akun ADMIN dan data stasiun).");
+        lblRestoreDesc.setText(
+                "Muat ulang data dari file JSON valid (wajib memiliki minimal 1 akun ADMIN dan data stasiun).");
         pnlRestoreText.add(lblRestoreDesc);
 
         pnlRestoreCard.add(pnlRestoreText, java.awt.BorderLayout.CENTER);

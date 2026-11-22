@@ -66,7 +66,7 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
         Tema.styleSecondaryButton(btnRestoreCepat);
 
         tableModel = new DefaultTableModel(
-                new Object[]{"Kode Booking", "Pemesan", "Kereta", "Rute", "Penumpang", "Total", "Status"}, 0) {
+                new Object[] { "Kode Booking", "Pemesan", "Kereta", "Rute", "Penumpang", "Total", "Status" }, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -116,20 +116,21 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
         int batas = Math.min(10, semua.size());
         for (int i = 0; i < batas; i++) {
             Pemesanan p = semua.get(i);
-            tableModel.addRow(new Object[]{
-                p.getBookingCode(),
-                p.getUserIdentifier(),
-                p.getTrainNumber() + " (" + p.getKelas() + ")",
-                p.getOriginCode() + " → " + p.getDestinationCode(),
-                p.getPenumpangList().size() + " org",
-                FormatUtil.formatRupiah(p.getTotalBayar()),
-                p.getStatus()
+            tableModel.addRow(new Object[] {
+                    p.getBookingCode(),
+                    p.getUserIdentifier(),
+                    p.getTrainNumber() + " (" + p.getKelas() + ")",
+                    p.getOriginCode() + " → " + p.getDestinationCode(),
+                    p.getPenumpangList().size() + " org",
+                    FormatUtil.formatRupiah(p.getTotalBayar()),
+                    p.getStatus()
             });
         }
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();
