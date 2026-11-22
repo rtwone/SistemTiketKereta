@@ -94,6 +94,8 @@ classDiagram
 | **Custom Exception** | `ValidasiException` menangani error validasi input, aturan bisnis, dan keamanan Restore JSON. |
 | **In-Memory DB + JSON** | `DataStore` menyimpan seluruh data di `ArrayList` dan disinkronkan ke `data/data.json` menggunakan pola **DTO + Factory** (`DataDto`, `ModelFactory`, `JsonStorage`). |
 
+> 📘 **Ingin mempelajari cara kerja setiap package, konsep PBO/Swing, dan alur lengkap transaksinya?** Baca [**Panduan Arsitektur & Alur Proyek**](docs/PANDUAN_ARSITEKTUR.md).
+
 ---
 
 ## 📂 Struktur Proyek
