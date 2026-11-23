@@ -188,7 +188,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
             JLabel lblJenis = new JLabel("Jenis Identitas");
             Tema.styleMuted(lblJenis);
-            JComboBox<String> cmbJenis = new JComboBox<String>(new String[]{"KTP", "PASPOR"});
+            JComboBox<String> cmbJenis = new JComboBox<String>(new String[] { "KTP", "PASPOR" });
             Tema.styleComboBox(cmbJenis);
             kartu.add(lblJenis);
             kartu.add(cmbJenis);
@@ -253,7 +253,8 @@ public class PesanKursiPanel extends javax.swing.JPanel {
             sb.append(kode);
             i++;
         }
-        lblKursiTerpilih.setText("Kursi Dipilih: " + sb.toString() + " (" + kursiTerpilih.size() + "/" + jumlahPenumpang + ")");
+        lblKursiTerpilih
+                .setText("Kursi Dipilih: " + sb.toString() + " (" + kursiTerpilih.size() + "/" + jumlahPenumpang + ")");
     }
 
     private void prosesBuatPesanan() {
@@ -275,8 +276,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
                     FormatUtil.rapi(b.txtNama.getText()),
                     String.valueOf(b.cmbJenisId.getSelectedItem()),
                     FormatUtil.rapi(b.txtNoId.getText()),
-                    kursiList.get(i)
-            ));
+                    kursiList.get(i)));
         }
 
         try {
@@ -289,7 +289,8 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();

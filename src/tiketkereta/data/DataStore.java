@@ -22,7 +22,7 @@ public class DataStore {
     private final ArrayList<Pemesanan> pemesananList;
     private final Map<String, Double> classMultipliers;
     private final JsonStorage jsonStorage;
-    private final File activeFile;
+    private File activeFile;
     private int fareRounding;
 
     public DataStore() {
@@ -55,10 +55,6 @@ public class DataStore {
         terapkanDto(dto);
     }
 
-    public void save() throws ValidasiException {
-        jsonStorage.writeToFile(activeFile, buatDto());
-    }
-
     public void backupToFile(File tujuan) throws ValidasiException {
         jsonStorage.writeToFile(tujuan, buatDto());
     }
@@ -66,7 +62,7 @@ public class DataStore {
     public void restoreFromFile(File sumber) throws ValidasiException {
         DataDto dto = jsonStorage.readFromFile(sumber);
         terapkanDto(dto);
-        save();
+        this.activeFile = sumber;
     }
 
     private void terapkanDto(DataDto dto) {

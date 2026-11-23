@@ -2694,54 +2694,5 @@
       "password": "irfan123"
     }
   ],
-  "pemesanan": [
-    {
-      "booking_code": "TKT-0001",
-      "user_identifier": "3529023001070001",
-      "schedule_id": "JD-110-01",
-      "train_number": "KA 110",
-      "train_name": "KA Gili Iyang",
-      "kelas": "Ekonomi",
-      "origin_code": "KLA",
-      "destination_code": "SMP",
-      "departure_time": "05:45",
-      "arrival_time": "05:53",
-      "penumpang": [
-        {
-          "nama": "Irfan Hariyanto",
-          "id_type": "KTP",
-          "id_number": "3529023001070001",
-          "kode_kursi": "G1-1A"
-        }
-      ],
-      "tarif_per_penumpang": 5000,
-      "total_bayar": 5000,
-      "status": "Dibatalkan",
-      "created_at": "2026-11-22 21:03"
-    },
-    {
-      "booking_code": "TKT-0002",
-      "user_identifier": "3529023001070001",
-      "schedule_id": "JD-110-05",
-      "train_number": "KA 110",
-      "train_name": "KA Gili Iyang",
-      "kelas": "Ekonomi",
-      "origin_code": "KLA",
-      "destination_code": "SRG",
-      "departure_time": "16:05",
-      "arrival_time": "16:26",
-      "penumpang": [
-        {
-          "nama": "Irfan Hariyanto",
-          "id_type": "KTP",
-          "id_number": "3529023001070001",
-          "kode_kursi": "G1-1B"
-        }
-      ],
-      "tarif_per_penumpang": 5000,
-      "total_bayar": 5000,
-      "status": "Lunas",
-      "created_at": "2026-11-22 21:04"
-    }
-  ]
+  "pemesanan": []
 }

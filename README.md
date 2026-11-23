@@ -31,7 +31,7 @@
 
 ### 🛠️ Alur Administrator
 - **Dashboard Ringkas** — Kartu statistik KPI (*Total Stasiun, Total Kereta, Total Jadwal, Total Pemesanan, Pendapatan Lunas*), tabel transaksi terbaru, dan tombol cepat Backup/Restore JSON.
-- **Kelola Stasiun, Kereta, & Jadwal** — CRUD penuh (Tambah, Ubah, Hapus) dengan validasi relasi data dan penyimpanan otomatis ke `data/data.json`.
+- **Kelola Stasiun, Kereta, & Jadwal** — CRUD penuh (Tambah, Ubah, Hapus) dengan validasi relasi data yang langsung diperbarui pada `ArrayList` di memori.
 - **Kelola Pemesanan** — Filter berdasarkan status (`Semua`, `Dipesan`, `Lunas`, `Dibatalkan`), lihat detail penumpang, tandai lunas, atau batalkan pesanan.
 - **Backup & Restore JSON** — Export/Import file `.json` via `JFileChooser` lengkap dengan validasi struktur data (minimal 1 akun `ADMIN` dan daftar stasiun valid) sehingga data lama tetap aman bila import gagal.
 
@@ -92,7 +92,7 @@ classDiagram
 | **Polymorphism** | Override `getRole()`, `getIdentifier()`, `getJenisLayanan()`, `getKecepatanKmh()`, `getTarifMinimum()`, dan perhitungan tarif. |
 | **Encapsulation** | Seluruh atribut model bersifat `private` dengan akses melalui getter/setter terkontrol. |
 | **Custom Exception** | `ValidasiException` menangani error validasi input, aturan bisnis, dan keamanan Restore JSON. |
-| **In-Memory DB + JSON** | `DataStore` menyimpan seluruh data di `ArrayList` dan disinkronkan ke `data/data.json` menggunakan pola **DTO + Factory** (`DataDto`, `ModelFactory`, `JsonStorage`). |
+| **In-Memory DB + JSON** | `DataStore` menyimpan seluruh data operasional secara sementara di `ArrayList` (dimuat awal dari `data/data.json`), dengan fitur **Backup** (export `ArrayList` → JSON) dan **Restore** (import JSON → `ArrayList`) menggunakan pola **DTO + Factory** (`DataDto`, `ModelFactory`, `JsonStorage`). |
 
 > 📘 **Ingin mempelajari cara kerja setiap package, konsep PBO/Swing, dan alur lengkap transaksinya?** Baca [**Panduan Arsitektur & Alur Proyek**](docs/PANDUAN_ARSITEKTUR.md).
 

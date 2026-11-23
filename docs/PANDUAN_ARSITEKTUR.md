@@ -40,9 +40,10 @@ File: [`DataStore.java`](../src/tiketkereta/data/DataStore.java), [`DataDto.java
      - **DTO (*Data Transfer Object*)** di [`DataDto.java`](../src/tiketkereta/data/DataDto.java) adalah class polos sementara yang bentuk field-nya 100% mengikuti struktur `data.json`.
      - **`@SerializedName("base_fare")`** memberi tahu Gson bahwa key JSON `base_fare` (*snake_case*) dipetakan ke variabel Java `baseFare` (*camelCase*).
      - **`ModelFactory`** di [`ModelFactory.java`](../src/tiketkereta/data/ModelFactory.java) membaca `dto.serviceType` / `dto.role` lalu membuat subclass konkret (`new KeretaEkspres(...)`, `new Admin(...)`, dll.), serta mengonversi balik ke DTO saat menyimpan ke JSON.
-2. **Kenapa `DataStore` memakai `ArrayList` lalu selalu memanggil `save()`?**
-   - Selama aplikasi berjalan, seluruh data berada di RAM dalam 5 `ArrayList` (`stasiunList`, `keretaList`, `jadwalList`, `userList`, `pemesananList`) agar aksesnya cepat.
-   - Karena isi RAM hilang saat aplikasi ditutup, setiap ada perubahan data (registrasi, pemesanan, pembayaran, pembatalan, CRUD admin), `DataStore.save()` langsung menulis ulang seluruh data ke `data/data.json`.
+2. **Bagaimana cara kerja `DataStore` (`ArrayList` sementara + Backup/Restore JSON)?**
+   - Saat aplikasi dimulai, `DataStore.load()` memuat data awal dari `data/data.json` ke dalam 5 `ArrayList` di memori RAM (`stasiunList`, `keretaList`, `jadwalList`, `userList`, `pemesananList`).
+   - Selama aplikasi berjalan, seluruh perubahan (registrasi, pemesanan, pembayaran, pembatalan, CRUD admin) **hanya disimpan sementara di `ArrayList`** (tidak auto-save menimpa `data/data.json`).
+   - Jika ingin menyimpan hasil perubahan ke file, Admin menggunakan **Backup JSON** (`backupToFile`) untuk meng-export isi `ArrayList` ke file `.json`, dan **Restore JSON** (`restoreFromFile`) untuk memuat ulang file `.json` ke dalam `ArrayList` sistem.
 3. **Kenapa Restore JSON memakai list sementara (`stasiunBaru`, `keretaBaru`, dst.) sebelum `.clear()`?**
    - Di [`JsonStorage.java`](../src/tiketkereta/data/JsonStorage.java) dan [`DataStore.java`](../src/tiketkereta/data/DataStore.java), file JSON divalidasi terlebih dahulu (JSON valid, minimal 1 akun `ADMIN`, daftar stasiun tidak kosong). Jika gagal, `ValidasiException` dilempar **sebelum** data lama dihapus sehingga data aktif tetap aman.
 
@@ -127,8 +128,8 @@ flowchart TD
     E -->|"JadwalService.cariJadwalCocok()"| F["4. PilihKeretaPanel: tampilkan OpsiJadwal + Tarif + Sisa Kursi"]
     F -->|"Klik baris & Lanjut"| G["5. PesanKursiPanel + SeatMapPanel"]
     G -->|"Isi data penumpang & pilih kursi Gx-barisHuruf"| H["PemesananService.buatPemesanan()"]
-    H -->|"Generate TKT-0001, status = Dipesan, DataStore.save()"| I["6. PembayaranPanel"]
-    I -->|"Klik Bayar Sekarang"| J["PemesananService.bayarPemesanan() -> status = Lunas, DataStore.save()"]
+    H -->|"Generate TKT-0001, status = Dipesan (simpan di ArrayList)"| I["6. PembayaranPanel"]
+    I -->|"Klik Bayar Sekarang"| J["PemesananService.bayarPemesanan() -> status = Lunas"]
     J --> K["7. ETiketPanel: E-Tiket Resmi TKT-0001"]
     I -->|"Klik Ke Tiket Saya"| L["8. TiketSayaPanel: Lihat E-Tiket / Bayar / Batalkan"]
     L -->|"Batalkan Tiket"| M["PemesananService.batalkanPemesanan() -> status = Dibatalkan, kursi dilepas"]
@@ -139,6 +140,6 @@ flowchart TD
 2. **Autentikasi (`LoginPanel` → `AuthService`)** — Memvalidasi akun lewat `user.getIdentifier()`, menyimpan user aktif, lalu membentuk sidebar sesuai role (`Admin` atau `Pelanggan`).
 3. **Pencarian Jadwal (`CariTiketPanel` → `JadwalService` + `TarifService` + `PemesananService`)** — Menyaring jadwal searah, menghitung sisa kursi per kelas dan tarif bulat ribuan, lalu menampilkan daftar `OpsiJadwal`.
 4. **Input Penumpang & Pilih Kursi (`PesanKursiPanel` + `SeatMapPanel`)** — Membuat 1–4 form penumpang dinamis, mengambil daftar kursi terisi pada trip tersebut, dan merender denah kursi per gerbong (`G1-1A`, `G2-7C`, dst.).
-5. **Pembuatan Pesanan (`PemesananService.buatPemesanan`)** — Validasi input penumpang dan anti *double booking*, menerbitkan kode booking (`TKT-0001`, dst.), menyimpan status **`Dipesan`** ke `ArrayList` dan `data/data.json`.
-6. **Pembayaran & E-Tiket (`PembayaranPanel` → `ETiketPanel`)** — Klik **Bayar Sekarang** mengubah status menjadi **`Lunas`**, menyimpan ke JSON, dan langsung menampilkan E-Tiket resmi.
-7. **Pembatalan & Kelola Admin (`TiketSayaPanel` / `KelolaPemesananPanel`)** — Pembatalan mengubah status menjadi **`Dibatalkan`** sehingga kursi otomatis tersedia kembali. Di sisi Admin, pesanan `Lunas` langsung memperbarui total pendapatan pada `AdminDashboardPanel`.
+5. **Pembuatan Pesanan (`PemesananService.buatPemesanan`)** — Validasi input penumpang dan anti *double booking*, menerbitkan kode booking (`TKT-0001`, dst.), lalu menyimpan pesanan berstatus **`Dipesan`** ke `ArrayList` di memori.
+6. **Pembayaran & E-Tiket (`PembayaranPanel` → `ETiketPanel`)** — Klik **Bayar Sekarang** mengubah status menjadi **`Lunas`** di memori dan langsung menampilkan E-Tiket resmi.
+7. **Pembatalan, Kelola Admin, & Backup/Restore** — Pembatalan mengubah status menjadi **`Dibatalkan`** sehingga kursi otomatis tersedia kembali. Untuk menyimpan seluruh data sementara `ArrayList` ke file atau memuat data cadangan ke sistem, Admin dapat memakai menu **Backup & Restore JSON**.

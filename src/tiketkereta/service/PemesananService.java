@@ -106,7 +106,6 @@ public class PemesananService {
                 FormatUtil.waktuSekarang()
         );
         dataStore.getPemesananList().add(baru);
-        dataStore.save();
         return baru;
     }
 
@@ -116,7 +115,6 @@ public class PemesananService {
             throw new ValidasiException("Pesanan yang sudah dibatalkan tidak dapat dibayar.");
         }
         p.setStatus(Pemesanan.STATUS_LUNAS);
-        dataStore.save();
         return p;
     }
 
@@ -126,7 +124,6 @@ public class PemesananService {
             throw new ValidasiException("Pesanan ini sudah berstatus Dibatalkan.");
         }
         p.setStatus(Pemesanan.STATUS_DIBATALKAN);
-        dataStore.save();
         return p;
     }
 
@@ -148,7 +145,6 @@ public class PemesananService {
         } else {
             throw new ValidasiException("Status tujuan tidak valid: " + statusBaru);
         }
-        dataStore.save();
         return p;
     }
 

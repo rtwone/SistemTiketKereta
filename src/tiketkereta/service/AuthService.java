@@ -65,7 +65,6 @@ public class AuthService {
 
         Pelanggan baru = new Pelanggan(jenisId, nomorId, nama, telepon, password);
         dataStore.getUserList().add(baru);
-        dataStore.save();
         return baru;
     }
 

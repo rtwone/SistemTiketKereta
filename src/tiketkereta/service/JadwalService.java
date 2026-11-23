@@ -93,7 +93,6 @@ public class JadwalService {
             }
         }
         dataStore.getStasiunList().add(baru);
-        dataStore.save();
     }
 
     public void ubahStasiun(String kodeLama, Stasiun update) throws ValidasiException {
@@ -117,7 +116,6 @@ public class JadwalService {
         target.setRegency(update.getRegency());
         target.setKelasStasiun(update.getKelasStasiun());
         target.setDistanceKm(update.getDistanceKm());
-        dataStore.save();
     }
 
     public void hapusStasiun(String kode) throws ValidasiException {
@@ -134,7 +132,6 @@ public class JadwalService {
             }
         }
         dataStore.getStasiunList().remove(target);
-        dataStore.save();
     }
 
     private void validasiStasiun(Stasiun s) throws ValidasiException {
@@ -166,7 +163,6 @@ public class JadwalService {
         Kereta baru = ModelFactory.createKereta(serviceType, trainNumber.trim(), name.trim(),
                 gerbong, originCode.trim().toUpperCase(), destinationCode.trim().toUpperCase(), baseFare);
         dataStore.getKeretaList().add(baru);
-        dataStore.save();
     }
 
     public void ubahKereta(String nomorLama, String serviceType, String trainNumber, String name,
@@ -192,7 +188,6 @@ public class JadwalService {
         Kereta pengganti = ModelFactory.createKereta(serviceType, trainNumber.trim(), name.trim(),
                 gerbong, originCode.trim().toUpperCase(), destinationCode.trim().toUpperCase(), baseFare);
         dataStore.getKeretaList().set(idx, pengganti);
-        dataStore.save();
     }
 
     public void hapusKereta(String trainNumber) throws ValidasiException {
@@ -206,7 +201,6 @@ public class JadwalService {
             }
         }
         dataStore.getKeretaList().remove(target);
-        dataStore.save();
     }
 
     private void validasiKereta(String trainNumber, String name, String originCode,
@@ -279,7 +273,6 @@ public class JadwalService {
         Jadwal baru = new Jadwal(scheduleId.trim(), trainNumber.trim(), direction.trim(),
                 originCode.trim().toUpperCase(), destinationCode.trim().toUpperCase(), stops);
         dataStore.getJadwalList().add(baru);
-        dataStore.save();
     }
 
     public void ubahJadwal(String idLama, String scheduleId, String trainNumber, String direction,
@@ -301,7 +294,6 @@ public class JadwalService {
         target.setOriginCode(originCode.trim().toUpperCase());
         target.setDestinationCode(destinationCode.trim().toUpperCase());
         target.setStops(stops);
-        dataStore.save();
     }
 
     public void hapusJadwal(String scheduleId) throws ValidasiException {
@@ -310,7 +302,6 @@ public class JadwalService {
             throw new ValidasiException("Jadwal tidak ditemukan.");
         }
         dataStore.getJadwalList().remove(target);
-        dataStore.save();
     }
 
     private void validasiJadwal(String scheduleId, String trainNumber, String originCode,
