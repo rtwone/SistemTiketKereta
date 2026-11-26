@@ -26,6 +26,7 @@ import tiketkereta.util.ValidasiException;
 public class PesanKursiPanel extends javax.swing.JPanel {
 
     private static class BarisInputPenumpang {
+        JLabel lblSeatBadge;
         JTextField txtNama;
         JComboBox<String> cmbJenisId;
         JTextField txtNoId;
@@ -59,38 +60,49 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
     private void setupStyle() {
         Tema.styleCanvas(this);
+        pnlTopArea.setOpaque(false);
+        pnlStepper.setOpaque(false);
+        Tema.styleStepItem(lblStep1, false, true);
+        Tema.styleStepItem(lblStep2, false, true);
+        Tema.styleStepItem(lblStep3, true, false);
+        Tema.styleStepItem(lblStep4, false, false);
+
         pnlHeader.setOpaque(false);
         pnlTitleBox.setOpaque(false);
         pnlMain.setOpaque(false);
 
         Tema.styleCard(pnlPenumpangCard, 18, 18);
-        pnlPenumpangCard.setPreferredSize(Tema.dim(390, 480));
+        pnlPenumpangCard.setPreferredSize(Tema.dim(400, 480));
         pnlPenumpangTop.setOpaque(false);
         pnlPenumpangList.setBackground(Tema.SURFACE);
-        pnlPenumpangList.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        pnlPenumpangList.setBorder(BorderFactory.createEmptyBorder(Tema.s(6), Tema.s(6), Tema.s(6), Tema.s(6)));
         scrPenumpang.getVerticalScrollBar().setUnitIncrement(16);
         Tema.styleScrollPane(scrPenumpang);
 
-        Tema.styleCard(pnlSeatCard, 16, 18);
+        Tema.styleCard(pnlSeatCard, 18, 18);
         pnlSeatTop.setOpaque(false);
         pnlGerbongPick.setOpaque(false);
         pnlSeatHost.setOpaque(false);
         pnlSeatHost.add(seatMapPanel, BorderLayout.CENTER);
 
-        Tema.styleCard(pnlBottomCard, 14, 20);
+        Tema.styleAccentCard(pnlBottomCard, 14, 20);
 
         Tema.stylePageTitle(lblTitle);
-        Tema.styleMuted(lblInfoKereta);
+        lblInfoKereta.setFont(Tema.FONT_BODY_BOLD);
+        lblInfoKereta.setForeground(Tema.TEXT_MUTED);
         Tema.styleSubTitle(lblPenumpangTitle);
-        Tema.styleBody(lblGerbong);
+        Tema.styleFieldLabel(lblGerbong);
         lblKursiTerpilih.setFont(Tema.FONT_BODY_BOLD);
         lblKursiTerpilih.setForeground(Tema.PRIMARY);
         lblTotalBayar.setFont(Tema.FONT_SUBTITLE);
         lblTotalBayar.setForeground(Tema.PRIMARY);
 
         Tema.styleComboBox(cmbGerbong);
+        cmbGerbong.setPreferredSize(Tema.dim(200, 40));
         Tema.styleSecondaryButton(btnKembali);
         Tema.styleSecondaryButton(btnIsiAkun);
+        Tema.stylePrimaryButton(btnPilihOtomatis);
+        Tema.styleSecondaryButton(btnResetKursi);
         Tema.styleAccentButton(btnLanjutBayar);
     }
 
@@ -118,6 +130,25 @@ public class PesanKursiPanel extends javax.swing.JPanel {
             }
         });
 
+        btnPilihOtomatis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean lengkap = seatMapPanel.pilihKursiOtomatis();
+                if (!lengkap) {
+                    JOptionPane.showMessageDialog(PesanKursiPanel.this,
+                            "Kursi kosong di gerbong ini tidak cukup untuk " + jumlahPenumpang + " penumpang. Silakan cek gerbong lain.",
+                            "Info Gerbong", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+        btnResetKursi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seatMapPanel.resetPilihanKursi();
+            }
+        });
+
         seatMapPanel.setSeatSelectionListener(new SeatMapPanel.SeatSelectionListener() {
             @Override
             public void onSelectionChanged(Set<String> selectedSeats) {
@@ -139,12 +170,13 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         this.kursiTerpilih.clear();
 
         lblInfoKereta.setText(opsi.getKereta().getTrainNumber() + " " + opsi.getKereta().getName()
-                + " (" + opsi.getKelas() + ")  •  "
-                + opsi.getStasiunAsal().getCode() + " (" + opsi.getJamBerangkat() + ") → "
-                + opsi.getStasiunTujuan().getCode() + " (" + opsi.getJamTiba() + ")");
+                + " (" + opsi.getKelas() + ")   •   "
+                + opsi.getStasiunAsal().getLabelSingkat() + " (" + opsi.getJamBerangkat() + ") → "
+                + opsi.getStasiunTujuan().getLabelSingkat() + " (" + opsi.getJamTiba() + ")");
 
         long total = opsi.getTarifPerPenumpang() * jumlahPenumpang;
-        lblTotalBayar.setText("Total Bayar (" + jumlahPenumpang + " penumpang): " + FormatUtil.formatRupiah(total));
+        lblTotalBayar.setText("Total Tagihan (" + jumlahPenumpang + " × "
+                + FormatUtil.formatRupiah(opsi.getTarifPerPenumpang()) + "):  " + FormatUtil.formatRupiah(total));
 
         bangunFormPenumpang();
         isiDariAkunLogin();
@@ -171,36 +203,56 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         inputPenumpangList.clear();
 
         for (int i = 1; i <= jumlahPenumpang; i++) {
-            JPanel kartu = new JPanel(new GridLayout(0, 1, 0, 6));
-            Tema.styleCard(kartu, 12, 14);
-            kartu.setBackground(Tema.CANVAS);
+            JPanel kartu = new JPanel(new BorderLayout(0, Tema.s(8)));
+            Tema.styleSoftCard(kartu, 12, 14);
 
+            JPanel head = new JPanel(new BorderLayout());
+            head.setOpaque(false);
             JLabel lblJudul = new JLabel("Penumpang " + i);
             Tema.styleSubTitle(lblJudul);
-            kartu.add(lblJudul);
+            JLabel lblBadge = new JLabel("Kursi: Belum dipilih");
+            Tema.styleBadge(lblBadge, Tema.PRIMARY_SOFT, Tema.PRIMARY);
+            head.add(lblJudul, BorderLayout.WEST);
+            head.add(lblBadge, BorderLayout.EAST);
+            kartu.add(head, BorderLayout.NORTH);
 
+            JPanel fields = new JPanel(new GridLayout(3, 1, 0, Tema.s(8)));
+            fields.setOpaque(false);
+
+            JPanel boxNama = new JPanel(new BorderLayout(0, Tema.s(4)));
+            boxNama.setOpaque(false);
             JLabel lblNama = new JLabel("Nama Lengkap");
             Tema.styleMuted(lblNama);
             JTextField txtNama = new JTextField();
             Tema.styleTextField(txtNama, "Nama sesuai KTP / Paspor");
-            kartu.add(lblNama);
-            kartu.add(txtNama);
+            boxNama.add(lblNama, BorderLayout.NORTH);
+            boxNama.add(txtNama, BorderLayout.CENTER);
+            fields.add(boxNama);
 
+            JPanel boxJenis = new JPanel(new BorderLayout(0, Tema.s(4)));
+            boxJenis.setOpaque(false);
             JLabel lblJenis = new JLabel("Jenis Identitas");
             Tema.styleMuted(lblJenis);
-            JComboBox<String> cmbJenis = new JComboBox<String>(new String[] { "KTP", "PASPOR" });
+            JComboBox<String> cmbJenis = new JComboBox<String>(new String[]{"KTP", "PASPOR"});
             Tema.styleComboBox(cmbJenis);
-            kartu.add(lblJenis);
-            kartu.add(cmbJenis);
+            boxJenis.add(lblJenis, BorderLayout.NORTH);
+            boxJenis.add(cmbJenis, BorderLayout.CENTER);
+            fields.add(boxJenis);
 
+            JPanel boxNo = new JPanel(new BorderLayout(0, Tema.s(4)));
+            boxNo.setOpaque(false);
             JLabel lblNo = new JLabel("Nomor Identitas");
             Tema.styleMuted(lblNo);
             JTextField txtNo = new JTextField();
             Tema.styleTextField(txtNo, "NIK atau Nomor Paspor");
-            kartu.add(lblNo);
-            kartu.add(txtNo);
+            boxNo.add(lblNo, BorderLayout.NORTH);
+            boxNo.add(txtNo, BorderLayout.CENTER);
+            fields.add(boxNo);
+
+            kartu.add(fields, BorderLayout.CENTER);
 
             BarisInputPenumpang baris = new BarisInputPenumpang();
+            baris.lblSeatBadge = lblBadge;
             baris.txtNama = txtNama;
             baris.cmbJenisId = cmbJenis;
             baris.txtNoId = txtNo;
@@ -240,21 +292,29 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     }
 
     private void perbaruiLabelKursi() {
+        ArrayList<String> urut = new ArrayList<String>(kursiTerpilih);
+        for (int i = 0; i < inputPenumpangList.size(); i++) {
+            JLabel badge = inputPenumpangList.get(i).lblSeatBadge;
+            if (i < urut.size()) {
+                badge.setText("Kursi: " + urut.get(i));
+                Tema.styleBadge(badge, Tema.SUCCESS_SOFT, Tema.STATUS_GREEN);
+            } else {
+                badge.setText("Kursi: Belum dipilih");
+                Tema.styleBadge(badge, Tema.PRIMARY_SOFT, Tema.PRIMARY);
+            }
+        }
         if (kursiTerpilih.isEmpty()) {
-            lblKursiTerpilih.setText("Kursi Dipilih: - (0/" + jumlahPenumpang + ")");
+            lblKursiTerpilih.setText("Kursi Terpilih: 0/" + jumlahPenumpang);
             return;
         }
         StringBuilder sb = new StringBuilder();
-        int i = 0;
-        for (String kode : kursiTerpilih) {
+        for (int i = 0; i < urut.size(); i++) {
             if (i > 0) {
                 sb.append(", ");
             }
-            sb.append(kode);
-            i++;
+            sb.append(urut.get(i));
         }
-        lblKursiTerpilih
-                .setText("Kursi Dipilih: " + sb.toString() + " (" + kursiTerpilih.size() + "/" + jumlahPenumpang + ")");
+        lblKursiTerpilih.setText("Terpilih (" + urut.size() + "/" + jumlahPenumpang + "): " + sb.toString());
     }
 
     private void prosesBuatPesanan() {
@@ -263,7 +323,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         }
         if (kursiTerpilih.size() != jumlahPenumpang) {
             JOptionPane.showMessageDialog(this,
-                    "Pilih tepat " + jumlahPenumpang + " kursi pada denah kursi sebelum melanjutkan.",
+                    "Pilih tepat " + jumlahPenumpang + " kursi pada denah kursi (atau klik tombol Pilih Kursi Otomatis).",
                     "Kursi Belum Lengkap",
                     JOptionPane.WARNING_MESSAGE);
             return;
@@ -276,7 +336,8 @@ public class PesanKursiPanel extends javax.swing.JPanel {
                     FormatUtil.rapi(b.txtNama.getText()),
                     String.valueOf(b.cmbJenisId.getSelectedItem()),
                     FormatUtil.rapi(b.txtNoId.getText()),
-                    kursiList.get(i)));
+                    kursiList.get(i)
+            ));
         }
 
         try {
@@ -289,10 +350,15 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlTopArea = new javax.swing.JPanel();
+        pnlStepper = new javax.swing.JPanel();
+        lblStep1 = new javax.swing.JLabel();
+        lblStep2 = new javax.swing.JLabel();
+        lblStep3 = new javax.swing.JLabel();
+        lblStep4 = new javax.swing.JLabel();
         pnlHeader = new javax.swing.JPanel();
         pnlTitleBox = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
@@ -310,6 +376,8 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         pnlGerbongPick = new javax.swing.JPanel();
         lblGerbong = new javax.swing.JLabel();
         cmbGerbong = new javax.swing.JComboBox<>();
+        btnPilihOtomatis = new javax.swing.JButton();
+        btnResetKursi = new javax.swing.JButton();
         lblKursiTerpilih = new javax.swing.JLabel();
         pnlSeatHost = new javax.swing.JPanel();
         pnlBottomCard = new javax.swing.JPanel();
@@ -318,11 +386,29 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlTopArea.setLayout(new java.awt.BorderLayout(0, 12));
+
+        pnlStepper.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
+
+        lblStep1.setText("•  1. Cari Rute (Selesai)");
+        pnlStepper.add(lblStep1);
+
+        lblStep2.setText("•  2. Pilih Kereta (Selesai)");
+        pnlStepper.add(lblStep2);
+
+        lblStep3.setText("3. Penumpang & Kursi");
+        pnlStepper.add(lblStep3);
+
+        lblStep4.setText("4. Bayar & E-Tiket");
+        pnlStepper.add(lblStep4);
+
+        pnlTopArea.add(pnlStepper, java.awt.BorderLayout.NORTH);
+
         pnlHeader.setLayout(new java.awt.BorderLayout(12, 0));
 
         pnlTitleBox.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
-        lblTitle.setText("Input Penumpang & Pilih Kursi");
+        lblTitle.setText("Data Penumpang & Pilih Kursi Gerbong");
         pnlTitleBox.add(lblTitle);
 
         lblInfoKereta.setText("Detail perjalanan");
@@ -330,10 +416,12 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.CENTER);
 
-        btnKembali.setText("Kembali");
+        btnKembali.setText("←  Kembali ke Jadwal");
         pnlHeader.add(btnKembali, java.awt.BorderLayout.EAST);
 
-        add(pnlHeader, java.awt.BorderLayout.NORTH);
+        pnlTopArea.add(pnlHeader, java.awt.BorderLayout.CENTER);
+
+        add(pnlTopArea, java.awt.BorderLayout.NORTH);
 
         pnlMain.setLayout(new java.awt.BorderLayout(16, 0));
 
@@ -341,10 +429,10 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
         pnlPenumpangTop.setLayout(new java.awt.BorderLayout());
 
-        lblPenumpangTitle.setText("Data Penumpang");
+        lblPenumpangTitle.setText("Identitas Penumpang");
         pnlPenumpangTop.add(lblPenumpangTitle, java.awt.BorderLayout.WEST);
 
-        btnIsiAkun.setText("Isi dari Akun");
+        btnIsiAkun.setText("Isi dari Profil");
         pnlPenumpangTop.add(btnIsiAkun, java.awt.BorderLayout.EAST);
 
         pnlPenumpangCard.add(pnlPenumpangTop, java.awt.BorderLayout.NORTH);
@@ -364,8 +452,13 @@ public class PesanKursiPanel extends javax.swing.JPanel {
 
         lblGerbong.setText("Gerbong:");
         pnlGerbongPick.add(lblGerbong);
-
         pnlGerbongPick.add(cmbGerbong);
+
+        btnPilihOtomatis.setText("Pilih Kursi Otomatis");
+        pnlGerbongPick.add(btnPilihOtomatis);
+
+        btnResetKursi.setText("Reset");
+        pnlGerbongPick.add(btnResetKursi);
 
         pnlSeatTop.add(pnlGerbongPick, java.awt.BorderLayout.WEST);
 
@@ -387,7 +480,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         lblTotalBayar.setText("Total Bayar: Rp 0");
         pnlBottomCard.add(lblTotalBayar, java.awt.BorderLayout.WEST);
 
-        btnLanjutBayar.setText("Lanjut ke Pembayaran");
+        btnLanjutBayar.setText("Buat Pesanan & Lanjut Bayar  →");
         pnlBottomCard.add(btnLanjutBayar, java.awt.BorderLayout.EAST);
 
         add(pnlBottomCard, java.awt.BorderLayout.SOUTH);
@@ -397,11 +490,17 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnIsiAkun;
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnLanjutBayar;
+    private javax.swing.JButton btnPilihOtomatis;
+    private javax.swing.JButton btnResetKursi;
     private javax.swing.JComboBox<String> cmbGerbong;
     private javax.swing.JLabel lblGerbong;
     private javax.swing.JLabel lblInfoKereta;
     private javax.swing.JLabel lblKursiTerpilih;
     private javax.swing.JLabel lblPenumpangTitle;
+    private javax.swing.JLabel lblStep1;
+    private javax.swing.JLabel lblStep2;
+    private javax.swing.JLabel lblStep3;
+    private javax.swing.JLabel lblStep4;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTotalBayar;
     private javax.swing.JPanel pnlBottomCard;
@@ -414,7 +513,9 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlSeatCard;
     private javax.swing.JPanel pnlSeatHost;
     private javax.swing.JPanel pnlSeatTop;
+    private javax.swing.JPanel pnlStepper;
     private javax.swing.JPanel pnlTitleBox;
+    private javax.swing.JPanel pnlTopArea;
     private javax.swing.JScrollPane scrPenumpang;
     // End of variables declaration//GEN-END:variables
 }

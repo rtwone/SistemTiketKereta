@@ -2,6 +2,8 @@ package tiketkereta.data;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import tiketkereta.model.Jadwal;
@@ -57,6 +59,70 @@ public class DataStore {
 
     public void backupToFile(File tujuan) throws ValidasiException {
         jsonStorage.writeToFile(tujuan, buatDto());
+    }
+
+    public File buatBackupOtomatis() throws ValidasiException {
+        File folderData = getFolderData();
+        if (!folderData.exists()) {
+            folderData.mkdirs();
+        }
+        File target = getFileBackupBerikutnya();
+        backupToFile(target);
+        return target;
+    }
+
+    public File getFileBackupBerikutnya() {
+        File folderData = getFolderData();
+        int nomor = 1;
+        while (new File(folderData, "backup-" + nomor + ".json").exists()) {
+            nomor++;
+        }
+        return new File(folderData, "backup-" + nomor + ".json");
+    }
+
+    public ArrayList<File> getDaftarFileBackup() {
+        ArrayList<File> hasil = new ArrayList<File>();
+        File folderData = getFolderData();
+        File[] files = folderData.listFiles();
+        if (files == null) {
+            return hasil;
+        }
+        for (File f : files) {
+            String nama = f.getName().toLowerCase();
+            if (f.isFile() && nama.startsWith("backup-") && nama.endsWith(".json")) {
+                hasil.add(f);
+            }
+        }
+        Collections.sort(hasil, new Comparator<File>() {
+            @Override
+            public int compare(File a, File b) {
+                return Integer.compare(ekstrakNomorBackup(a.getName()), ekstrakNomorBackup(b.getName()));
+            }
+        });
+        return hasil;
+    }
+
+    private int ekstrakNomorBackup(String fileName) {
+        String lower = fileName.toLowerCase();
+        if (!lower.startsWith("backup-") || !lower.endsWith(".json")) {
+            return Integer.MAX_VALUE;
+        }
+        String angka = lower.substring("backup-".length(), lower.length() - ".json".length());
+        try {
+            return Integer.parseInt(angka);
+        } catch (NumberFormatException ex) {
+            return Integer.MAX_VALUE;
+        }
+    }
+
+    private File getFolderData() {
+        File parent = activeFile.getParentFile();
+        return parent != null ? parent : new File("data");
+    }
+
+    public void restoreDefaultData() throws ValidasiException {
+        File sumberUtama = new File(DEFAULT_DATA_PATH);
+        restoreFromFile(sumberUtama);
     }
 
     public void restoreFromFile(File sumber) throws ValidasiException {

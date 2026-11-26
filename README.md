@@ -33,7 +33,7 @@
 - **Dashboard Ringkas** — Kartu statistik KPI (*Total Stasiun, Total Kereta, Total Jadwal, Total Pemesanan, Pendapatan Lunas*), tabel transaksi terbaru, dan tombol cepat Backup/Restore JSON.
 - **Kelola Stasiun, Kereta, & Jadwal** — CRUD penuh (Tambah, Ubah, Hapus) dengan validasi relasi data yang langsung diperbarui pada `ArrayList` di memori.
 - **Kelola Pemesanan** — Filter berdasarkan status (`Semua`, `Dipesan`, `Lunas`, `Dibatalkan`), lihat detail penumpang, tandai lunas, atau batalkan pesanan.
-- **Backup & Restore JSON** — Export/Import file `.json` via `JFileChooser` lengkap dengan validasi struktur data (minimal 1 akun `ADMIN` dan daftar stasiun valid) sehingga data lama tetap aman bila import gagal.
+- **Backup & Restore JSON** — **Backup** otomatis membuat file berurutan baru di folder `data/` (`data/backup-1.json`, `data/backup-2.json`, dst.) dari `ArrayList` aktif, sedangkan **Restore** langsung memuat ulang data standar dari `data/data.json` lengkap dengan validasi keamanan (minimal 1 akun `ADMIN` dan daftar stasiun valid).
 
 ---
 

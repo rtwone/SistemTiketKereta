@@ -4,8 +4,10 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
@@ -44,6 +46,10 @@ public final class Tema {
     public static final Color SEAT_OCCUPIED = new Color(0x94A3B8);
     public static final Color TABLE_ALT = new Color(0xF8FAFC);
     public static final Color TABLE_SELECT = new Color(0xDBEAFE);
+    public static final Color SURFACE_SOFT = new Color(0xF8FAFC);
+    public static final Color PRIMARY_SOFT = new Color(0xEFF6FF);
+    public static final Color ACCENT_SOFT = new Color(0xFFF7ED);
+    public static final Color SUCCESS_SOFT = new Color(0xDCFCE7);
 
     private static final String FONT_NAME = "Segoe UI";
 
@@ -77,6 +83,20 @@ public final class Tema {
         panel.setBorder(BorderFactory.createEmptyBorder(s(22), s(26), s(22), s(26)));
     }
 
+    public static void centerFlowPanel(JPanel wrapper, final JComponent card) {
+        wrapper.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0) {
+            @Override
+            public void layoutContainer(Container target) {
+                synchronized (target.getTreeLock()) {
+                    Dimension pref = card.getPreferredSize();
+                    int x = Math.max(s(16), (target.getWidth() - pref.width) / 2);
+                    int y = Math.max(s(16), (target.getHeight() - pref.height) / 2);
+                    card.setBounds(x, y, pref.width, pref.height);
+                }
+            }
+        });
+    }
+
     public static void styleCard(JPanel panel) {
         styleCard(panel, 18, 22);
     }
@@ -93,6 +113,55 @@ public final class Tema {
         panel.setBackground(PRIMARY);
         panel.setBorder(BorderFactory.createEmptyBorder(s(22), s(26), s(22), s(26)));
         panel.putClientProperty(FlatClientProperties.STYLE, "arc: 12");
+    }
+
+    public static void styleSoftCard(JPanel panel, int padV, int padH) {
+        panel.setBackground(SURFACE_SOFT);
+        Border line = BorderFactory.createLineBorder(BORDER, 1);
+        Border pad = BorderFactory.createEmptyBorder(s(padV), s(padH), s(padV), s(padH));
+        panel.setBorder(BorderFactory.createCompoundBorder(line, pad));
+        panel.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
+    }
+
+    public static void styleAccentCard(JPanel panel, int padV, int padH) {
+        panel.setBackground(ACCENT_SOFT);
+        Border line = BorderFactory.createLineBorder(new Color(0xFED7AA), 1);
+        Border pad = BorderFactory.createEmptyBorder(s(padV), s(padH), s(padV), s(padH));
+        panel.setBorder(BorderFactory.createCompoundBorder(line, pad));
+        panel.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
+    }
+
+    public static void styleStepItem(JLabel label, boolean active, boolean done) {
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBorder(BorderFactory.createEmptyBorder(s(8), s(12), s(8), s(12)));
+        if (active) {
+            label.setFont(FONT_BODY_BOLD);
+            label.setBackground(ACCENT);
+            label.setForeground(Color.WHITE);
+        } else if (done) {
+            label.setFont(FONT_BODY_BOLD);
+            label.setBackground(SUCCESS_SOFT);
+            label.setForeground(STATUS_GREEN);
+        } else {
+            label.setFont(FONT_SMALL);
+            label.setBackground(SURFACE_SOFT);
+            label.setForeground(TEXT_MUTED);
+        }
+    }
+
+    public static void styleFieldLabel(JLabel label) {
+        label.setFont(FONT_BODY_BOLD);
+        label.setForeground(TEXT_PRIMARY);
+    }
+
+    public static void styleBadge(JLabel label, Color bg, Color fg) {
+        label.setFont(FONT_SMALL);
+        label.setOpaque(true);
+        label.setBackground(bg);
+        label.setForeground(fg);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setBorder(BorderFactory.createEmptyBorder(s(4), s(10), s(4), s(10)));
     }
 
     public static void stylePageTitle(JLabel label) {

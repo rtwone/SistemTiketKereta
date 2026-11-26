@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -32,28 +34,40 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         initComponents();
         setupStyle();
         setupEvents();
+        perbaruiModeForm();
     }
 
     private void setupStyle() {
         Tema.styleCanvas(this);
         pnlHeader.setOpaque(false);
         pnlBody.setOpaque(false);
-        Tema.styleCard(pnlTableCard, 14, 14);
+        Tema.styleCard(pnlTableCard, 16, 18);
+        pnlSearchBar.setOpaque(false);
+
         Tema.styleCard(pnlFormCard, 18, 20);
-        pnlFormCard.setPreferredSize(Tema.dim(410, 540));
+        pnlFormCard.setPreferredSize(Tema.dim(440, 540));
         pnlTopFields.setOpaque(false);
+        pnlFormHead.setOpaque(false);
+        pnlGridMeta.setOpaque(false);
+        pnlIdBox.setOpaque(false);
+        pnlKeretaBox.setOpaque(false);
+        pnlArahBox.setOpaque(false);
+        pnlRuteBox.setOpaque(false);
         pnlAsalTujuan.setOpaque(false);
         pnlButtons.setOpaque(false);
 
         Tema.stylePageTitle(lblTitle);
         Tema.styleMuted(lblSubtitle);
+        Tema.styleFieldLabel(lblCari);
         Tema.styleSubTitle(lblFormTitle);
-        Tema.styleMuted(lblIdJadwal);
-        Tema.styleMuted(lblKereta);
-        Tema.styleMuted(lblArah);
-        Tema.styleMuted(lblRute);
-        Tema.styleMuted(lblStops);
 
+        Tema.styleFieldLabel(lblIdJadwal);
+        Tema.styleFieldLabel(lblKereta);
+        Tema.styleFieldLabel(lblArah);
+        Tema.styleFieldLabel(lblRute);
+        Tema.styleFieldLabel(lblStops);
+
+        Tema.styleTextField(txtCari, "Ketik ID jadwal, kode kereta, atau kode stasiun...");
         Tema.styleTextField(txtIdJadwal, "Contoh: JD-101-05");
         Tema.styleComboBox(cmbKereta);
         cmbArah.setModel(new DefaultComboBoxModel<String>(new String[]{"pergi", "balik"}));
@@ -82,6 +96,23 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
     }
 
     private void setupEvents() {
+        txtCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+        });
+
         tblJadwal.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -136,8 +167,28 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         cmbAsal.setModel(new DefaultComboBoxModel<String>(kodeStasiun));
         cmbTujuan.setModel(new DefaultComboBoxModel<String>(kodeStasiun));
 
+        txtCari.setText("");
+        muatTabel();
+        resetForm();
+    }
+
+    private void muatTabel() {
+        if (mainFrame == null) {
+            return;
+        }
+        String q = FormatUtil.rapi(txtCari.getText()).toLowerCase();
         tableModel.setRowCount(0);
         for (Jadwal j : mainFrame.getDataStore().getJadwalList()) {
+            if (!q.isEmpty()) {
+                boolean cocok = j.getScheduleId().toLowerCase().contains(q)
+                        || j.getTrainNumber().toLowerCase().contains(q)
+                        || j.getOriginCode().toLowerCase().contains(q)
+                        || j.getDestinationCode().toLowerCase().contains(q)
+                        || j.getDirection().toLowerCase().contains(q);
+                if (!cocok) {
+                    continue;
+                }
+            }
             tableModel.addRow(new Object[]{
                 j.getScheduleId(),
                 j.getTrainNumber(),
@@ -166,6 +217,20 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         cmbAsal.setSelectedItem(j.getOriginCode());
         cmbTujuan.setSelectedItem(j.getDestinationCode());
         txtStops.setText(mainFrame.getJadwalService().formatStops(j.getStops()));
+        perbaruiModeForm();
+    }
+
+    private void perbaruiModeForm() {
+        boolean edit = !FormatUtil.kosong(idTerpilih);
+        if (edit) {
+            lblModeBadge.setText("Edit: " + idTerpilih);
+            Tema.styleBadge(lblModeBadge, Tema.ACCENT_SOFT, Tema.ACCENT);
+        } else {
+            lblModeBadge.setText("Mode: Tambah Baru");
+            Tema.styleBadge(lblModeBadge, Tema.PRIMARY_SOFT, Tema.PRIMARY);
+        }
+        btnUbah.setEnabled(edit);
+        btnHapus.setEnabled(edit);
     }
 
     private void prosesTambah() {
@@ -181,7 +246,7 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
                     String.valueOf(cmbTujuan.getSelectedItem()),
                     txtStops.getText()
             );
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Jadwal baru berhasil ditambahkan.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -207,7 +272,7 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
                     String.valueOf(cmbTujuan.getSelectedItem()),
                     txtStops.getText()
             );
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Jadwal berhasil diperbarui.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -231,7 +296,7 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         }
         try {
             mainFrame.getJadwalService().hapusJadwal(idTerpilih);
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Jadwal berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -252,6 +317,7 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         }
         txtStops.setText("SMP|-|06:00\nPMK|06:44|06:46\nKML|08:15|-");
         tblJadwal.clearSelection();
+        perbaruiModeForm();
     }
 
     @SuppressWarnings("unchecked")
@@ -263,17 +329,27 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         lblSubtitle = new javax.swing.JLabel();
         pnlBody = new javax.swing.JPanel();
         pnlTableCard = new javax.swing.JPanel();
+        pnlSearchBar = new javax.swing.JPanel();
+        lblCari = new javax.swing.JLabel();
+        txtCari = new javax.swing.JTextField();
         scrJadwal = new javax.swing.JScrollPane();
         tblJadwal = new javax.swing.JTable();
         pnlFormCard = new javax.swing.JPanel();
         pnlTopFields = new javax.swing.JPanel();
+        pnlFormHead = new javax.swing.JPanel();
         lblFormTitle = new javax.swing.JLabel();
+        lblModeBadge = new javax.swing.JLabel();
+        pnlGridMeta = new javax.swing.JPanel();
+        pnlIdBox = new javax.swing.JPanel();
         lblIdJadwal = new javax.swing.JLabel();
         txtIdJadwal = new javax.swing.JTextField();
+        pnlKeretaBox = new javax.swing.JPanel();
         lblKereta = new javax.swing.JLabel();
         cmbKereta = new javax.swing.JComboBox<>();
+        pnlArahBox = new javax.swing.JPanel();
         lblArah = new javax.swing.JLabel();
         cmbArah = new javax.swing.JComboBox<>();
+        pnlRuteBox = new javax.swing.JPanel();
         lblRute = new javax.swing.JLabel();
         pnlAsalTujuan = new javax.swing.JPanel();
         cmbAsal = new javax.swing.JComboBox<>();
@@ -294,14 +370,22 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
         lblTitle.setText("Kelola Jadwal");
         pnlHeader.add(lblTitle);
 
-        lblSubtitle.setText("Tambah, ubah, atau hapus jadwal perjalanan dan daftar pemberhentian stasiun");
+        lblSubtitle.setText("Cari jadwal dengan cepat, klik baris untuk mengedit pemberhentian, atau tambahkan jadwal baru");
         pnlHeader.add(lblSubtitle);
 
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
         pnlBody.setLayout(new java.awt.BorderLayout(16, 0));
 
-        pnlTableCard.setLayout(new java.awt.BorderLayout());
+        pnlTableCard.setLayout(new java.awt.BorderLayout(0, 12));
+
+        pnlSearchBar.setLayout(new java.awt.BorderLayout(10, 0));
+
+        lblCari.setText("Cari Jadwal:");
+        pnlSearchBar.add(lblCari, java.awt.BorderLayout.WEST);
+        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
+
+        pnlTableCard.add(pnlSearchBar, java.awt.BorderLayout.NORTH);
 
         scrJadwal.setViewportView(tblJadwal);
 
@@ -311,38 +395,61 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
 
         pnlFormCard.setLayout(new java.awt.BorderLayout(0, 12));
 
-        pnlTopFields.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
+        pnlTopFields.setLayout(new java.awt.BorderLayout(0, 10));
 
-        lblFormTitle.setText("Form Data Jadwal");
-        pnlTopFields.add(lblFormTitle);
+        pnlFormHead.setLayout(new java.awt.BorderLayout());
+
+        lblFormTitle.setText("Form Jadwal");
+        pnlFormHead.add(lblFormTitle, java.awt.BorderLayout.WEST);
+
+        lblModeBadge.setText("Mode: Tambah Baru");
+        pnlFormHead.add(lblModeBadge, java.awt.BorderLayout.EAST);
+
+        pnlTopFields.add(pnlFormHead, java.awt.BorderLayout.NORTH);
+
+        pnlGridMeta.setLayout(new java.awt.GridLayout(2, 2, 10, 8));
+
+        pnlIdBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblIdJadwal.setText("ID Jadwal");
-        pnlTopFields.add(lblIdJadwal);
-        pnlTopFields.add(txtIdJadwal);
+        pnlIdBox.add(lblIdJadwal, java.awt.BorderLayout.NORTH);
+        pnlIdBox.add(txtIdJadwal, java.awt.BorderLayout.CENTER);
+
+        pnlGridMeta.add(pnlIdBox);
+
+        pnlKeretaBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblKereta.setText("Kereta");
-        pnlTopFields.add(lblKereta);
+        pnlKeretaBox.add(lblKereta, java.awt.BorderLayout.NORTH);
+        pnlKeretaBox.add(cmbKereta, java.awt.BorderLayout.CENTER);
 
-        pnlTopFields.add(cmbKereta);
+        pnlGridMeta.add(pnlKeretaBox);
 
-        lblArah.setText("Arah Perjalanan");
-        pnlTopFields.add(lblArah);
+        pnlArahBox.setLayout(new java.awt.BorderLayout(0, 4));
 
-        pnlTopFields.add(cmbArah);
+        lblArah.setText("Arah");
+        pnlArahBox.add(lblArah, java.awt.BorderLayout.NORTH);
+        pnlArahBox.add(cmbArah, java.awt.BorderLayout.CENTER);
 
-        lblRute.setText("Stasiun Asal & Tujuan");
-        pnlTopFields.add(lblRute);
+        pnlGridMeta.add(pnlArahBox);
 
-        pnlAsalTujuan.setLayout(new java.awt.GridLayout(1, 2, 8, 0));
+        pnlRuteBox.setLayout(new java.awt.BorderLayout(0, 4));
 
+        lblRute.setText("Asal → Tujuan");
+        pnlRuteBox.add(lblRute, java.awt.BorderLayout.NORTH);
+
+        pnlAsalTujuan.setLayout(new java.awt.GridLayout(1, 2, 6, 0));
         pnlAsalTujuan.add(cmbAsal);
-
         pnlAsalTujuan.add(cmbTujuan);
 
-        pnlTopFields.add(pnlAsalTujuan);
+        pnlRuteBox.add(pnlAsalTujuan, java.awt.BorderLayout.CENTER);
 
-        lblStops.setText("Pemberhentian (KODE|TIBA|BERANGKAT)");
-        pnlTopFields.add(lblStops);
+        pnlGridMeta.add(pnlRuteBox);
+
+        pnlTopFields.add(pnlGridMeta, java.awt.BorderLayout.CENTER);
+
+        lblStops.setText("Pemberhentian per Baris (KODE|TIBA|BERANGKAT)");
+        pnlTopFields.add(lblStops, java.awt.BorderLayout.SOUTH);
 
         pnlFormCard.add(pnlTopFields, java.awt.BorderLayout.NORTH);
 
@@ -354,16 +461,16 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
 
         pnlButtons.setLayout(new java.awt.GridLayout(2, 2, 8, 8));
 
-        btnTambah.setText("Tambah");
+        btnTambah.setText("+ Tambah Baru");
         pnlButtons.add(btnTambah);
 
-        btnUbah.setText("Ubah");
+        btnUbah.setText("Simpan Ubah");
         pnlButtons.add(btnUbah);
 
-        btnHapus.setText("Hapus");
+        btnHapus.setText("Hapus Jadwal");
         pnlButtons.add(btnHapus);
 
-        btnReset.setText("Reset");
+        btnReset.setText("Bersihkan / Baru");
         pnlButtons.add(btnReset);
 
         pnlFormCard.add(pnlButtons, java.awt.BorderLayout.SOUTH);
@@ -383,23 +490,33 @@ public class KelolaJadwalPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbKereta;
     private javax.swing.JComboBox<String> cmbTujuan;
     private javax.swing.JLabel lblArah;
+    private javax.swing.JLabel lblCari;
     private javax.swing.JLabel lblFormTitle;
     private javax.swing.JLabel lblIdJadwal;
     private javax.swing.JLabel lblKereta;
+    private javax.swing.JLabel lblModeBadge;
     private javax.swing.JLabel lblRute;
     private javax.swing.JLabel lblStops;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel pnlArahBox;
     private javax.swing.JPanel pnlAsalTujuan;
     private javax.swing.JPanel pnlBody;
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlFormCard;
+    private javax.swing.JPanel pnlFormHead;
+    private javax.swing.JPanel pnlGridMeta;
     private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlIdBox;
+    private javax.swing.JPanel pnlKeretaBox;
+    private javax.swing.JPanel pnlRuteBox;
+    private javax.swing.JPanel pnlSearchBar;
     private javax.swing.JPanel pnlTableCard;
     private javax.swing.JPanel pnlTopFields;
     private javax.swing.JScrollPane scrJadwal;
     private javax.swing.JScrollPane scrStops;
     private javax.swing.JTable tblJadwal;
+    private javax.swing.JTextField txtCari;
     private javax.swing.JTextField txtIdJadwal;
     private javax.swing.JTextArea txtStops;
     // End of variables declaration//GEN-END:variables

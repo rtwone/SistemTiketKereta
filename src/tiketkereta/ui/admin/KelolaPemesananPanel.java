@@ -2,10 +2,14 @@ package tiketkereta.ui.admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import tiketkereta.model.Pemesanan;
 import tiketkereta.model.Penumpang;
@@ -37,14 +41,15 @@ public class KelolaPemesananPanel extends javax.swing.JPanel {
         pnlHeader.setOpaque(false);
         pnlTitleBox.setOpaque(false);
         pnlFilter.setOpaque(false);
-        Tema.styleCard(pnlCard, 16, 18);
-        pnlActions.setOpaque(false);
+        Tema.styleCard(pnlCard, 18, 20);
+        Tema.styleSoftCard(pnlActions, 10, 14);
         pnlActionButtons.setOpaque(false);
 
         Tema.stylePageTitle(lblTitle);
         Tema.styleMuted(lblSubtitle);
         Tema.styleBody(lblFilter);
-        Tema.styleMuted(lblInfo);
+        lblInfo.setFont(Tema.FONT_BODY_BOLD);
+        lblInfo.setForeground(Tema.PRIMARY);
 
         cmbFilter.setModel(new DefaultComboBoxModel<String>(new String[]{"Semua", "Dipesan", "Lunas", "Dibatalkan"}));
         Tema.styleComboBox(cmbFilter);
@@ -79,6 +84,22 @@ public class KelolaPemesananPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 refreshData();
+            }
+        });
+        tblPemesanan.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    perbaruiStatusTombol();
+                }
+            }
+        });
+        tblPemesanan.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    tampilkanDetail();
+                }
             }
         });
         btnDetail.addActionListener(new ActionListener() {
@@ -126,7 +147,26 @@ public class KelolaPemesananPanel extends javax.swing.JPanel {
                 p.getStatus()
             });
         }
-        lblInfo.setText("Menampilkan " + daftarTampil.size() + " pesanan.");
+        if (!daftarTampil.isEmpty()) {
+            tblPemesanan.setRowSelectionInterval(0, 0);
+        }
+        perbaruiStatusTombol();
+    }
+
+    private void perbaruiStatusTombol() {
+        int row = tblPemesanan.getSelectedRow();
+        if (row < 0 || row >= daftarTampil.size()) {
+            lblInfo.setText("Menampilkan " + daftarTampil.size() + " pesanan.");
+            btnDetail.setEnabled(false);
+            btnTandaiLunas.setEnabled(false);
+            btnBatalkan.setEnabled(false);
+            return;
+        }
+        Pemesanan p = daftarTampil.get(row);
+        lblInfo.setText("Terpilih: " + p.getBookingCode() + " (" + p.getStatus() + ")  •  Klik 2x baris untuk detail penumpang");
+        btnDetail.setEnabled(true);
+        btnTandaiLunas.setEnabled(!Pemesanan.STATUS_LUNAS.equalsIgnoreCase(p.getStatus()));
+        btnBatalkan.setEnabled(!Pemesanan.STATUS_DIBATALKAN.equalsIgnoreCase(p.getStatus()));
     }
 
     private Pemesanan getSelected() {

@@ -48,21 +48,41 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblSubtitle">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Kelola riwayat pemesanan, lihat E-Tiket, bayar, atau batalkan pesanan"/>
+                <Property name="text" type="java.lang.String" value="Klik dua kali baris pesanan untuk membuka E-Tiket, atau kelola pembayaran &amp; pembatalan"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnRefresh">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Muat Ulang"/>
-          </Properties>
+        <Container class="javax.swing.JPanel" name="pnlFilterBar">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="East"/>
             </Constraint>
           </Constraints>
-        </Component>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="2"/>
+            <Property name="horizontalGap" type="int" value="8"/>
+            <Property name="verticalGap" type="int" value="4"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblFilterStatus">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Status:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbFilterStatus">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnRefresh">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Muat Ulang"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlCard">
@@ -127,6 +147,11 @@
                 <Component class="javax.swing.JButton" name="btnLihatETiket">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Lihat E-Tiket"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCetakTiket">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cetak Tiket Fisik"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBayar">

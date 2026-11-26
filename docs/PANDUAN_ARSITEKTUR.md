@@ -43,7 +43,7 @@ File: [`DataStore.java`](../src/tiketkereta/data/DataStore.java), [`DataDto.java
 2. **Bagaimana cara kerja `DataStore` (`ArrayList` sementara + Backup/Restore JSON)?**
    - Saat aplikasi dimulai, `DataStore.load()` memuat data awal dari `data/data.json` ke dalam 5 `ArrayList` di memori RAM (`stasiunList`, `keretaList`, `jadwalList`, `userList`, `pemesananList`).
    - Selama aplikasi berjalan, seluruh perubahan (registrasi, pemesanan, pembayaran, pembatalan, CRUD admin) **hanya disimpan sementara di `ArrayList`** (tidak auto-save menimpa `data/data.json`).
-   - Jika ingin menyimpan hasil perubahan ke file, Admin menggunakan **Backup JSON** (`backupToFile`) untuk meng-export isi `ArrayList` ke file `.json`, dan **Restore JSON** (`restoreFromFile`) untuk memuat ulang file `.json` ke dalam `ArrayList` sistem.
+   - Jika ingin menyimpan hasil perubahan ke file, Admin menggunakan **Backup JSON** (`buatBackupOtomatis`) yang otomatis membuat file baru berurutan di folder `data/` (`data/backup-1.json`, `data/backup-2.json`, dst.), dan **Restore JSON** (`restoreDefaultData`) untuk memuat ulang `data/data.json` langsung ke dalam `ArrayList` sistem.
 3. **Kenapa Restore JSON memakai list sementara (`stasiunBaru`, `keretaBaru`, dst.) sebelum `.clear()`?**
    - Di [`JsonStorage.java`](../src/tiketkereta/data/JsonStorage.java) dan [`DataStore.java`](../src/tiketkereta/data/DataStore.java), file JSON divalidasi terlebih dahulu (JSON valid, minimal 1 akun `ADMIN`, daftar stasiun tidak kosong). Jika gagal, `ValidasiException` dilempar **sebelum** data lama dihapus sehingga data aktif tetap aman.
 

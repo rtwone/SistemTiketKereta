@@ -43,7 +43,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lblBrand">
               <Properties>
-                <Property name="text" type="java.lang.String" value="E-TIKET RESMI • ACCESS BY KAI"/>
+                <Property name="text" type="java.lang.String" value="BOARDING PASS / E-TIKET RESMI • ACCESS BY KAI"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblBookingCode">
@@ -85,72 +85,86 @@
           </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="2"/>
-            <Property name="horizontalGap" type="int" value="18"/>
-            <Property name="rows" type="int" value="0"/>
-            <Property name="verticalGap" type="int" value="8"/>
+            <Property name="columns" type="int" value="3"/>
+            <Property name="horizontalGap" type="int" value="16"/>
+            <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblKeretaTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kereta Api"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblKeretaVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblKelasTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kelas Layanan"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblKelasVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblRuteTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Rute Perjalanan"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblRuteVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblJamTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Jadwal Berangkat - Tiba"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblJamVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblWaktuTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Waktu Pemesanan"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblWaktuVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="-"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblTotalTag">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Total Pembayaran"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblTotalVal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Rp 0"/>
-              </Properties>
-            </Component>
+            <Container class="javax.swing.JPanel" name="pnlTileRute">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="3"/>
+                <Property name="verticalGap" type="int" value="4"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblRuteTag">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rute &amp; Waktu Perjalanan"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblRuteVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblJamVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnlTileKereta">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="3"/>
+                <Property name="verticalGap" type="int" value="4"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblKeretaTag">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Armada &amp; Kelas Layanan"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblKeretaVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblKelasVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnlTileBayar">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="3"/>
+                <Property name="verticalGap" type="int" value="4"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblTotalTag">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Total Bayar &amp; Waktu Pesan"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTotalVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rp 0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblWaktuVal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="scrPenumpang">
@@ -176,22 +190,43 @@
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-            <Property name="alignment" type="int" value="2"/>
-            <Property name="horizontalGap" type="int" value="10"/>
-            <Property name="verticalGap" type="int" value="0"/>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnTiketSaya">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ke Tiket Saya"/>
+                <Property name="text" type="java.lang.String" value="←  Lihat Daftar Tiket Saya"/>
               </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="West"/>
+                </Constraint>
+              </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="btnPesanLagi">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Pesan Tiket Baru"/>
-              </Properties>
-            </Component>
+            <Container class="javax.swing.JPanel" name="pnlFooterRight">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="East"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="2"/>
+                <Property name="horizontalGap" type="int" value="10"/>
+                <Property name="verticalGap" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="btnCetakFisik">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cetak Tiket Fisik"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnPesanLagi">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pesan Tiket Baru  →"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

@@ -2,9 +2,14 @@ package tiketkereta.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import tiketkereta.model.Pemesanan;
 import tiketkereta.model.User;
@@ -34,16 +39,24 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         Tema.styleCanvas(this);
         pnlHeader.setOpaque(false);
         pnlTitleBox.setOpaque(false);
-        Tema.styleCard(pnlCard, 16, 18);
-        pnlActions.setOpaque(false);
+        pnlFilterBar.setOpaque(false);
+        Tema.styleCard(pnlCard, 18, 20);
+        Tema.styleSoftCard(pnlActions, 10, 14);
         pnlActionButtons.setOpaque(false);
 
         Tema.stylePageTitle(lblTitle);
         Tema.styleMuted(lblSubtitle);
-        Tema.styleMuted(lblInfo);
+        Tema.styleBody(lblFilterStatus);
+        lblInfo.setFont(Tema.FONT_BODY_BOLD);
+        lblInfo.setForeground(Tema.PRIMARY);
+
+        cmbFilterStatus.setModel(new DefaultComboBoxModel<String>(
+                new String[]{"Semua Status", "Dipesan", "Lunas", "Dibatalkan"}));
+        Tema.styleComboBox(cmbFilterStatus);
 
         Tema.styleSecondaryButton(btnRefresh);
         Tema.stylePrimaryButton(btnLihatETiket);
+        Tema.styleSuccessButton(btnCetakTiket);
         Tema.styleAccentButton(btnBayar);
         Tema.styleDangerButton(btnBatalkan);
 
@@ -62,6 +75,13 @@ public class TiketSayaPanel extends javax.swing.JPanel {
     }
 
     private void setupEvents() {
+        cmbFilterStatus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                muatTabel();
+            }
+        });
+
         btnRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,12 +89,43 @@ public class TiketSayaPanel extends javax.swing.JPanel {
             }
         });
 
+        tblTiket.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    perbaruiStatusTombol();
+                }
+            }
+        });
+
+        tblTiket.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    Pemesanan p = getSelectedPesanan(false);
+                    if (p != null && mainFrame != null) {
+                        mainFrame.tampilkanETiket(p);
+                    }
+                }
+            }
+        });
+
         btnLihatETiket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Pemesanan p = getSelectedPesanan();
+                Pemesanan p = getSelectedPesanan(true);
                 if (p != null && mainFrame != null) {
                     mainFrame.tampilkanETiket(p);
+                }
+            }
+        });
+
+        btnCetakTiket.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Pemesanan p = getSelectedPesanan(true);
+                if (p != null && mainFrame != null) {
+                    mainFrame.mulaiCetakTiket(p);
                 }
             }
         });
@@ -82,7 +133,7 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         btnBayar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Pemesanan p = getSelectedPesanan();
+                Pemesanan p = getSelectedPesanan(true);
                 if (p == null || mainFrame == null) {
                     return;
                 }
@@ -105,6 +156,11 @@ public class TiketSayaPanel extends javax.swing.JPanel {
     }
 
     public void refreshData() {
+        cmbFilterStatus.setSelectedIndex(0);
+        muatTabel();
+    }
+
+    private void muatTabel() {
         if (mainFrame == null) {
             return;
         }
@@ -112,9 +168,16 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         if (user == null) {
             return;
         }
-        daftarPesanan = mainFrame.getPemesananService().getPemesananByUser(user.getIdentifier());
+        String filter = String.valueOf(cmbFilterStatus.getSelectedItem());
+        ArrayList<Pemesanan> semua = mainFrame.getPemesananService().getPemesananByUser(user.getIdentifier());
+        daftarPesanan = new ArrayList<Pemesanan>();
         tableModel.setRowCount(0);
-        for (Pemesanan p : daftarPesanan) {
+
+        for (Pemesanan p : semua) {
+            if (!"Semua Status".equalsIgnoreCase(filter) && !p.getStatus().equalsIgnoreCase(filter)) {
+                continue;
+            }
+            daftarPesanan.add(p);
             tableModel.addRow(new Object[]{
                 p.getBookingCode(),
                 p.getTrainNumber() + " " + p.getTrainName(),
@@ -126,21 +189,44 @@ public class TiketSayaPanel extends javax.swing.JPanel {
                 p.getStatus()
             });
         }
-        lblInfo.setText("Menampilkan " + daftarPesanan.size() + " riwayat tiket Anda.");
+        if (!daftarPesanan.isEmpty()) {
+            tblTiket.setRowSelectionInterval(0, 0);
+        }
+        perbaruiStatusTombol();
     }
 
-    private Pemesanan getSelectedPesanan() {
+    private void perbaruiStatusTombol() {
         int row = tblTiket.getSelectedRow();
         if (row < 0 || row >= daftarPesanan.size()) {
-            JOptionPane.showMessageDialog(this, "Pilih salah satu tiket pada tabel terlebih dahulu.",
-                    "Belum Ada Pilihan", JOptionPane.WARNING_MESSAGE);
+            lblInfo.setText("Menampilkan " + daftarPesanan.size() + " pesanan.");
+            btnLihatETiket.setEnabled(false);
+            btnCetakTiket.setEnabled(false);
+            btnBayar.setEnabled(false);
+            btnBatalkan.setEnabled(false);
+            return;
+        }
+        Pemesanan p = daftarPesanan.get(row);
+        lblInfo.setText("Terpilih: " + p.getBookingCode() + "  •  Status: " + p.getStatus());
+        btnLihatETiket.setEnabled(true);
+        btnCetakTiket.setEnabled(Pemesanan.STATUS_LUNAS.equalsIgnoreCase(p.getStatus()));
+        btnBayar.setEnabled(Pemesanan.STATUS_DIPESAN.equalsIgnoreCase(p.getStatus()));
+        btnBatalkan.setEnabled(!Pemesanan.STATUS_DIBATALKAN.equalsIgnoreCase(p.getStatus()));
+    }
+
+    private Pemesanan getSelectedPesanan(boolean tampilkanPeringatan) {
+        int row = tblTiket.getSelectedRow();
+        if (row < 0 || row >= daftarPesanan.size()) {
+            if (tampilkanPeringatan) {
+                JOptionPane.showMessageDialog(this, "Pilih salah satu tiket pada tabel terlebih dahulu.",
+                        "Belum Ada Pilihan", JOptionPane.WARNING_MESSAGE);
+            }
             return null;
         }
         return daftarPesanan.get(row);
     }
 
     private void prosesBatalkan() {
-        Pemesanan p = getSelectedPesanan();
+        Pemesanan p = getSelectedPesanan(true);
         if (p == null || mainFrame == null) {
             return;
         }
@@ -159,7 +245,7 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         }
         try {
             mainFrame.getPemesananService().batalkanPemesanan(p.getBookingCode());
-            refreshData();
+            muatTabel();
             JOptionPane.showMessageDialog(this, "Tiket " + p.getBookingCode() + " berhasil dibatalkan.",
                     "Dibatalkan", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -175,6 +261,9 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         pnlTitleBox = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
+        pnlFilterBar = new javax.swing.JPanel();
+        lblFilterStatus = new javax.swing.JLabel();
+        cmbFilterStatus = new javax.swing.JComboBox<>();
         btnRefresh = new javax.swing.JButton();
         pnlCard = new javax.swing.JPanel();
         scrTiket = new javax.swing.JScrollPane();
@@ -183,6 +272,7 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         lblInfo = new javax.swing.JLabel();
         pnlActionButtons = new javax.swing.JPanel();
         btnLihatETiket = new javax.swing.JButton();
+        btnCetakTiket = new javax.swing.JButton();
         btnBayar = new javax.swing.JButton();
         btnBatalkan = new javax.swing.JButton();
 
@@ -195,13 +285,21 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         lblTitle.setText("Tiket Saya");
         pnlTitleBox.add(lblTitle);
 
-        lblSubtitle.setText("Kelola riwayat pemesanan, lihat E-Tiket, bayar, atau batalkan pesanan");
+        lblSubtitle.setText("Klik dua kali baris pesanan untuk membuka E-Tiket, atau kelola pembayaran & pembatalan");
         pnlTitleBox.add(lblSubtitle);
 
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.CENTER);
 
+        pnlFilterBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 8, 4));
+
+        lblFilterStatus.setText("Status:");
+        pnlFilterBar.add(lblFilterStatus);
+        pnlFilterBar.add(cmbFilterStatus);
+
         btnRefresh.setText("Muat Ulang");
-        pnlHeader.add(btnRefresh, java.awt.BorderLayout.EAST);
+        pnlFilterBar.add(btnRefresh);
+
+        pnlHeader.add(pnlFilterBar, java.awt.BorderLayout.EAST);
 
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
@@ -221,6 +319,9 @@ public class TiketSayaPanel extends javax.swing.JPanel {
         btnLihatETiket.setText("Lihat E-Tiket");
         pnlActionButtons.add(btnLihatETiket);
 
+        btnCetakTiket.setText("Cetak Tiket Fisik");
+        pnlActionButtons.add(btnCetakTiket);
+
         btnBayar.setText("Bayar Sekarang");
         pnlActionButtons.add(btnBayar);
 
@@ -237,14 +338,18 @@ public class TiketSayaPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatalkan;
     private javax.swing.JButton btnBayar;
+    private javax.swing.JButton btnCetakTiket;
     private javax.swing.JButton btnLihatETiket;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JComboBox<String> cmbFilterStatus;
+    private javax.swing.JLabel lblFilterStatus;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlActionButtons;
     private javax.swing.JPanel pnlActions;
     private javax.swing.JPanel pnlCard;
+    private javax.swing.JPanel pnlFilterBar;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlTitleBox;
     private javax.swing.JScrollPane scrTiket;

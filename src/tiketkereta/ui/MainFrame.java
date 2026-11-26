@@ -1,5 +1,6 @@
 package tiketkereta.ui;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -13,9 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import tiketkereta.data.DataStore;
 import tiketkereta.model.OpsiJadwal;
 import tiketkereta.model.Pemesanan;
@@ -44,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static final String CARD_BAYAR = "PEMBAYARAN";
     private static final String CARD_ETIKET = "ETIKET";
     private static final String CARD_TIKET_SAYA = "TIKET_SAYA";
+    private static final String CARD_CETAK_TIKET = "CETAK_TIKET";
     private static final String CARD_ADM_DASHBOARD = "ADM_DASHBOARD";
     private static final String CARD_ADM_STASIUN = "ADM_STASIUN";
     private static final String CARD_ADM_KERETA = "ADM_KERETA";
@@ -65,6 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
     private PembayaranPanel pembayaranPanel;
     private ETiketPanel eTiketPanel;
     private TiketSayaPanel tiketSayaPanel;
+    private CetakTiketPanel cetakTiketPanel;
 
     private AdminDashboardPanel adminDashboardPanel;
     private KelolaStasiunPanel kelolaStasiunPanel;
@@ -74,12 +75,14 @@ public class MainFrame extends javax.swing.JFrame {
     private BackupRestorePanel backupRestorePanel;
 
     private final Map<String, JButton> sidebarButtons;
+    private final Map<String, String> sidebarLabels;
     private Stasiun lastAsal;
     private Stasiun lastTujuan;
     private int lastJumlahPenumpang;
 
     public MainFrame() {
         this.sidebarButtons = new LinkedHashMap<String, JButton>();
+        this.sidebarLabels = new LinkedHashMap<String, String>();
         this.lastJumlahPenumpang = 1;
         initServices();
         initComponents();
@@ -112,19 +115,30 @@ public class MainFrame extends javax.swing.JFrame {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
 
         pnlSidebar.setBackground(Tema.PRIMARY);
-        pnlSidebar.setPreferredSize(Tema.dim(255, 720));
+        pnlSidebar.setPreferredSize(Tema.dim(265, 720));
         pnlSidebar.setBorder(BorderFactory.createEmptyBorder(Tema.s(24), Tema.s(18), Tema.s(22), Tema.s(18)));
 
         pnlBrand.setOpaque(false);
+        pnlBrand.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x2B4C7E)),
+                BorderFactory.createEmptyBorder(0, Tema.s(4), Tema.s(16), Tema.s(4))));
         pnlNavWrap.setOpaque(false);
+        pnlNavHolder.setOpaque(false);
         pnlNavMenu.setOpaque(false);
+
         pnlUserFooter.setBackground(Tema.PRIMARY_DARK);
         pnlUserFooter.setBorder(BorderFactory.createEmptyBorder(Tema.s(14), Tema.s(14), Tema.s(14), Tema.s(14)));
+        pnlUserFooter.putClientProperty(FlatClientProperties.STYLE, "arc: 12");
+        pnlUserMeta.setOpaque(false);
 
         lblBrandTitle.setFont(Tema.FONT_TITLE);
         lblBrandTitle.setForeground(Color.WHITE);
         lblBrandSub.setFont(Tema.FONT_SMALL);
         lblBrandSub.setForeground(Tema.ACCENT);
+
+        lblNavSection.setFont(Tema.FONT_SMALL);
+        lblNavSection.setForeground(new Color(0x94A3B8));
+        lblNavSection.setBorder(BorderFactory.createEmptyBorder(0, Tema.s(6), 0, 0));
 
         lblUserName.setFont(Tema.FONT_BODY_BOLD);
         lblUserName.setForeground(Color.WHITE);
@@ -147,6 +161,7 @@ public class MainFrame extends javax.swing.JFrame {
         pembayaranPanel = new PembayaranPanel(this);
         eTiketPanel = new ETiketPanel(this);
         tiketSayaPanel = new TiketSayaPanel(this);
+        cetakTiketPanel = new CetakTiketPanel(this);
 
         adminDashboardPanel = new AdminDashboardPanel(this);
         kelolaStasiunPanel = new KelolaStasiunPanel(this);
@@ -161,6 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
         pnlContent.add(pembayaranPanel, CARD_BAYAR);
         pnlContent.add(eTiketPanel, CARD_ETIKET);
         pnlContent.add(tiketSayaPanel, CARD_TIKET_SAYA);
+        pnlContent.add(cetakTiketPanel, CARD_CETAK_TIKET);
 
         pnlContent.add(adminDashboardPanel, CARD_ADM_DASHBOARD);
         pnlContent.add(kelolaStasiunPanel, CARD_ADM_STASIUN);
@@ -175,7 +191,7 @@ public class MainFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int konfirmasi = JOptionPane.showConfirmDialog(MainFrame.this,
-                        "Keluar dari akun saat ini?",
+                        "Keluar dari sesi akun saat ini?",
                         "Konfirmasi Keluar",
                         JOptionPane.YES_NO_OPTION);
                 if (konfirmasi == JOptionPane.YES_OPTION) {
@@ -213,23 +229,26 @@ public class MainFrame extends javax.swing.JFrame {
     private void bangunSidebar(boolean isAdmin) {
         pnlNavMenu.removeAll();
         sidebarButtons.clear();
+        sidebarLabels.clear();
+        lblNavSection.setText(isAdmin ? "MENU ADMINISTRATOR" : "MENU PELANGGAN");
         if (isAdmin) {
-            tambahTombolNav(CARD_ADM_DASHBOARD, "Dashboard");
+            tambahTombolNav(CARD_ADM_DASHBOARD, "Dashboard Ringkas");
             tambahTombolNav(CARD_ADM_STASIUN, "Kelola Stasiun");
             tambahTombolNav(CARD_ADM_KERETA, "Kelola Kereta");
             tambahTombolNav(CARD_ADM_JADWAL, "Kelola Jadwal");
             tambahTombolNav(CARD_ADM_PEMESANAN, "Kelola Pemesanan");
             tambahTombolNav(CARD_ADM_BACKUP, "Backup & Restore JSON");
         } else {
-            tambahTombolNav(CARD_CARI, "Cari Tiket");
+            tambahTombolNav(CARD_CARI, "Cari & Pesan Tiket");
             tambahTombolNav(CARD_TIKET_SAYA, "Tiket Saya");
+            tambahTombolNav(CARD_CETAK_TIKET, "Cetak Tiket Mandiri");
         }
         pnlNavMenu.revalidate();
         pnlNavMenu.repaint();
     }
 
     private void tambahTombolNav(final String cardKey, String label) {
-        JButton btn = new JButton(label);
+        JButton btn = new JButton("   " + label);
         Tema.styleSidebarButton(btn, false);
         btn.addActionListener(new ActionListener() {
             @Override
@@ -238,18 +257,24 @@ public class MainFrame extends javax.swing.JFrame {
                     tampilkanCariTiket();
                 } else if (CARD_TIKET_SAYA.equals(cardKey)) {
                     tampilkanTiketSaya();
+                } else if (CARD_CETAK_TIKET.equals(cardKey)) {
+                    tampilkanCetakTiket();
                 } else {
                     tampilkanAdminPanel(cardKey);
                 }
             }
         });
         sidebarButtons.put(cardKey, btn);
+        sidebarLabels.put(cardKey, label);
         pnlNavMenu.add(btn);
     }
 
     private void setActiveNav(String activeKey) {
         for (Map.Entry<String, JButton> entry : sidebarButtons.entrySet()) {
-            Tema.styleSidebarButton(entry.getValue(), entry.getKey().equals(activeKey));
+            boolean active = entry.getKey().equals(activeKey);
+            String base = sidebarLabels.get(entry.getKey());
+            entry.getValue().setText((active ? "»  " : "   ") + base);
+            Tema.styleSidebarButton(entry.getValue(), active);
         }
     }
 
@@ -307,6 +332,18 @@ public class MainFrame extends javax.swing.JFrame {
         setActiveNav(CARD_TIKET_SAYA);
     }
 
+    public void tampilkanCetakTiket() {
+        cetakTiketPanel.refreshData();
+        showContentCard(CARD_CETAK_TIKET);
+        setActiveNav(CARD_CETAK_TIKET);
+    }
+
+    public void mulaiCetakTiket(Pemesanan pesanan) {
+        showContentCard(CARD_CETAK_TIKET);
+        setActiveNav(CARD_CETAK_TIKET);
+        cetakTiketPanel.mulaiSimulasiCetak(pesanan);
+    }
+
     private void tampilkanAdminPanel(String cardKey) {
         if (CARD_ADM_DASHBOARD.equals(cardKey)) {
             adminDashboardPanel.refreshData();
@@ -326,21 +363,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void lakukanBackupJson(Component parent) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Simpan Backup Data JSON");
-        chooser.setFileFilter(new FileNameExtensionFilter("File JSON (*.json)", "json"));
-        chooser.setSelectedFile(new File("backup-tiket-kereta.json"));
-        if (chooser.showSaveDialog(parent) != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
-        File file = chooser.getSelectedFile();
-        if (!file.getName().toLowerCase().endsWith(".json")) {
-            file = new File(file.getAbsolutePath() + ".json");
-        }
         try {
-            dataStore.backupToFile(file);
+            File fileBaru = dataStore.buatBackupOtomatis();
+            if (backupRestorePanel != null) {
+                backupRestorePanel.refreshData();
+            }
             JOptionPane.showMessageDialog(parent,
-                    "Backup data berhasil disimpan ke:\n" + file.getAbsolutePath(),
+                    "Backup data ArrayList berhasil dibuat!\nFile baru: data/" + fileBaru.getName(),
                     "Backup Berhasil", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
             JOptionPane.showMessageDialog(parent, ex.getMessage(), "Backup Gagal", JOptionPane.ERROR_MESSAGE);
@@ -348,25 +377,22 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void lakukanRestoreJson(Component parent) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Pilih File JSON untuk Restore");
-        chooser.setFileFilter(new FileNameExtensionFilter("File JSON (*.json)", "json"));
-        if (chooser.showOpenDialog(parent) != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
-        File file = chooser.getSelectedFile();
         int konfirmasi = JOptionPane.showConfirmDialog(parent,
-                "Restore dari '" + file.getName() + "' akan menggantikan seluruh data aktif saat ini.\nLanjutkan?",
-                "Konfirmasi Restore JSON",
+                "Muat ulang seluruh data sistem dari file utama 'data/data.json'?\n"
+                        + "Perubahan sementara di memori ArrayList saat ini akan digantikan.",
+                "Konfirmasi Restore Data",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
         if (konfirmasi != JOptionPane.YES_OPTION) {
             return;
         }
         try {
-            dataStore.restoreFromFile(file);
+            dataStore.restoreDefaultData();
+            if (backupRestorePanel != null) {
+                backupRestorePanel.refreshData();
+            }
             JOptionPane.showMessageDialog(parent,
-                    "Restore data berhasil! Seluruh data telah dimuat ulang dari " + file.getName(),
+                    "Restore berhasil! Seluruh data sistem telah dimuat ulang dari data/data.json.",
                     "Restore Berhasil", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
             JOptionPane.showMessageDialog(parent,
@@ -417,7 +443,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlRoot = new javax.swing.JPanel();
@@ -428,8 +455,11 @@ public class MainFrame extends javax.swing.JFrame {
         lblBrandTitle = new javax.swing.JLabel();
         lblBrandSub = new javax.swing.JLabel();
         pnlNavWrap = new javax.swing.JPanel();
+        lblNavSection = new javax.swing.JLabel();
+        pnlNavHolder = new javax.swing.JPanel();
         pnlNavMenu = new javax.swing.JPanel();
         pnlUserFooter = new javax.swing.JPanel();
+        pnlUserMeta = new javax.swing.JPanel();
         lblUserName = new javax.swing.JLabel();
         lblUserSub = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
@@ -445,35 +475,46 @@ public class MainFrame extends javax.swing.JFrame {
 
         pnlAppShell.setLayout(new java.awt.BorderLayout());
 
-        pnlSidebar.setLayout(new java.awt.BorderLayout(0, 18));
+        pnlSidebar.setLayout(new java.awt.BorderLayout(0, 20));
 
         pnlBrand.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblBrandTitle.setText("ACCESS BY KAI");
         pnlBrand.add(lblBrandTitle);
 
-        lblBrandSub.setText("Sistem Tiket Kereta");
+        lblBrandSub.setText("Jalur Kereta Api Madura");
         pnlBrand.add(lblBrandSub);
 
         pnlSidebar.add(pnlBrand, java.awt.BorderLayout.NORTH);
 
-        pnlNavWrap.setLayout(new java.awt.BorderLayout());
+        pnlNavWrap.setLayout(new java.awt.BorderLayout(0, 10));
+
+        lblNavSection.setText("NAVIGASI UTAMA");
+        pnlNavWrap.add(lblNavSection, java.awt.BorderLayout.NORTH);
+
+        pnlNavHolder.setLayout(new java.awt.BorderLayout());
 
         pnlNavMenu.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
-        pnlNavWrap.add(pnlNavMenu, java.awt.BorderLayout.NORTH);
+        pnlNavHolder.add(pnlNavMenu, java.awt.BorderLayout.NORTH);
+
+        pnlNavWrap.add(pnlNavHolder, java.awt.BorderLayout.CENTER);
 
         pnlSidebar.add(pnlNavWrap, java.awt.BorderLayout.CENTER);
 
-        pnlUserFooter.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
+        pnlUserFooter.setLayout(new java.awt.BorderLayout(0, 10));
+
+        pnlUserMeta.setLayout(new java.awt.GridLayout(0, 1, 0, 2));
 
         lblUserName.setText("Pengguna");
-        pnlUserFooter.add(lblUserName);
+        pnlUserMeta.add(lblUserName);
 
         lblUserSub.setText("Role");
-        pnlUserFooter.add(lblUserSub);
+        pnlUserMeta.add(lblUserSub);
 
-        btnLogout.setText("Keluar");
-        pnlUserFooter.add(btnLogout);
+        pnlUserFooter.add(pnlUserMeta, java.awt.BorderLayout.CENTER);
+
+        btnLogout.setText("Keluar Akun");
+        pnlUserFooter.add(btnLogout, java.awt.BorderLayout.SOUTH);
 
         pnlSidebar.add(pnlUserFooter, java.awt.BorderLayout.SOUTH);
 
@@ -493,16 +534,19 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel lblBrandSub;
     private javax.swing.JLabel lblBrandTitle;
+    private javax.swing.JLabel lblNavSection;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblUserSub;
     private javax.swing.JPanel pnlAppShell;
     private javax.swing.JPanel pnlAuthHost;
     private javax.swing.JPanel pnlBrand;
     private javax.swing.JPanel pnlContent;
+    private javax.swing.JPanel pnlNavHolder;
     private javax.swing.JPanel pnlNavMenu;
     private javax.swing.JPanel pnlNavWrap;
     private javax.swing.JPanel pnlRoot;
     private javax.swing.JPanel pnlSidebar;
     private javax.swing.JPanel pnlUserFooter;
+    private javax.swing.JPanel pnlUserMeta;
     // End of variables declaration//GEN-END:variables
 }

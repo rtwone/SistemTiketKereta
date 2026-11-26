@@ -14,10 +14,10 @@
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
-    <Property name="verticalGap" type="int" value="16"/>
+    <Property name="verticalGap" type="int" value="14"/>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="pnlHeader">
+    <Container class="javax.swing.JPanel" name="pnlTopArea">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="North"/>
@@ -25,44 +25,92 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
-        <Property name="horizontalGap" type="int" value="12"/>
+        <Property name="verticalGap" type="int" value="12"/>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="pnlTitleBox">
+        <Container class="javax.swing.JPanel" name="pnlStepper">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="North"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="4"/>
+            <Property name="horizontalGap" type="int" value="10"/>
+            <Property name="rows" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblStep1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="•  1. Cari Rute (Selesai)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStep2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="2. Pilih Kereta"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStep3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="3. Penumpang &amp; Kursi"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblStep4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="4. Bayar &amp; E-Tiket"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pnlHeader">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="1"/>
-            <Property name="rows" type="int" value="0"/>
-            <Property name="verticalGap" type="int" value="4"/>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="12"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblTitle">
+            <Container class="javax.swing.JPanel" name="pnlTitleBox">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="0"/>
+                <Property name="verticalGap" type="int" value="4"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblTitle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pilih Jadwal &amp; Kelas Kereta"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblRuteInfo">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Menampilkan jadwal tersedia"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="btnKembali">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pilih Jadwal Kereta"/>
+                <Property name="text" type="java.lang.String" value="←  Ubah Pencarian"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblRuteInfo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Menampilkan jadwal tersedia"/>
-              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="East"/>
+                </Constraint>
+              </Constraints>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnKembali">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ubah Pencarian"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-              <BorderConstraints direction="East"/>
-            </Constraint>
-          </Constraints>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlTableCard">
@@ -76,6 +124,52 @@
         <Property name="verticalGap" type="int" value="12"/>
       </Layout>
       <SubComponents>
+        <Container class="javax.swing.JPanel" name="pnlToolbar">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="North"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblJumlahHasil">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0 opsi ditemukan"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="West"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="javax.swing.JPanel" name="pnlFilterWrap">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="East"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="2"/>
+                <Property name="horizontalGap" type="int" value="8"/>
+                <Property name="verticalGap" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblFilterKelas">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Filter Kelas:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cmbFilterKelas">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
         <Container class="javax.swing.JScrollPane" name="scrJadwal">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -99,21 +193,23 @@
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="16"/>
+          </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblJumlahHasil">
+            <Component class="javax.swing.JLabel" name="lblPreviewPilihan">
               <Properties>
-                <Property name="text" type="java.lang.String" value="0 opsi ditemukan"/>
+                <Property name="text" type="java.lang.String" value="Pilih salah satu jadwal kereta pada tabel di atas"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="West"/>
+                  <BorderConstraints direction="Center"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JButton" name="btnPilih">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lanjut Pilih Kursi"/>
+                <Property name="text" type="java.lang.String" value="Lanjut Pilih Kursi  →"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

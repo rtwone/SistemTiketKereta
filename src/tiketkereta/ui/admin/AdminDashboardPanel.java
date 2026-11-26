@@ -1,8 +1,11 @@
 package tiketkereta.ui.admin;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import tiketkereta.data.DataStore;
 import tiketkereta.model.Pemesanan;
@@ -34,12 +37,12 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
         pnlBody.setOpaque(false);
         pnlKpiGrid.setOpaque(false);
 
-        Tema.styleCard(pnlKpiStasiun, 16, 16);
-        Tema.styleCard(pnlKpiKereta, 16, 16);
-        Tema.styleCard(pnlKpiJadwal, 16, 16);
-        Tema.styleCard(pnlKpiPemesanan, 16, 16);
-        Tema.styleCard(pnlKpiPendapatan, 16, 16);
-        Tema.styleCard(pnlRecentCard, 16, 18);
+        styleKpiCard(pnlKpiStasiun, Tema.PRIMARY);
+        styleKpiCard(pnlKpiKereta, Tema.PRIMARY);
+        styleKpiCard(pnlKpiJadwal, Tema.STATUS_BLUE);
+        styleKpiCard(pnlKpiPemesanan, Tema.ACCENT);
+        styleKpiCard(pnlKpiPendapatan, Tema.STATUS_GREEN);
+        Tema.styleCard(pnlRecentCard, 18, 20);
 
         Tema.stylePageTitle(lblTitle);
         Tema.styleMuted(lblSubtitle);
@@ -104,6 +107,8 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
             return;
         }
         DataStore ds = mainFrame.getDataStore();
+        btnBackupCepat.setText("Backup Baru (" + ds.getFileBackupBerikutnya().getName() + ")");
+        btnRestoreCepat.setText("Restore (data.json)");
         lblKpiStasiunVal.setText(String.valueOf(ds.getStasiunList().size()));
         lblKpiKeretaVal.setText(String.valueOf(ds.getKeretaList().size()));
         lblKpiJadwalVal.setText(String.valueOf(ds.getJadwalList().size()));
@@ -128,9 +133,17 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
         }
     }
 
+    private void styleKpiCard(JPanel panel, Color accentTop) {
+        panel.setBackground(Tema.SURFACE);
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Tema.BORDER, 1),
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createMatteBorder(Tema.s(4), 0, 0, 0, accentTop),
+                        BorderFactory.createEmptyBorder(Tema.s(14), Tema.s(16), Tema.s(16), Tema.s(16)))));
+    }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();

@@ -70,6 +70,39 @@ public class SeatMapPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    public boolean pilihKursiOtomatis() {
+        selectedSeats.clear();
+        boolean layout33 = kapasitas == 90;
+        String[] semuaHuruf = layout33
+                ? new String[]{"A", "B", "C", "D", "E", "F"}
+                : new String[]{"A", "B", "C", "D"};
+        int jumlahBaris = hitungJumlahBaris();
+        for (int baris = 1; baris <= jumlahBaris && selectedSeats.size() < maxSelection; baris++) {
+            for (int i = 0; i < semuaHuruf.length && selectedSeats.size() < maxSelection; i++) {
+                if (kapasitas == 50 && baris == 13 && i >= 2) {
+                    continue;
+                }
+                String kode = "G" + nomorGerbong + "-" + baris + semuaHuruf[i];
+                if (!occupiedSeats.contains(kode)) {
+                    selectedSeats.add(kode);
+                }
+            }
+        }
+        renderGrid();
+        if (listener != null) {
+            listener.onSelectionChanged(selectedSeats);
+        }
+        return selectedSeats.size() == maxSelection;
+    }
+
+    public void resetPilihanKursi() {
+        selectedSeats.clear();
+        renderGrid();
+        if (listener != null) {
+            listener.onSelectionChanged(selectedSeats);
+        }
+    }
+
     public void setSeatSelectionListener(SeatSelectionListener listener) {
         this.listener = listener;
     }
@@ -96,11 +129,23 @@ public class SeatMapPanel extends JPanel {
         gbc.insets = new Insets(Tema.s(4), Tema.s(4), Tema.s(4), Tema.s(4));
         gbc.fill = GridBagConstraints.NONE;
 
+        int totalKolom = 2 + hurufKiri.length + hurufKanan.length;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = totalKolom;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JLabel lblDepan = new JLabel("▲  ARAH DEPAN KERETA (LOKOMOTIF)  ▲", SwingConstants.CENTER);
+        Tema.styleBadge(lblDepan, Tema.PRIMARY_SOFT, Tema.PRIMARY);
+        lblDepan.setFont(Tema.FONT_BODY_BOLD);
+        pnlGridHost.add(lblDepan, gbc);
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.NONE;
+
         tambahHeaderKolom(gbc, hurufKiri, hurufKanan);
 
         for (int baris = 1; baris <= jumlahBaris; baris++) {
             int col = 0;
-            gbc.gridy = baris;
+            gbc.gridy = baris + 1;
 
             gbc.gridx = col++;
             JLabel lblRow = new JLabel(String.valueOf(baris), SwingConstants.CENTER);
@@ -138,7 +183,7 @@ public class SeatMapPanel extends JPanel {
 
     private void tambahHeaderKolom(GridBagConstraints gbc, String[] kiri, String[] kanan) {
         int col = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gbc.gridx = col++;
         pnlGridHost.add(buatLabelHeader("Baris"), gbc);
         for (String h : kiri) {

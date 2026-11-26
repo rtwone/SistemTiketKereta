@@ -27,50 +27,52 @@ public class RegisterPanel extends javax.swing.JPanel {
     private void setupStyle() {
         Tema.styleCanvas(this);
         pnlWrapper.setOpaque(false);
+        Tema.centerFlowPanel(pnlWrapper, pnlCard);
         Tema.styleCard(pnlCard, 32, 38);
 
         pnlHeader.setOpaque(false);
         pnlForm.setOpaque(false);
+        pnlFieldNama.setOpaque(false);
+        pnlFieldPhone.setOpaque(false);
+        pnlFieldJenis.setOpaque(false);
+        pnlFieldNoId.setOpaque(false);
+        pnlFieldPass.setOpaque(false);
+        pnlFieldKonfirmasi.setOpaque(false);
         pnlActions.setOpaque(false);
 
-        lblBrand.setFont(Tema.FONT_SUBTITLE);
+        lblBrand.setFont(Tema.FONT_SMALL);
         lblBrand.setForeground(Tema.ACCENT);
         lblTitle.setFont(Tema.FONT_HERO);
         lblTitle.setForeground(Tema.PRIMARY);
         Tema.styleMuted(lblSubtitle);
-        lblNama.setFont(Tema.FONT_BODY_BOLD);
-        lblNama.setForeground(Tema.TEXT_PRIMARY);
-        lblJenisId.setFont(Tema.FONT_BODY_BOLD);
-        lblJenisId.setForeground(Tema.TEXT_PRIMARY);
-        lblNoId.setFont(Tema.FONT_BODY_BOLD);
-        lblNoId.setForeground(Tema.TEXT_PRIMARY);
-        lblPhone.setFont(Tema.FONT_BODY_BOLD);
-        lblPhone.setForeground(Tema.TEXT_PRIMARY);
-        lblPassword.setFont(Tema.FONT_BODY_BOLD);
-        lblPassword.setForeground(Tema.TEXT_PRIMARY);
-        lblKonfirmasi.setFont(Tema.FONT_BODY_BOLD);
-        lblKonfirmasi.setForeground(Tema.TEXT_PRIMARY);
+
+        Tema.styleFieldLabel(lblNama);
+        Tema.styleFieldLabel(lblPhone);
+        Tema.styleFieldLabel(lblJenisId);
+        Tema.styleFieldLabel(lblNoId);
+        Tema.styleFieldLabel(lblPassword);
+        Tema.styleFieldLabel(lblKonfirmasi);
 
         cmbJenisId.setModel(new DefaultComboBoxModel<String>(new String[]{"KTP", "PASPOR"}));
         Tema.styleComboBox(cmbJenisId);
         Tema.styleTextField(txtNama, "Masukkan nama sesuai identitas");
-        Tema.styleTextField(txtNoId, "Contoh: 3529000000000002");
         Tema.styleTextField(txtPhone, "Contoh: 081234567890");
+        Tema.styleTextField(txtNoId, "Contoh: 3529000000000002");
         Tema.styleTextField(pwdPassword, "Minimal 4 karakter");
-        Tema.styleTextField(pwdKonfirmasi, "Ulangi password");
+        Tema.styleTextField(pwdKonfirmasi, "Ketik ulang password");
 
-        Dimension fieldSize = Tema.dim(260, 40);
+        Dimension fieldSize = Tema.dim(290, 42);
         cmbJenisId.setPreferredSize(fieldSize);
         txtNama.setPreferredSize(fieldSize);
-        txtNoId.setPreferredSize(fieldSize);
         txtPhone.setPreferredSize(fieldSize);
+        txtNoId.setPreferredSize(fieldSize);
         pwdPassword.setPreferredSize(fieldSize);
         pwdKonfirmasi.setPreferredSize(fieldSize);
 
-        Tema.styleAccentButton(btnDaftar);
         Tema.styleSecondaryButton(btnKembali);
-        btnDaftar.setPreferredSize(Tema.dim(480, 44));
-        btnKembali.setPreferredSize(Tema.dim(480, 42));
+        Tema.styleAccentButton(btnDaftar);
+        btnKembali.setPreferredSize(Tema.dim(220, 44));
+        btnDaftar.setPreferredSize(Tema.dim(280, 44));
     }
 
     private void setupEvents() {
@@ -114,7 +116,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             Pelanggan baru = mainFrame.getAuthService().registerPelanggan(
                     nama, jenisId, noId, phone, pass, konfirmasi);
             JOptionPane.showMessageDialog(this,
-                    "Registrasi berhasil! Silakan masuk menggunakan No. Identitas: " + baru.getIdNumber(),
+                    "Registrasi berhasil! Silakan masuk menggunakan Nomor Identitas: " + baru.getIdNumber(),
                     "Registrasi Berhasil",
                     JOptionPane.INFORMATION_MESSAGE);
             resetForm();
@@ -135,77 +137,106 @@ public class RegisterPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
         pnlForm = new javax.swing.JPanel();
+        pnlFieldNama = new javax.swing.JPanel();
         lblNama = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
-        lblJenisId = new javax.swing.JLabel();
-        cmbJenisId = new javax.swing.JComboBox<>();
-        lblNoId = new javax.swing.JLabel();
-        txtNoId = new javax.swing.JTextField();
+        pnlFieldPhone = new javax.swing.JPanel();
         lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
+        pnlFieldJenis = new javax.swing.JPanel();
+        lblJenisId = new javax.swing.JLabel();
+        cmbJenisId = new javax.swing.JComboBox<>();
+        pnlFieldNoId = new javax.swing.JPanel();
+        lblNoId = new javax.swing.JLabel();
+        txtNoId = new javax.swing.JTextField();
+        pnlFieldPass = new javax.swing.JPanel();
         lblPassword = new javax.swing.JLabel();
         pwdPassword = new javax.swing.JPasswordField();
+        pnlFieldKonfirmasi = new javax.swing.JPanel();
         lblKonfirmasi = new javax.swing.JLabel();
         pwdKonfirmasi = new javax.swing.JPasswordField();
         pnlActions = new javax.swing.JPanel();
-        btnDaftar = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
+        btnDaftar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
-        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 48));
+        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 54));
 
-        pnlCard.setLayout(new java.awt.BorderLayout(0, 16));
+        pnlCard.setLayout(new java.awt.BorderLayout(0, 22));
 
-        pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
+        pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
 
-        lblBrand.setText("ACCESS BY KAI");
+        lblBrand.setText("ACCESS BY KAI • REGISTRASI PELANGGAN");
         pnlHeader.add(lblBrand);
 
-        lblTitle.setText("Registrasi Akun Pelanggan");
+        lblTitle.setText("Buat Akun Pelanggan Baru");
         pnlHeader.add(lblTitle);
 
-        lblSubtitle.setText("Lengkapi data diri Anda untuk mulai memesan tiket kereta");
+        lblSubtitle.setText("Isi identitas resmi (KTP/NIK atau Paspor) untuk memesan tiket kereta api");
         pnlHeader.add(lblSubtitle);
 
         pnlCard.add(pnlHeader, java.awt.BorderLayout.NORTH);
 
-        pnlForm.setLayout(new java.awt.GridLayout(0, 2, 14, 10));
+        pnlForm.setLayout(new java.awt.GridLayout(3, 2, 18, 14));
+
+        pnlFieldNama.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblNama.setText("Nama Lengkap");
-        pnlForm.add(lblNama);
-        pnlForm.add(txtNama);
+        pnlFieldNama.add(lblNama, java.awt.BorderLayout.NORTH);
+        pnlFieldNama.add(txtNama, java.awt.BorderLayout.CENTER);
+
+        pnlForm.add(pnlFieldNama);
+
+        pnlFieldPhone.setLayout(new java.awt.BorderLayout(0, 6));
+
+        lblPhone.setText("Nomor HP Aktif");
+        pnlFieldPhone.add(lblPhone, java.awt.BorderLayout.NORTH);
+        pnlFieldPhone.add(txtPhone, java.awt.BorderLayout.CENTER);
+
+        pnlForm.add(pnlFieldPhone);
+
+        pnlFieldJenis.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblJenisId.setText("Jenis Identitas");
-        pnlForm.add(lblJenisId);
+        pnlFieldJenis.add(lblJenisId, java.awt.BorderLayout.NORTH);
+        pnlFieldJenis.add(cmbJenisId, java.awt.BorderLayout.CENTER);
 
-        pnlForm.add(cmbJenisId);
+        pnlForm.add(pnlFieldJenis);
 
-        lblNoId.setText("Nomor KTP / Paspor");
-        pnlForm.add(lblNoId);
-        pnlForm.add(txtNoId);
+        pnlFieldNoId.setLayout(new java.awt.BorderLayout(0, 6));
 
-        lblPhone.setText("Nomor HP");
-        pnlForm.add(lblPhone);
-        pnlForm.add(txtPhone);
+        lblNoId.setText("Nomor KTP / Paspor (Unik)");
+        pnlFieldNoId.add(lblNoId, java.awt.BorderLayout.NORTH);
+        pnlFieldNoId.add(txtNoId, java.awt.BorderLayout.CENTER);
+
+        pnlForm.add(pnlFieldNoId);
+
+        pnlFieldPass.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblPassword.setText("Password");
-        pnlForm.add(lblPassword);
-        pnlForm.add(pwdPassword);
+        pnlFieldPass.add(lblPassword, java.awt.BorderLayout.NORTH);
+        pnlFieldPass.add(pwdPassword, java.awt.BorderLayout.CENTER);
 
-        lblKonfirmasi.setText("Konfirmasi Password");
-        pnlForm.add(lblKonfirmasi);
-        pnlForm.add(pwdKonfirmasi);
+        pnlForm.add(pnlFieldPass);
+
+        pnlFieldKonfirmasi.setLayout(new java.awt.BorderLayout(0, 6));
+
+        lblKonfirmasi.setText("Ulangi Password");
+        pnlFieldKonfirmasi.add(lblKonfirmasi, java.awt.BorderLayout.NORTH);
+        pnlFieldKonfirmasi.add(pwdKonfirmasi, java.awt.BorderLayout.CENTER);
+
+        pnlForm.add(pnlFieldKonfirmasi);
 
         pnlCard.add(pnlForm, java.awt.BorderLayout.CENTER);
 
-        pnlActions.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
+        pnlActions.setLayout(new java.awt.BorderLayout(14, 0));
 
-        btnDaftar.setText("Daftar Sekarang");
-        pnlActions.add(btnDaftar);
+        btnKembali.setText("← Kembali ke Login");
+        pnlActions.add(btnKembali, java.awt.BorderLayout.WEST);
 
-        btnKembali.setText("Sudah punya akun? Kembali ke Login");
-        pnlActions.add(btnKembali);
+        btnDaftar.setText("Daftar Akun Sekarang →");
+        pnlActions.add(btnDaftar, java.awt.BorderLayout.EAST);
 
         pnlCard.add(pnlActions, java.awt.BorderLayout.SOUTH);
 
@@ -229,6 +260,12 @@ public class RegisterPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlActions;
     private javax.swing.JPanel pnlCard;
+    private javax.swing.JPanel pnlFieldJenis;
+    private javax.swing.JPanel pnlFieldKonfirmasi;
+    private javax.swing.JPanel pnlFieldNama;
+    private javax.swing.JPanel pnlFieldNoId;
+    private javax.swing.JPanel pnlFieldPass;
+    private javax.swing.JPanel pnlFieldPhone;
     private javax.swing.JPanel pnlForm;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlWrapper;

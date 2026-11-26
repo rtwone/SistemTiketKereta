@@ -1,6 +1,7 @@
 /build/
 /dist/
 /nbproject/private/
+/data/backup-*.json
 *.class
 *.log
 .DS_Store

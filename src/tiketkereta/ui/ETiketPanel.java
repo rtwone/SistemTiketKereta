@@ -14,6 +14,7 @@ public class ETiketPanel extends javax.swing.JPanel {
 
     private final MainFrame mainFrame;
     private DefaultTableModel tableModel;
+    private Pemesanan pesananAktif;
 
     public ETiketPanel() {
         this(null);
@@ -32,40 +33,44 @@ public class ETiketPanel extends javax.swing.JPanel {
         pnlHeadLeft.setOpaque(false);
         Tema.styleCard(pnlTicketBody, 20, 24);
         pnlInfoGrid.setOpaque(false);
+        Tema.styleSoftCard(pnlTileRute, 14, 16);
+        Tema.styleSoftCard(pnlTileKereta, 14, 16);
+        Tema.styleAccentCard(pnlTileBayar, 14, 16);
         pnlFooter.setOpaque(false);
+        pnlFooterRight.setOpaque(false);
 
         lblBrand.setFont(Tema.FONT_SMALL);
         lblBrand.setForeground(Tema.ACCENT);
         lblBookingCode.setFont(Tema.FONT_HERO);
         lblBookingCode.setForeground(Color.WHITE);
-        lblStatusBadge.setFont(Tema.FONT_SUBTITLE);
+        lblStatusBadge.setFont(Tema.FONT_TITLE);
         lblStatusBadge.setForeground(Color.WHITE);
 
-        Tema.styleMuted(lblKeretaTag);
-        Tema.styleMuted(lblKelasTag);
         Tema.styleMuted(lblRuteTag);
-        Tema.styleMuted(lblJamTag);
-        Tema.styleMuted(lblWaktuTag);
+        Tema.styleMuted(lblKeretaTag);
         Tema.styleMuted(lblTotalTag);
 
-        lblKeretaVal.setFont(Tema.FONT_BODY_BOLD);
+        lblRuteVal.setFont(Tema.FONT_SUBTITLE);
+        lblRuteVal.setForeground(Tema.PRIMARY);
+        lblJamVal.setFont(Tema.FONT_BODY_BOLD);
+        lblJamVal.setForeground(Tema.TEXT_PRIMARY);
+
+        lblKeretaVal.setFont(Tema.FONT_SUBTITLE);
         lblKeretaVal.setForeground(Tema.TEXT_PRIMARY);
         lblKelasVal.setFont(Tema.FONT_BODY_BOLD);
         lblKelasVal.setForeground(Tema.PRIMARY);
-        lblRuteVal.setFont(Tema.FONT_BODY_BOLD);
-        lblRuteVal.setForeground(Tema.TEXT_PRIMARY);
-        lblJamVal.setFont(Tema.FONT_BODY_BOLD);
-        lblJamVal.setForeground(Tema.TEXT_PRIMARY);
-        lblWaktuVal.setFont(Tema.FONT_BODY);
-        lblWaktuVal.setForeground(Tema.TEXT_MUTED);
-        lblTotalVal.setFont(Tema.FONT_SUBTITLE);
+
+        lblTotalVal.setFont(Tema.FONT_TITLE);
         lblTotalVal.setForeground(Tema.ACCENT);
+        lblWaktuVal.setFont(Tema.FONT_SMALL);
+        lblWaktuVal.setForeground(Tema.TEXT_MUTED);
 
         Tema.styleSecondaryButton(btnTiketSaya);
+        Tema.stylePrimaryButton(btnCetakFisik);
         Tema.styleAccentButton(btnPesanLagi);
 
         tableModel = new DefaultTableModel(
-                new Object[]{"No", "Nama Penumpang", "Jenis ID", "No. Identitas", "No. Kursi"}, 0) {
+                new Object[]{"No", "Nama Penumpang", "Jenis Identitas", "Nomor Identitas", "Nomor Kursi"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -86,6 +91,15 @@ public class ETiketPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCetakFisik.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (pesananAktif != null && mainFrame != null) {
+                    mainFrame.mulaiCetakTiket(pesananAktif);
+                }
+            }
+        });
+
         btnPesanLagi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,8 +114,11 @@ public class ETiketPanel extends javax.swing.JPanel {
         if (pesanan == null) {
             return;
         }
-        lblBookingCode.setText(pesanan.getBookingCode());
-        lblStatusBadge.setText("STATUS: " + pesanan.getStatus().toUpperCase());
+        this.pesananAktif = pesanan;
+        boolean lunas = Pemesanan.STATUS_LUNAS.equalsIgnoreCase(pesanan.getStatus());
+        btnCetakFisik.setEnabled(lunas);
+        lblBookingCode.setText("KODE BOOKING: " + pesanan.getBookingCode());
+        lblStatusBadge.setText("•  " + pesanan.getStatus().toUpperCase());
         if (Pemesanan.STATUS_LUNAS.equalsIgnoreCase(pesanan.getStatus())) {
             lblStatusBadge.setForeground(new Color(0x86EFAC));
         } else if (Pemesanan.STATUS_DIPESAN.equalsIgnoreCase(pesanan.getStatus())) {
@@ -111,7 +128,7 @@ public class ETiketPanel extends javax.swing.JPanel {
         }
 
         lblKeretaVal.setText(pesanan.getTrainNumber() + " - " + pesanan.getTrainName());
-        lblKelasVal.setText(pesanan.getKelas());
+        lblKelasVal.setText("Kelas " + pesanan.getKelas());
 
         String asal = pesanan.getOriginCode();
         String tujuan = pesanan.getDestinationCode();
@@ -126,8 +143,8 @@ public class ETiketPanel extends javax.swing.JPanel {
             }
         }
         lblRuteVal.setText(asal + "  →  " + tujuan);
-        lblJamVal.setText(pesanan.getDepartureTime() + "  -  " + pesanan.getArrivalTime());
-        lblWaktuVal.setText(pesanan.getCreatedAt() == null ? "-" : pesanan.getCreatedAt());
+        lblJamVal.setText("Berangkat " + pesanan.getDepartureTime() + "  •  Tiba " + pesanan.getArrivalTime());
+        lblWaktuVal.setText("Dipesan: " + (pesanan.getCreatedAt() == null ? "-" : pesanan.getCreatedAt()));
         lblTotalVal.setText(FormatUtil.formatRupiah(pesanan.getTotalBayar()));
 
         tableModel.setRowCount(0);
@@ -154,22 +171,24 @@ public class ETiketPanel extends javax.swing.JPanel {
         lblStatusBadge = new javax.swing.JLabel();
         pnlTicketBody = new javax.swing.JPanel();
         pnlInfoGrid = new javax.swing.JPanel();
-        lblKeretaTag = new javax.swing.JLabel();
-        lblKeretaVal = new javax.swing.JLabel();
-        lblKelasTag = new javax.swing.JLabel();
-        lblKelasVal = new javax.swing.JLabel();
+        pnlTileRute = new javax.swing.JPanel();
         lblRuteTag = new javax.swing.JLabel();
         lblRuteVal = new javax.swing.JLabel();
-        lblJamTag = new javax.swing.JLabel();
         lblJamVal = new javax.swing.JLabel();
-        lblWaktuTag = new javax.swing.JLabel();
-        lblWaktuVal = new javax.swing.JLabel();
+        pnlTileKereta = new javax.swing.JPanel();
+        lblKeretaTag = new javax.swing.JLabel();
+        lblKeretaVal = new javax.swing.JLabel();
+        lblKelasVal = new javax.swing.JLabel();
+        pnlTileBayar = new javax.swing.JPanel();
         lblTotalTag = new javax.swing.JLabel();
         lblTotalVal = new javax.swing.JLabel();
+        lblWaktuVal = new javax.swing.JLabel();
         scrPenumpang = new javax.swing.JScrollPane();
         tblPenumpang = new javax.swing.JTable();
         pnlFooter = new javax.swing.JPanel();
         btnTiketSaya = new javax.swing.JButton();
+        pnlFooterRight = new javax.swing.JPanel();
+        btnCetakFisik = new javax.swing.JButton();
         btnPesanLagi = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout(0, 16));
@@ -178,7 +197,7 @@ public class ETiketPanel extends javax.swing.JPanel {
 
         pnlHeadLeft.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
-        lblBrand.setText("E-TIKET RESMI • ACCESS BY KAI");
+        lblBrand.setText("BOARDING PASS / E-TIKET RESMI • ACCESS BY KAI");
         pnlHeadLeft.add(lblBrand);
 
         lblBookingCode.setText("TKT-0001");
@@ -194,43 +213,46 @@ public class ETiketPanel extends javax.swing.JPanel {
 
         pnlTicketBody.setLayout(new java.awt.BorderLayout(0, 16));
 
-        pnlInfoGrid.setLayout(new java.awt.GridLayout(0, 2, 18, 8));
+        pnlInfoGrid.setLayout(new java.awt.GridLayout(1, 3, 16, 0));
 
-        lblKeretaTag.setText("Kereta Api");
-        pnlInfoGrid.add(lblKeretaTag);
+        pnlTileRute.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
 
-        lblKeretaVal.setText("-");
-        pnlInfoGrid.add(lblKeretaVal);
-
-        lblKelasTag.setText("Kelas Layanan");
-        pnlInfoGrid.add(lblKelasTag);
-
-        lblKelasVal.setText("-");
-        pnlInfoGrid.add(lblKelasVal);
-
-        lblRuteTag.setText("Rute Perjalanan");
-        pnlInfoGrid.add(lblRuteTag);
+        lblRuteTag.setText("Rute & Waktu Perjalanan");
+        pnlTileRute.add(lblRuteTag);
 
         lblRuteVal.setText("-");
-        pnlInfoGrid.add(lblRuteVal);
-
-        lblJamTag.setText("Jadwal Berangkat - Tiba");
-        pnlInfoGrid.add(lblJamTag);
+        pnlTileRute.add(lblRuteVal);
 
         lblJamVal.setText("-");
-        pnlInfoGrid.add(lblJamVal);
+        pnlTileRute.add(lblJamVal);
 
-        lblWaktuTag.setText("Waktu Pemesanan");
-        pnlInfoGrid.add(lblWaktuTag);
+        pnlInfoGrid.add(pnlTileRute);
 
-        lblWaktuVal.setText("-");
-        pnlInfoGrid.add(lblWaktuVal);
+        pnlTileKereta.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
 
-        lblTotalTag.setText("Total Pembayaran");
-        pnlInfoGrid.add(lblTotalTag);
+        lblKeretaTag.setText("Armada & Kelas Layanan");
+        pnlTileKereta.add(lblKeretaTag);
+
+        lblKeretaVal.setText("-");
+        pnlTileKereta.add(lblKeretaVal);
+
+        lblKelasVal.setText("-");
+        pnlTileKereta.add(lblKelasVal);
+
+        pnlInfoGrid.add(pnlTileKereta);
+
+        pnlTileBayar.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
+
+        lblTotalTag.setText("Total Bayar & Waktu Pesan");
+        pnlTileBayar.add(lblTotalTag);
 
         lblTotalVal.setText("Rp 0");
-        pnlInfoGrid.add(lblTotalVal);
+        pnlTileBayar.add(lblTotalVal);
+
+        lblWaktuVal.setText("-");
+        pnlTileBayar.add(lblWaktuVal);
+
+        pnlInfoGrid.add(pnlTileBayar);
 
         pnlTicketBody.add(pnlInfoGrid, java.awt.BorderLayout.NORTH);
 
@@ -238,13 +260,20 @@ public class ETiketPanel extends javax.swing.JPanel {
 
         pnlTicketBody.add(scrPenumpang, java.awt.BorderLayout.CENTER);
 
-        pnlFooter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
+        pnlFooter.setLayout(new java.awt.BorderLayout());
 
-        btnTiketSaya.setText("Ke Tiket Saya");
-        pnlFooter.add(btnTiketSaya);
+        btnTiketSaya.setText("←  Lihat Daftar Tiket Saya");
+        pnlFooter.add(btnTiketSaya, java.awt.BorderLayout.WEST);
 
-        btnPesanLagi.setText("Pesan Tiket Baru");
-        pnlFooter.add(btnPesanLagi);
+        pnlFooterRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
+
+        btnCetakFisik.setText("Cetak Tiket Fisik");
+        pnlFooterRight.add(btnCetakFisik);
+
+        btnPesanLagi.setText("Pesan Tiket Baru  →");
+        pnlFooterRight.add(btnPesanLagi);
+
+        pnlFooter.add(pnlFooterRight, java.awt.BorderLayout.EAST);
 
         pnlTicketBody.add(pnlFooter, java.awt.BorderLayout.SOUTH);
 
@@ -252,13 +281,12 @@ public class ETiketPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCetakFisik;
     private javax.swing.JButton btnPesanLagi;
     private javax.swing.JButton btnTiketSaya;
     private javax.swing.JLabel lblBookingCode;
     private javax.swing.JLabel lblBrand;
-    private javax.swing.JLabel lblJamTag;
     private javax.swing.JLabel lblJamVal;
-    private javax.swing.JLabel lblKelasTag;
     private javax.swing.JLabel lblKelasVal;
     private javax.swing.JLabel lblKeretaTag;
     private javax.swing.JLabel lblKeretaVal;
@@ -267,13 +295,16 @@ public class ETiketPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStatusBadge;
     private javax.swing.JLabel lblTotalTag;
     private javax.swing.JLabel lblTotalVal;
-    private javax.swing.JLabel lblWaktuTag;
     private javax.swing.JLabel lblWaktuVal;
     private javax.swing.JPanel pnlFooter;
+    private javax.swing.JPanel pnlFooterRight;
     private javax.swing.JPanel pnlHeadLeft;
     private javax.swing.JPanel pnlInfoGrid;
     private javax.swing.JPanel pnlTicketBody;
     private javax.swing.JPanel pnlTicketHeader;
+    private javax.swing.JPanel pnlTileBayar;
+    private javax.swing.JPanel pnlTileKereta;
+    private javax.swing.JPanel pnlTileRute;
     private javax.swing.JScrollPane scrPenumpang;
     private javax.swing.JTable tblPenumpang;
     // End of variables declaration//GEN-END:variables

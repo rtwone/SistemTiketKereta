@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -31,29 +33,44 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         initComponents();
         setupStyle();
         setupEvents();
+        perbaruiModeForm();
     }
 
     private void setupStyle() {
         Tema.styleCanvas(this);
         pnlHeader.setOpaque(false);
         pnlBody.setOpaque(false);
-        Tema.styleCard(pnlTableCard, 14, 14);
+        Tema.styleCard(pnlTableCard, 16, 18);
+        pnlSearchBar.setOpaque(false);
+
         Tema.styleCard(pnlFormCard, 18, 20);
-        pnlFormCard.setPreferredSize(Tema.dim(420, 500));
+        pnlFormCard.setPreferredSize(Tema.dim(440, 500));
+        pnlFormHead.setOpaque(false);
+        pnlFieldsWrap.setOpaque(false);
         pnlFields.setOpaque(false);
+        pnlNomorBox.setOpaque(false);
+        pnlNamaBox.setOpaque(false);
+        pnlJenisBox.setOpaque(false);
+        pnlTarifBox.setOpaque(false);
+        pnlAsalBox.setOpaque(false);
+        pnlTujuanBox.setOpaque(false);
+        pnlGerbongBox.setOpaque(false);
         pnlButtons.setOpaque(false);
 
         Tema.stylePageTitle(lblTitle);
         Tema.styleMuted(lblSubtitle);
+        Tema.styleFieldLabel(lblCari);
         Tema.styleSubTitle(lblFormTitle);
-        Tema.styleMuted(lblNomor);
-        Tema.styleMuted(lblNama);
-        Tema.styleMuted(lblJenis);
-        Tema.styleMuted(lblAsal);
-        Tema.styleMuted(lblTujuan);
-        Tema.styleMuted(lblTarif);
-        Tema.styleMuted(lblGerbong);
 
+        Tema.styleFieldLabel(lblNomor);
+        Tema.styleFieldLabel(lblNama);
+        Tema.styleFieldLabel(lblJenis);
+        Tema.styleFieldLabel(lblTarif);
+        Tema.styleFieldLabel(lblAsal);
+        Tema.styleFieldLabel(lblTujuan);
+        Tema.styleFieldLabel(lblGerbong);
+
+        Tema.styleTextField(txtCari, "Ketik nomor kereta, nama kereta, atau jenis layanan...");
         Tema.styleTextField(txtNomor, "Contoh: KA 111");
         Tema.styleTextField(txtNama, "Contoh: KA Madura Jaya");
         cmbJenis.setModel(new DefaultComboBoxModel<String>(new String[]{"Ekspres", "Antarkota", "Lokal", "Komuter"}));
@@ -82,6 +99,23 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
     }
 
     private void setupEvents() {
+        txtCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                muatTabel();
+            }
+        });
+
         tblKereta.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -129,8 +163,27 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         cmbAsal.setModel(new DefaultComboBoxModel<String>(kodeStasiun));
         cmbTujuan.setModel(new DefaultComboBoxModel<String>(kodeStasiun));
 
+        txtCari.setText("");
+        muatTabel();
+        resetForm();
+    }
+
+    private void muatTabel() {
+        if (mainFrame == null) {
+            return;
+        }
+        String q = FormatUtil.rapi(txtCari.getText()).toLowerCase();
         tableModel.setRowCount(0);
         for (Kereta k : mainFrame.getDataStore().getKeretaList()) {
+            if (!q.isEmpty()) {
+                boolean cocok = k.getTrainNumber().toLowerCase().contains(q)
+                        || k.getName().toLowerCase().contains(q)
+                        || k.getJenisLayanan().toLowerCase().contains(q)
+                        || k.getRingkasanGerbong().toLowerCase().contains(q);
+                if (!cocok) {
+                    continue;
+                }
+            }
             tableModel.addRow(new Object[]{
                 k.getTrainNumber(),
                 k.getName(),
@@ -159,6 +212,20 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         cmbTujuan.setSelectedItem(k.getDestinationCode());
         txtTarif.setText(String.valueOf(k.getBaseFare()));
         txtGerbong.setText(k.getRingkasanGerbong());
+        perbaruiModeForm();
+    }
+
+    private void perbaruiModeForm() {
+        boolean edit = !FormatUtil.kosong(nomorTerpilih);
+        if (edit) {
+            lblModeBadge.setText("Edit: " + nomorTerpilih);
+            Tema.styleBadge(lblModeBadge, Tema.ACCENT_SOFT, Tema.ACCENT);
+        } else {
+            lblModeBadge.setText("Mode: Tambah Baru");
+            Tema.styleBadge(lblModeBadge, Tema.PRIMARY_SOFT, Tema.PRIMARY);
+        }
+        btnUbah.setEnabled(edit);
+        btnHapus.setEnabled(edit);
     }
 
     private int bacaTarif() throws ValidasiException {
@@ -183,7 +250,7 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
                     bacaTarif(),
                     txtGerbong.getText()
             );
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Kereta baru berhasil ditambahkan.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -210,7 +277,7 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
                     bacaTarif(),
                     txtGerbong.getText()
             );
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Data kereta berhasil diperbarui.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -234,7 +301,7 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         }
         try {
             mainFrame.getJadwalService().hapusKereta(nomorTerpilih);
-            refreshData();
+            muatTabel();
             resetForm();
             JOptionPane.showMessageDialog(this, "Data kereta berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidasiException ex) {
@@ -254,6 +321,7 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         txtTarif.setText("");
         txtGerbong.setText("");
         tblKereta.clearSelection();
+        perbaruiModeForm();
     }
 
     @SuppressWarnings("unchecked")
@@ -265,23 +333,36 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         lblSubtitle = new javax.swing.JLabel();
         pnlBody = new javax.swing.JPanel();
         pnlTableCard = new javax.swing.JPanel();
+        pnlSearchBar = new javax.swing.JPanel();
+        lblCari = new javax.swing.JLabel();
+        txtCari = new javax.swing.JTextField();
         scrKereta = new javax.swing.JScrollPane();
         tblKereta = new javax.swing.JTable();
         pnlFormCard = new javax.swing.JPanel();
+        pnlFormHead = new javax.swing.JPanel();
         lblFormTitle = new javax.swing.JLabel();
+        lblModeBadge = new javax.swing.JLabel();
+        pnlFieldsWrap = new javax.swing.JPanel();
         pnlFields = new javax.swing.JPanel();
+        pnlNomorBox = new javax.swing.JPanel();
         lblNomor = new javax.swing.JLabel();
         txtNomor = new javax.swing.JTextField();
+        pnlNamaBox = new javax.swing.JPanel();
         lblNama = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
+        pnlJenisBox = new javax.swing.JPanel();
         lblJenis = new javax.swing.JLabel();
         cmbJenis = new javax.swing.JComboBox<>();
-        lblAsal = new javax.swing.JLabel();
-        cmbAsal = new javax.swing.JComboBox<>();
-        lblTujuan = new javax.swing.JLabel();
-        cmbTujuan = new javax.swing.JComboBox<>();
+        pnlTarifBox = new javax.swing.JPanel();
         lblTarif = new javax.swing.JLabel();
         txtTarif = new javax.swing.JTextField();
+        pnlAsalBox = new javax.swing.JPanel();
+        lblAsal = new javax.swing.JLabel();
+        cmbAsal = new javax.swing.JComboBox<>();
+        pnlTujuanBox = new javax.swing.JPanel();
+        lblTujuan = new javax.swing.JLabel();
+        cmbTujuan = new javax.swing.JComboBox<>();
+        pnlGerbongBox = new javax.swing.JPanel();
         lblGerbong = new javax.swing.JLabel();
         txtGerbong = new javax.swing.JTextField();
         pnlButtons = new javax.swing.JPanel();
@@ -297,14 +378,22 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         lblTitle.setText("Kelola Kereta");
         pnlHeader.add(lblTitle);
 
-        lblSubtitle.setText("Tambah, ubah, atau hapus armada kereta beserta konfigurasi gerbong");
+        lblSubtitle.setText("Klik baris tabel untuk mengubah data armada kereta, atau klik Bersihkan untuk menambah baru");
         pnlHeader.add(lblSubtitle);
 
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
         pnlBody.setLayout(new java.awt.BorderLayout(16, 0));
 
-        pnlTableCard.setLayout(new java.awt.BorderLayout());
+        pnlTableCard.setLayout(new java.awt.BorderLayout(0, 12));
+
+        pnlSearchBar.setLayout(new java.awt.BorderLayout(10, 0));
+
+        lblCari.setText("Cari Kereta:");
+        pnlSearchBar.add(lblCari, java.awt.BorderLayout.WEST);
+        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
+
+        pnlTableCard.add(pnlSearchBar, java.awt.BorderLayout.NORTH);
 
         scrKereta.setViewportView(tblKereta);
 
@@ -314,56 +403,92 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
 
         pnlFormCard.setLayout(new java.awt.BorderLayout(0, 14));
 
-        lblFormTitle.setText("Form Data Kereta");
-        pnlFormCard.add(lblFormTitle, java.awt.BorderLayout.NORTH);
+        pnlFormHead.setLayout(new java.awt.BorderLayout());
 
-        pnlFields.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
+        lblFormTitle.setText("Form Kereta");
+        pnlFormHead.add(lblFormTitle, java.awt.BorderLayout.WEST);
+
+        lblModeBadge.setText("Mode: Tambah Baru");
+        pnlFormHead.add(lblModeBadge, java.awt.BorderLayout.EAST);
+
+        pnlFormCard.add(pnlFormHead, java.awt.BorderLayout.NORTH);
+
+        pnlFieldsWrap.setLayout(new java.awt.BorderLayout(0, 10));
+
+        pnlFields.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
+
+        pnlNomorBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblNomor.setText("Nomor Kereta");
-        pnlFields.add(lblNomor);
-        pnlFields.add(txtNomor);
+        pnlNomorBox.add(lblNomor, java.awt.BorderLayout.NORTH);
+        pnlNomorBox.add(txtNomor, java.awt.BorderLayout.CENTER);
+
+        pnlFields.add(pnlNomorBox);
+
+        pnlNamaBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblNama.setText("Nama Kereta");
-        pnlFields.add(lblNama);
-        pnlFields.add(txtNama);
+        pnlNamaBox.add(lblNama, java.awt.BorderLayout.NORTH);
+        pnlNamaBox.add(txtNama, java.awt.BorderLayout.CENTER);
+
+        pnlFields.add(pnlNamaBox);
+
+        pnlJenisBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblJenis.setText("Jenis Layanan");
-        pnlFields.add(lblJenis);
+        pnlJenisBox.add(lblJenis, java.awt.BorderLayout.NORTH);
+        pnlJenisBox.add(cmbJenis, java.awt.BorderLayout.CENTER);
 
-        pnlFields.add(cmbJenis);
+        pnlFields.add(pnlJenisBox);
 
-        lblAsal.setText("Kode Stasiun Asal");
-        pnlFields.add(lblAsal);
-
-        pnlFields.add(cmbAsal);
-
-        lblTujuan.setText("Kode Stasiun Tujuan");
-        pnlFields.add(lblTujuan);
-
-        pnlFields.add(cmbTujuan);
+        pnlTarifBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblTarif.setText("Tarif Dasar (Rp)");
-        pnlFields.add(lblTarif);
-        pnlFields.add(txtTarif);
+        pnlTarifBox.add(lblTarif, java.awt.BorderLayout.NORTH);
+        pnlTarifBox.add(txtTarif, java.awt.BorderLayout.CENTER);
 
-        lblGerbong.setText("Gerbong (Kelas:Jml:Kursi)");
-        pnlFields.add(lblGerbong);
-        pnlFields.add(txtGerbong);
+        pnlFields.add(pnlTarifBox);
 
-        pnlFormCard.add(pnlFields, java.awt.BorderLayout.CENTER);
+        pnlAsalBox.setLayout(new java.awt.BorderLayout(0, 4));
+
+        lblAsal.setText("Stasiun Asal");
+        pnlAsalBox.add(lblAsal, java.awt.BorderLayout.NORTH);
+        pnlAsalBox.add(cmbAsal, java.awt.BorderLayout.CENTER);
+
+        pnlFields.add(pnlAsalBox);
+
+        pnlTujuanBox.setLayout(new java.awt.BorderLayout(0, 4));
+
+        lblTujuan.setText("Stasiun Tujuan");
+        pnlTujuanBox.add(lblTujuan, java.awt.BorderLayout.NORTH);
+        pnlTujuanBox.add(cmbTujuan, java.awt.BorderLayout.CENTER);
+
+        pnlFields.add(pnlTujuanBox);
+
+        pnlFieldsWrap.add(pnlFields, java.awt.BorderLayout.CENTER);
+
+        pnlGerbongBox.setLayout(new java.awt.BorderLayout(0, 4));
+
+        lblGerbong.setText("Konfigurasi Gerbong (Format: Kelas:Jumlah:Kursi)");
+        pnlGerbongBox.add(lblGerbong, java.awt.BorderLayout.NORTH);
+        pnlGerbongBox.add(txtGerbong, java.awt.BorderLayout.CENTER);
+
+        pnlFieldsWrap.add(pnlGerbongBox, java.awt.BorderLayout.SOUTH);
+
+        pnlFormCard.add(pnlFieldsWrap, java.awt.BorderLayout.CENTER);
 
         pnlButtons.setLayout(new java.awt.GridLayout(2, 2, 8, 8));
 
-        btnTambah.setText("Tambah");
+        btnTambah.setText("+ Tambah Baru");
         pnlButtons.add(btnTambah);
 
-        btnUbah.setText("Ubah");
+        btnUbah.setText("Simpan Ubah");
         pnlButtons.add(btnUbah);
 
-        btnHapus.setText("Hapus");
+        btnHapus.setText("Hapus Kereta");
         pnlButtons.add(btnHapus);
 
-        btnReset.setText("Reset");
+        btnReset.setText("Bersihkan / Baru");
         pnlButtons.add(btnReset);
 
         pnlFormCard.add(pnlButtons, java.awt.BorderLayout.SOUTH);
@@ -382,23 +507,36 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbJenis;
     private javax.swing.JComboBox<String> cmbTujuan;
     private javax.swing.JLabel lblAsal;
+    private javax.swing.JLabel lblCari;
     private javax.swing.JLabel lblFormTitle;
     private javax.swing.JLabel lblGerbong;
     private javax.swing.JLabel lblJenis;
+    private javax.swing.JLabel lblModeBadge;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblNomor;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTarif;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTujuan;
+    private javax.swing.JPanel pnlAsalBox;
     private javax.swing.JPanel pnlBody;
     private javax.swing.JPanel pnlButtons;
     private javax.swing.JPanel pnlFields;
+    private javax.swing.JPanel pnlFieldsWrap;
     private javax.swing.JPanel pnlFormCard;
+    private javax.swing.JPanel pnlFormHead;
+    private javax.swing.JPanel pnlGerbongBox;
     private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlJenisBox;
+    private javax.swing.JPanel pnlNamaBox;
+    private javax.swing.JPanel pnlNomorBox;
+    private javax.swing.JPanel pnlSearchBar;
     private javax.swing.JPanel pnlTableCard;
+    private javax.swing.JPanel pnlTarifBox;
+    private javax.swing.JPanel pnlTujuanBox;
     private javax.swing.JScrollPane scrKereta;
     private javax.swing.JTable tblKereta;
+    private javax.swing.JTextField txtCari;
     private javax.swing.JTextField txtGerbong;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNomor;
