@@ -74,6 +74,8 @@ public final class Tema {
 
     public static void applyGlobalDefaults() {
         UIManager.put("defaultFont", FONT_BODY);
+        UIManager.put("Spinner.font", FONT_SUBTITLE);
+        UIManager.put("FormattedTextField.font", FONT_SUBTITLE);
         UIManager.put("OptionPane.messageFont", FONT_BODY);
         UIManager.put("OptionPane.buttonFont", FONT_BODY_BOLD);
     }
@@ -287,9 +289,15 @@ public final class Tema {
     }
 
     public static void styleSpinner(JSpinner spinner) {
-        spinner.setFont(FONT_BODY_BOLD);
-        spinner.setPreferredSize(dim(96, 40));
+        spinner.setFont(FONT_SUBTITLE);
+        spinner.setPreferredSize(dim(104, 42));
         spinner.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
+        if (spinner.getEditor() instanceof JSpinner.DefaultEditor) {
+            JTextField editorField = ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField();
+            editorField.setFont(FONT_SUBTITLE);
+            editorField.setHorizontalAlignment(SwingConstants.CENTER);
+            editorField.setForeground(TEXT_PRIMARY);
+        }
     }
 
     public static void styleScrollPane(JScrollPane scrollPane) {

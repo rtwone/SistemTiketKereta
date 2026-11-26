@@ -350,130 +350,212 @@ public class KelolaStasiunPanel extends javax.swing.JPanel {
         btnHapus = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Kelola Stasiun");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlHeader.add(lblTitle);
 
         lblSubtitle.setText("Klik baris tabel untuk mengedit, atau klik Reset untuk beralih ke mode Tambah Stasiun Baru");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlHeader.add(lblSubtitle);
-
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlBody.setOpaque(false);
         pnlBody.setLayout(new java.awt.BorderLayout(16, 0));
 
+        pnlTableCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTableCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(16, 18, 16, 18)));
         pnlTableCard.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlSearchBar.setOpaque(false);
         pnlSearchBar.setLayout(new java.awt.BorderLayout(10, 0));
 
         lblCari.setText("Cari Stasiun:");
+        lblCari.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblCari.setForeground(new java.awt.Color(15, 23, 42));
         pnlSearchBar.add(lblCari, java.awt.BorderLayout.WEST);
-        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
 
+        txtCari.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtCari.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
         pnlTableCard.add(pnlSearchBar, java.awt.BorderLayout.NORTH);
 
+        scrStasiun.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
+
+        tblStasiun.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        tblStasiun.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Kode", "Nama Stasiun", "Kecamatan", "Kabupaten", "Kelas", "Jarak (KM)"
+            }
+        ));
+        tblStasiun.setRowHeight(34);
         scrStasiun.setViewportView(tblStasiun);
-
         pnlTableCard.add(scrStasiun, java.awt.BorderLayout.CENTER);
-
         pnlBody.add(pnlTableCard, java.awt.BorderLayout.CENTER);
 
+        pnlFormCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlFormCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 20, 18, 20)));
+        pnlFormCard.setPreferredSize(new java.awt.Dimension(420, 500));
         pnlFormCard.setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlFormHead.setOpaque(false);
         pnlFormHead.setLayout(new java.awt.BorderLayout());
 
         lblFormTitle.setText("Form Stasiun");
+        lblFormTitle.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblFormTitle.setForeground(new java.awt.Color(15, 23, 42));
         pnlFormHead.add(lblFormTitle, java.awt.BorderLayout.WEST);
 
         lblModeBadge.setText("Mode: Tambah Baru");
         pnlFormHead.add(lblModeBadge, java.awt.BorderLayout.EAST);
-
         pnlFormCard.add(pnlFormHead, java.awt.BorderLayout.NORTH);
 
+        pnlFieldsWrap.setOpaque(false);
         pnlFieldsWrap.setLayout(new java.awt.BorderLayout(0, 10));
 
+        pnlNamaBox.setOpaque(false);
         pnlNamaBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblNama.setText("Nama Stasiun");
+        lblNama.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblNama.setForeground(new java.awt.Color(15, 23, 42));
         pnlNamaBox.add(lblNama, java.awt.BorderLayout.NORTH);
-        pnlNamaBox.add(txtNama, java.awt.BorderLayout.CENTER);
 
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtNama.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlNamaBox.add(txtNama, java.awt.BorderLayout.CENTER);
         pnlFieldsWrap.add(pnlNamaBox, java.awt.BorderLayout.NORTH);
 
+        pnlFields.setOpaque(false);
         pnlFields.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
+        pnlIdBox.setOpaque(false);
         pnlIdBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblId.setText("ID Urut");
+        lblId.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblId.setForeground(new java.awt.Color(15, 23, 42));
         pnlIdBox.add(lblId, java.awt.BorderLayout.NORTH);
-        pnlIdBox.add(txtId, java.awt.BorderLayout.CENTER);
 
+        txtId.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtId.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlIdBox.add(txtId, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlIdBox);
 
+        pnlKodeBox.setOpaque(false);
         pnlKodeBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblKode.setText("Kode Stasiun");
+        lblKode.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKode.setForeground(new java.awt.Color(15, 23, 42));
         pnlKodeBox.add(lblKode, java.awt.BorderLayout.NORTH);
-        pnlKodeBox.add(txtKode, java.awt.BorderLayout.CENTER);
 
+        txtKode.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtKode.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlKodeBox.add(txtKode, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlKodeBox);
 
+        pnlKecBox.setOpaque(false);
         pnlKecBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblKecamatan.setText("Kecamatan");
+        lblKecamatan.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKecamatan.setForeground(new java.awt.Color(15, 23, 42));
         pnlKecBox.add(lblKecamatan, java.awt.BorderLayout.NORTH);
-        pnlKecBox.add(txtKecamatan, java.awt.BorderLayout.CENTER);
 
+        txtKecamatan.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtKecamatan.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlKecBox.add(txtKecamatan, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlKecBox);
 
+        pnlKabBox.setOpaque(false);
         pnlKabBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblKabupaten.setText("Kabupaten");
+        lblKabupaten.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKabupaten.setForeground(new java.awt.Color(15, 23, 42));
         pnlKabBox.add(lblKabupaten, java.awt.BorderLayout.NORTH);
-        pnlKabBox.add(txtKabupaten, java.awt.BorderLayout.CENTER);
 
+        txtKabupaten.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtKabupaten.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlKabBox.add(txtKabupaten, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlKabBox);
 
+        pnlKelasBox.setOpaque(false);
         pnlKelasBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblKelas.setText("Kelas Stasiun");
+        lblKelas.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKelas.setForeground(new java.awt.Color(15, 23, 42));
         pnlKelasBox.add(lblKelas, java.awt.BorderLayout.NORTH);
-        pnlKelasBox.add(cmbKelas, java.awt.BorderLayout.CENTER);
 
+        cmbKelas.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbKelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "I", "II", "III" }));
+        cmbKelas.setPreferredSize(new java.awt.Dimension(170, 38));
+        pnlKelasBox.add(cmbKelas, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlKelasBox);
 
+        pnlJarakBox.setOpaque(false);
         pnlJarakBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblJarak.setText("Jarak (KM)");
+        lblJarak.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblJarak.setForeground(new java.awt.Color(15, 23, 42));
         pnlJarakBox.add(lblJarak, java.awt.BorderLayout.NORTH);
+
+        txtJarak.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtJarak.setPreferredSize(new java.awt.Dimension(180, 38));
         pnlJarakBox.add(txtJarak, java.awt.BorderLayout.CENTER);
-
         pnlFields.add(pnlJarakBox);
-
         pnlFieldsWrap.add(pnlFields, java.awt.BorderLayout.CENTER);
-
         pnlFormCard.add(pnlFieldsWrap, java.awt.BorderLayout.CENTER);
 
+        pnlButtons.setOpaque(false);
         pnlButtons.setLayout(new java.awt.GridLayout(2, 2, 8, 8));
 
         btnTambah.setText("+ Tambah Baru");
+        btnTambah.setBackground(new java.awt.Color(243, 112, 33));
+        btnTambah.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnTambah.setForeground(new java.awt.Color(255, 255, 255));
+        btnTambah.setFocusPainted(false);
         pnlButtons.add(btnTambah);
 
         btnUbah.setText("Simpan Ubah");
+        btnUbah.setBackground(new java.awt.Color(27, 54, 93));
+        btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnUbah.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbah.setFocusPainted(false);
         pnlButtons.add(btnUbah);
 
         btnHapus.setText("Hapus Stasiun");
+        btnHapus.setBackground(new java.awt.Color(220, 38, 38));
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapus.setFocusPainted(false);
         pnlButtons.add(btnHapus);
 
         btnReset.setText("Bersihkan / Baru");
+        btnReset.setBackground(new java.awt.Color(255, 255, 255));
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnReset.setForeground(new java.awt.Color(15, 23, 42));
+        btnReset.setFocusPainted(false);
         pnlButtons.add(btnReset);
-
         pnlFormCard.add(pnlButtons, java.awt.BorderLayout.SOUTH);
-
         pnlBody.add(pnlFormCard, java.awt.BorderLayout.EAST);
-
         add(pnlBody, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

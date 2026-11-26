@@ -83,6 +83,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         pnlSeatTop.setOpaque(false);
         pnlGerbongPick.setOpaque(false);
         pnlSeatHost.setOpaque(false);
+        pnlSeatHost.removeAll();
         pnlSeatHost.add(seatMapPanel, BorderLayout.CENTER);
 
         Tema.styleAccentCard(pnlBottomCard, 14, 20);
@@ -371,6 +372,7 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         btnIsiAkun = new javax.swing.JButton();
         scrPenumpang = new javax.swing.JScrollPane();
         pnlPenumpangList = new javax.swing.JPanel();
+        lblPenumpangPreview = new javax.swing.JLabel();
         pnlSeatCard = new javax.swing.JPanel();
         pnlSeatTop = new javax.swing.JPanel();
         pnlGerbongPick = new javax.swing.JPanel();
@@ -380,109 +382,195 @@ public class PesanKursiPanel extends javax.swing.JPanel {
         btnResetKursi = new javax.swing.JButton();
         lblKursiTerpilih = new javax.swing.JLabel();
         pnlSeatHost = new javax.swing.JPanel();
+        lblSeatPreview = new javax.swing.JLabel();
         pnlBottomCard = new javax.swing.JPanel();
         lblTotalBayar = new javax.swing.JLabel();
         btnLanjutBayar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlTopArea.setOpaque(false);
         pnlTopArea.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlStepper.setOpaque(false);
         pnlStepper.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
         lblStep1.setText("•  1. Cari Rute (Selesai)");
+        lblStep1.setBackground(new java.awt.Color(220, 252, 231));
+        lblStep1.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep1.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblStep1.setForeground(new java.awt.Color(22, 163, 74));
+        lblStep1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep1.setOpaque(true);
         pnlStepper.add(lblStep1);
 
         lblStep2.setText("•  2. Pilih Kereta (Selesai)");
+        lblStep2.setBackground(new java.awt.Color(220, 252, 231));
+        lblStep2.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep2.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblStep2.setForeground(new java.awt.Color(22, 163, 74));
+        lblStep2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep2.setOpaque(true);
         pnlStepper.add(lblStep2);
 
         lblStep3.setText("3. Penumpang & Kursi");
+        lblStep3.setBackground(new java.awt.Color(243, 112, 33));
+        lblStep3.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep3.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblStep3.setForeground(new java.awt.Color(255, 255, 255));
+        lblStep3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep3.setOpaque(true);
         pnlStepper.add(lblStep3);
 
         lblStep4.setText("4. Bayar & E-Tiket");
+        lblStep4.setBackground(new java.awt.Color(248, 250, 252));
+        lblStep4.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep4.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblStep4.setForeground(new java.awt.Color(100, 116, 139));
+        lblStep4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep4.setOpaque(true);
         pnlStepper.add(lblStep4);
-
         pnlTopArea.add(pnlStepper, java.awt.BorderLayout.NORTH);
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.BorderLayout(12, 0));
 
+        pnlTitleBox.setOpaque(false);
         pnlTitleBox.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Data Penumpang & Pilih Kursi Gerbong");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlTitleBox.add(lblTitle);
 
         lblInfoKereta.setText("Detail perjalanan");
+        lblInfoKereta.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblInfoKereta.setForeground(new java.awt.Color(100, 116, 139));
         pnlTitleBox.add(lblInfoKereta);
-
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.CENTER);
 
         btnKembali.setText("←  Kembali ke Jadwal");
+        btnKembali.setBackground(new java.awt.Color(255, 255, 255));
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnKembali.setForeground(new java.awt.Color(15, 23, 42));
+        btnKembali.setFocusPainted(false);
         pnlHeader.add(btnKembali, java.awt.BorderLayout.EAST);
-
         pnlTopArea.add(pnlHeader, java.awt.BorderLayout.CENTER);
-
         add(pnlTopArea, java.awt.BorderLayout.NORTH);
 
+        pnlMain.setOpaque(false);
         pnlMain.setLayout(new java.awt.BorderLayout(16, 0));
 
+        pnlPenumpangCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPenumpangCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 18, 18, 18)));
+        pnlPenumpangCard.setPreferredSize(new java.awt.Dimension(400, 480));
         pnlPenumpangCard.setLayout(new java.awt.BorderLayout(0, 10));
 
+        pnlPenumpangTop.setOpaque(false);
         pnlPenumpangTop.setLayout(new java.awt.BorderLayout());
 
         lblPenumpangTitle.setText("Identitas Penumpang");
+        lblPenumpangTitle.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblPenumpangTitle.setForeground(new java.awt.Color(15, 23, 42));
         pnlPenumpangTop.add(lblPenumpangTitle, java.awt.BorderLayout.WEST);
 
         btnIsiAkun.setText("Isi dari Profil");
+        btnIsiAkun.setBackground(new java.awt.Color(255, 255, 255));
+        btnIsiAkun.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnIsiAkun.setForeground(new java.awt.Color(15, 23, 42));
+        btnIsiAkun.setFocusPainted(false);
         pnlPenumpangTop.add(btnIsiAkun, java.awt.BorderLayout.EAST);
-
         pnlPenumpangCard.add(pnlPenumpangTop, java.awt.BorderLayout.NORTH);
 
+        scrPenumpang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
+
+        pnlPenumpangList.setBackground(new java.awt.Color(255, 255, 255));
         pnlPenumpangList.setLayout(new java.awt.GridLayout(0, 1, 0, 12));
+
+        lblPenumpangPreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPenumpangPreview.setText("Form Penumpang 1 - 4 (Otomatis sesuai jumlah penumpang)");
+        lblPenumpangPreview.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblPenumpangPreview.setForeground(new java.awt.Color(100, 116, 139));
+        pnlPenumpangList.add(lblPenumpangPreview);
         scrPenumpang.setViewportView(pnlPenumpangList);
-
         pnlPenumpangCard.add(scrPenumpang, java.awt.BorderLayout.CENTER);
-
         pnlMain.add(pnlPenumpangCard, java.awt.BorderLayout.WEST);
 
+        pnlSeatCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSeatCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 18, 18, 18)));
         pnlSeatCard.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlSeatTop.setOpaque(false);
         pnlSeatTop.setLayout(new java.awt.BorderLayout(12, 0));
 
+        pnlGerbongPick.setOpaque(false);
         pnlGerbongPick.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 0));
 
         lblGerbong.setText("Gerbong:");
+        lblGerbong.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblGerbong.setForeground(new java.awt.Color(15, 23, 42));
         pnlGerbongPick.add(lblGerbong);
+
+        cmbGerbong.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbGerbong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerbong 1 - Eksekutif (50 Kursi)", "Gerbong 2 - Bisnis (64 Kursi)" }));
+        cmbGerbong.setPreferredSize(new java.awt.Dimension(200, 40));
         pnlGerbongPick.add(cmbGerbong);
 
         btnPilihOtomatis.setText("Pilih Kursi Otomatis");
+        btnPilihOtomatis.setBackground(new java.awt.Color(27, 54, 93));
+        btnPilihOtomatis.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnPilihOtomatis.setForeground(new java.awt.Color(255, 255, 255));
+        btnPilihOtomatis.setFocusPainted(false);
         pnlGerbongPick.add(btnPilihOtomatis);
 
         btnResetKursi.setText("Reset");
+        btnResetKursi.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetKursi.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnResetKursi.setForeground(new java.awt.Color(15, 23, 42));
+        btnResetKursi.setFocusPainted(false);
         pnlGerbongPick.add(btnResetKursi);
-
         pnlSeatTop.add(pnlGerbongPick, java.awt.BorderLayout.WEST);
 
         lblKursiTerpilih.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblKursiTerpilih.setText("Kursi Dipilih: -");
+        lblKursiTerpilih.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKursiTerpilih.setForeground(new java.awt.Color(27, 54, 93));
         pnlSeatTop.add(lblKursiTerpilih, java.awt.BorderLayout.CENTER);
-
         pnlSeatCard.add(pnlSeatTop, java.awt.BorderLayout.NORTH);
 
+        pnlSeatHost.setOpaque(false);
         pnlSeatHost.setLayout(new java.awt.BorderLayout());
+
+        lblSeatPreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSeatPreview.setText("Area Denah Kursi Gerbong Interaktif (SeatMapPanel: Hijau = Kosong, Biru = Dipilih, Abu-abu = Terisi)");
+        lblSeatPreview.setBackground(new java.awt.Color(248, 250, 252));
+        lblSeatPreview.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(24, 24, 24, 24)));
+        lblSeatPreview.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblSeatPreview.setForeground(new java.awt.Color(27, 54, 93));
+        lblSeatPreview.setOpaque(true);
+        pnlSeatHost.add(lblSeatPreview, java.awt.BorderLayout.CENTER);
         pnlSeatCard.add(pnlSeatHost, java.awt.BorderLayout.CENTER);
-
         pnlMain.add(pnlSeatCard, java.awt.BorderLayout.CENTER);
-
         add(pnlMain, java.awt.BorderLayout.CENTER);
 
+        pnlBottomCard.setBackground(new java.awt.Color(255, 247, 237));
+        pnlBottomCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 215, 170)), javax.swing.BorderFactory.createEmptyBorder(14, 20, 14, 20)));
         pnlBottomCard.setLayout(new java.awt.BorderLayout());
 
         lblTotalBayar.setText("Total Bayar: Rp 0");
+        lblTotalBayar.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblTotalBayar.setForeground(new java.awt.Color(27, 54, 93));
         pnlBottomCard.add(lblTotalBayar, java.awt.BorderLayout.WEST);
 
         btnLanjutBayar.setText("Buat Pesanan & Lanjut Bayar  →");
+        btnLanjutBayar.setBackground(new java.awt.Color(243, 112, 33));
+        btnLanjutBayar.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnLanjutBayar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLanjutBayar.setFocusPainted(false);
         pnlBottomCard.add(btnLanjutBayar, java.awt.BorderLayout.EAST);
-
         add(pnlBottomCard, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -496,7 +584,9 @@ public class PesanKursiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblGerbong;
     private javax.swing.JLabel lblInfoKereta;
     private javax.swing.JLabel lblKursiTerpilih;
+    private javax.swing.JLabel lblPenumpangPreview;
     private javax.swing.JLabel lblPenumpangTitle;
+    private javax.swing.JLabel lblSeatPreview;
     private javax.swing.JLabel lblStep1;
     private javax.swing.JLabel lblStep2;
     private javax.swing.JLabel lblStep3;

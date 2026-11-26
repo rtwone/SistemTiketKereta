@@ -228,76 +228,140 @@ public class PilihKeretaPanel extends javax.swing.JPanel {
         lblPreviewPilihan = new javax.swing.JLabel();
         btnPilih = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlTopArea.setOpaque(false);
         pnlTopArea.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlStepper.setOpaque(false);
         pnlStepper.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
         lblStep1.setText("•  1. Cari Rute (Selesai)");
+        lblStep1.setBackground(new java.awt.Color(220, 252, 231));
+        lblStep1.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep1.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblStep1.setForeground(new java.awt.Color(22, 163, 74));
+        lblStep1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep1.setOpaque(true);
         pnlStepper.add(lblStep1);
 
         lblStep2.setText("2. Pilih Kereta");
+        lblStep2.setBackground(new java.awt.Color(243, 112, 33));
+        lblStep2.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep2.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblStep2.setForeground(new java.awt.Color(255, 255, 255));
+        lblStep2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep2.setOpaque(true);
         pnlStepper.add(lblStep2);
 
         lblStep3.setText("3. Penumpang & Kursi");
+        lblStep3.setBackground(new java.awt.Color(248, 250, 252));
+        lblStep3.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep3.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblStep3.setForeground(new java.awt.Color(100, 116, 139));
+        lblStep3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep3.setOpaque(true);
         pnlStepper.add(lblStep3);
 
         lblStep4.setText("4. Bayar & E-Tiket");
+        lblStep4.setBackground(new java.awt.Color(248, 250, 252));
+        lblStep4.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        lblStep4.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblStep4.setForeground(new java.awt.Color(100, 116, 139));
+        lblStep4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStep4.setOpaque(true);
         pnlStepper.add(lblStep4);
-
         pnlTopArea.add(pnlStepper, java.awt.BorderLayout.NORTH);
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.BorderLayout(12, 0));
 
+        pnlTitleBox.setOpaque(false);
         pnlTitleBox.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Pilih Jadwal & Kelas Kereta");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlTitleBox.add(lblTitle);
 
         lblRuteInfo.setText("Menampilkan jadwal tersedia");
+        lblRuteInfo.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblRuteInfo.setForeground(new java.awt.Color(100, 116, 139));
         pnlTitleBox.add(lblRuteInfo);
-
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.CENTER);
 
         btnKembali.setText("←  Ubah Pencarian");
+        btnKembali.setBackground(new java.awt.Color(255, 255, 255));
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnKembali.setForeground(new java.awt.Color(15, 23, 42));
+        btnKembali.setFocusPainted(false);
         pnlHeader.add(btnKembali, java.awt.BorderLayout.EAST);
-
         pnlTopArea.add(pnlHeader, java.awt.BorderLayout.CENTER);
-
         add(pnlTopArea, java.awt.BorderLayout.NORTH);
 
+        pnlTableCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTableCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 20, 18, 20)));
         pnlTableCard.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlToolbar.setOpaque(false);
         pnlToolbar.setLayout(new java.awt.BorderLayout());
 
         lblJumlahHasil.setText("0 opsi ditemukan");
+        lblJumlahHasil.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblJumlahHasil.setForeground(new java.awt.Color(100, 116, 139));
         pnlToolbar.add(lblJumlahHasil, java.awt.BorderLayout.WEST);
 
+        pnlFilterWrap.setOpaque(false);
         pnlFilterWrap.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 8, 0));
 
         lblFilterKelas.setText("Filter Kelas:");
+        lblFilterKelas.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblFilterKelas.setForeground(new java.awt.Color(15, 23, 42));
         pnlFilterWrap.add(lblFilterKelas);
+
+        cmbFilterKelas.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbFilterKelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua Kelas", "Eksekutif", "Bisnis", "Ekonomi Premium", "Ekonomi" }));
+        cmbFilterKelas.setPreferredSize(new java.awt.Dimension(170, 38));
         pnlFilterWrap.add(cmbFilterKelas);
-
         pnlToolbar.add(pnlFilterWrap, java.awt.BorderLayout.EAST);
-
         pnlTableCard.add(pnlToolbar, java.awt.BorderLayout.NORTH);
 
-        scrJadwal.setViewportView(tblJadwal);
+        scrJadwal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
 
+        tblJadwal.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        tblJadwal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Kode & Nama Kereta", "Jenis Layanan", "Kelas", "Berangkat", "Tiba", "Sisa Kursi", "Tarif / Org"
+            }
+        ));
+        tblJadwal.setRowHeight(34);
+        scrJadwal.setViewportView(tblJadwal);
         pnlTableCard.add(scrJadwal, java.awt.BorderLayout.CENTER);
 
+        pnlFooter.setBackground(new java.awt.Color(255, 247, 237));
+        pnlFooter.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 215, 170)), javax.swing.BorderFactory.createEmptyBorder(12, 16, 12, 16)));
         pnlFooter.setLayout(new java.awt.BorderLayout(16, 0));
 
         lblPreviewPilihan.setText("Pilih salah satu jadwal kereta pada tabel di atas");
+        lblPreviewPilihan.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPreviewPilihan.setForeground(new java.awt.Color(27, 54, 93));
         pnlFooter.add(lblPreviewPilihan, java.awt.BorderLayout.CENTER);
 
         btnPilih.setText("Lanjut Pilih Kursi  →");
+        btnPilih.setBackground(new java.awt.Color(243, 112, 33));
+        btnPilih.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnPilih.setForeground(new java.awt.Color(255, 255, 255));
+        btnPilih.setFocusPainted(false);
         pnlFooter.add(btnPilih, java.awt.BorderLayout.EAST);
-
         pnlTableCard.add(pnlFooter, java.awt.BorderLayout.SOUTH);
-
         add(pnlTableCard, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

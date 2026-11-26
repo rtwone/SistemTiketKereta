@@ -159,89 +159,140 @@ public class RegisterPanel extends javax.swing.JPanel {
         btnKembali = new javax.swing.JButton();
         btnDaftar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout());
 
-        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 54));
+        pnlWrapper.setOpaque(false);
+        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 105));
 
+        pnlCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(32, 38, 32, 38)));
         pnlCard.setLayout(new java.awt.BorderLayout(0, 22));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
 
         lblBrand.setText("ACCESS BY KAI • REGISTRASI PELANGGAN");
+        lblBrand.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblBrand.setForeground(new java.awt.Color(243, 112, 33));
         pnlHeader.add(lblBrand);
 
         lblTitle.setText("Buat Akun Pelanggan Baru");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlHeader.add(lblTitle);
 
         lblSubtitle.setText("Isi identitas resmi (KTP/NIK atau Paspor) untuk memesan tiket kereta api");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlHeader.add(lblSubtitle);
-
         pnlCard.add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlForm.setOpaque(false);
         pnlForm.setLayout(new java.awt.GridLayout(3, 2, 18, 14));
 
+        pnlFieldNama.setOpaque(false);
         pnlFieldNama.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblNama.setText("Nama Lengkap");
+        lblNama.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblNama.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldNama.add(lblNama, java.awt.BorderLayout.NORTH);
-        pnlFieldNama.add(txtNama, java.awt.BorderLayout.CENTER);
 
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtNama.setPreferredSize(new java.awt.Dimension(290, 42));
+        pnlFieldNama.add(txtNama, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlFieldNama);
 
+        pnlFieldPhone.setOpaque(false);
         pnlFieldPhone.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblPhone.setText("Nomor HP Aktif");
+        lblPhone.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPhone.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldPhone.add(lblPhone, java.awt.BorderLayout.NORTH);
-        pnlFieldPhone.add(txtPhone, java.awt.BorderLayout.CENTER);
 
+        txtPhone.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtPhone.setPreferredSize(new java.awt.Dimension(290, 42));
+        pnlFieldPhone.add(txtPhone, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlFieldPhone);
 
+        pnlFieldJenis.setOpaque(false);
         pnlFieldJenis.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblJenisId.setText("Jenis Identitas");
+        lblJenisId.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblJenisId.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldJenis.add(lblJenisId, java.awt.BorderLayout.NORTH);
-        pnlFieldJenis.add(cmbJenisId, java.awt.BorderLayout.CENTER);
 
+        cmbJenisId.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbJenisId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KTP", "PASPOR" }));
+        cmbJenisId.setPreferredSize(new java.awt.Dimension(290, 42));
+        pnlFieldJenis.add(cmbJenisId, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlFieldJenis);
 
+        pnlFieldNoId.setOpaque(false);
         pnlFieldNoId.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblNoId.setText("Nomor KTP / Paspor (Unik)");
+        lblNoId.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblNoId.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldNoId.add(lblNoId, java.awt.BorderLayout.NORTH);
-        pnlFieldNoId.add(txtNoId, java.awt.BorderLayout.CENTER);
 
+        txtNoId.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtNoId.setPreferredSize(new java.awt.Dimension(290, 42));
+        pnlFieldNoId.add(txtNoId, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlFieldNoId);
 
+        pnlFieldPass.setOpaque(false);
         pnlFieldPass.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblPassword.setText("Password");
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPassword.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldPass.add(lblPassword, java.awt.BorderLayout.NORTH);
-        pnlFieldPass.add(pwdPassword, java.awt.BorderLayout.CENTER);
 
+        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        pwdPassword.setPreferredSize(new java.awt.Dimension(290, 42));
+        pnlFieldPass.add(pwdPassword, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlFieldPass);
 
+        pnlFieldKonfirmasi.setOpaque(false);
         pnlFieldKonfirmasi.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblKonfirmasi.setText("Ulangi Password");
+        lblKonfirmasi.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKonfirmasi.setForeground(new java.awt.Color(15, 23, 42));
         pnlFieldKonfirmasi.add(lblKonfirmasi, java.awt.BorderLayout.NORTH);
+
+        pwdKonfirmasi.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        pwdKonfirmasi.setPreferredSize(new java.awt.Dimension(290, 42));
         pnlFieldKonfirmasi.add(pwdKonfirmasi, java.awt.BorderLayout.CENTER);
-
         pnlForm.add(pnlFieldKonfirmasi);
-
         pnlCard.add(pnlForm, java.awt.BorderLayout.CENTER);
 
+        pnlActions.setOpaque(false);
         pnlActions.setLayout(new java.awt.BorderLayout(14, 0));
 
         btnKembali.setText("← Kembali ke Login");
+        btnKembali.setBackground(new java.awt.Color(255, 255, 255));
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnKembali.setForeground(new java.awt.Color(15, 23, 42));
+        btnKembali.setFocusPainted(false);
+        btnKembali.setPreferredSize(new java.awt.Dimension(220, 44));
         pnlActions.add(btnKembali, java.awt.BorderLayout.WEST);
 
         btnDaftar.setText("Daftar Akun Sekarang →");
+        btnDaftar.setBackground(new java.awt.Color(243, 112, 33));
+        btnDaftar.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnDaftar.setForeground(new java.awt.Color(255, 255, 255));
+        btnDaftar.setFocusPainted(false);
+        btnDaftar.setPreferredSize(new java.awt.Dimension(280, 44));
         pnlActions.add(btnDaftar, java.awt.BorderLayout.EAST);
-
         pnlCard.add(pnlActions, java.awt.BorderLayout.SOUTH);
-
         pnlWrapper.add(pnlCard);
-
         add(pnlWrapper, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

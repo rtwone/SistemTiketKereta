@@ -371,130 +371,214 @@ public class KelolaKeretaPanel extends javax.swing.JPanel {
         btnHapus = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Kelola Kereta");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlHeader.add(lblTitle);
 
         lblSubtitle.setText("Klik baris tabel untuk mengubah data armada kereta, atau klik Bersihkan untuk menambah baru");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlHeader.add(lblSubtitle);
-
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlBody.setOpaque(false);
         pnlBody.setLayout(new java.awt.BorderLayout(16, 0));
 
+        pnlTableCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTableCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(16, 18, 16, 18)));
         pnlTableCard.setLayout(new java.awt.BorderLayout(0, 12));
 
+        pnlSearchBar.setOpaque(false);
         pnlSearchBar.setLayout(new java.awt.BorderLayout(10, 0));
 
         lblCari.setText("Cari Kereta:");
+        lblCari.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblCari.setForeground(new java.awt.Color(15, 23, 42));
         pnlSearchBar.add(lblCari, java.awt.BorderLayout.WEST);
-        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
 
+        txtCari.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtCari.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlSearchBar.add(txtCari, java.awt.BorderLayout.CENTER);
         pnlTableCard.add(pnlSearchBar, java.awt.BorderLayout.NORTH);
 
+        scrKereta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
+
+        tblKereta.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        tblKereta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "No. Kereta", "Nama Kereta", "Jenis", "Rute", "Tarif Dasar", "Konfigurasi Gerbong"
+            }
+        ));
+        tblKereta.setRowHeight(34);
         scrKereta.setViewportView(tblKereta);
-
         pnlTableCard.add(scrKereta, java.awt.BorderLayout.CENTER);
-
         pnlBody.add(pnlTableCard, java.awt.BorderLayout.CENTER);
 
+        pnlFormCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlFormCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 20, 18, 20)));
+        pnlFormCard.setPreferredSize(new java.awt.Dimension(440, 500));
         pnlFormCard.setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlFormHead.setOpaque(false);
         pnlFormHead.setLayout(new java.awt.BorderLayout());
 
         lblFormTitle.setText("Form Kereta");
+        lblFormTitle.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblFormTitle.setForeground(new java.awt.Color(15, 23, 42));
         pnlFormHead.add(lblFormTitle, java.awt.BorderLayout.WEST);
 
         lblModeBadge.setText("Mode: Tambah Baru");
         pnlFormHead.add(lblModeBadge, java.awt.BorderLayout.EAST);
-
         pnlFormCard.add(pnlFormHead, java.awt.BorderLayout.NORTH);
 
+        pnlFieldsWrap.setOpaque(false);
         pnlFieldsWrap.setLayout(new java.awt.BorderLayout(0, 10));
 
+        pnlFields.setOpaque(false);
         pnlFields.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
+        pnlNomorBox.setOpaque(false);
         pnlNomorBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblNomor.setText("Nomor Kereta");
+        lblNomor.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblNomor.setForeground(new java.awt.Color(15, 23, 42));
         pnlNomorBox.add(lblNomor, java.awt.BorderLayout.NORTH);
-        pnlNomorBox.add(txtNomor, java.awt.BorderLayout.CENTER);
 
+        txtNomor.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtNomor.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlNomorBox.add(txtNomor, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlNomorBox);
 
+        pnlNamaBox.setOpaque(false);
         pnlNamaBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblNama.setText("Nama Kereta");
+        lblNama.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblNama.setForeground(new java.awt.Color(15, 23, 42));
         pnlNamaBox.add(lblNama, java.awt.BorderLayout.NORTH);
-        pnlNamaBox.add(txtNama, java.awt.BorderLayout.CENTER);
 
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtNama.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlNamaBox.add(txtNama, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlNamaBox);
 
+        pnlJenisBox.setOpaque(false);
         pnlJenisBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblJenis.setText("Jenis Layanan");
+        lblJenis.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblJenis.setForeground(new java.awt.Color(15, 23, 42));
         pnlJenisBox.add(lblJenis, java.awt.BorderLayout.NORTH);
-        pnlJenisBox.add(cmbJenis, java.awt.BorderLayout.CENTER);
 
+        cmbJenis.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ekspres", "Antarkota", "Lokal", "Komuter" }));
+        cmbJenis.setPreferredSize(new java.awt.Dimension(170, 38));
+        pnlJenisBox.add(cmbJenis, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlJenisBox);
 
+        pnlTarifBox.setOpaque(false);
         pnlTarifBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblTarif.setText("Tarif Dasar (Rp)");
+        lblTarif.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblTarif.setForeground(new java.awt.Color(15, 23, 42));
         pnlTarifBox.add(lblTarif, java.awt.BorderLayout.NORTH);
-        pnlTarifBox.add(txtTarif, java.awt.BorderLayout.CENTER);
 
+        txtTarif.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtTarif.setPreferredSize(new java.awt.Dimension(180, 38));
+        pnlTarifBox.add(txtTarif, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlTarifBox);
 
+        pnlAsalBox.setOpaque(false);
         pnlAsalBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblAsal.setText("Stasiun Asal");
+        lblAsal.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblAsal.setForeground(new java.awt.Color(15, 23, 42));
         pnlAsalBox.add(lblAsal, java.awt.BorderLayout.NORTH);
-        pnlAsalBox.add(cmbAsal, java.awt.BorderLayout.CENTER);
 
+        cmbAsal.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbAsal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Stasiun Kamal (KML)", "Stasiun Bangkalan (BKL)", "Stasiun Sampang (SPG)" }));
+        cmbAsal.setPreferredSize(new java.awt.Dimension(170, 38));
+        pnlAsalBox.add(cmbAsal, java.awt.BorderLayout.CENTER);
         pnlFields.add(pnlAsalBox);
 
+        pnlTujuanBox.setOpaque(false);
         pnlTujuanBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblTujuan.setText("Stasiun Tujuan");
+        lblTujuan.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblTujuan.setForeground(new java.awt.Color(15, 23, 42));
         pnlTujuanBox.add(lblTujuan, java.awt.BorderLayout.NORTH);
+
+        cmbTujuan.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbTujuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Stasiun Sumenep (SMP)", "Stasiun Pamekasan (PMK)", "Stasiun Kalianget (KLT)" }));
+        cmbTujuan.setPreferredSize(new java.awt.Dimension(170, 38));
         pnlTujuanBox.add(cmbTujuan, java.awt.BorderLayout.CENTER);
-
         pnlFields.add(pnlTujuanBox);
-
         pnlFieldsWrap.add(pnlFields, java.awt.BorderLayout.CENTER);
 
+        pnlGerbongBox.setOpaque(false);
         pnlGerbongBox.setLayout(new java.awt.BorderLayout(0, 4));
 
         lblGerbong.setText("Konfigurasi Gerbong (Format: Kelas:Jumlah:Kursi)");
+        lblGerbong.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblGerbong.setForeground(new java.awt.Color(15, 23, 42));
         pnlGerbongBox.add(lblGerbong, java.awt.BorderLayout.NORTH);
+
+        txtGerbong.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtGerbong.setPreferredSize(new java.awt.Dimension(180, 38));
         pnlGerbongBox.add(txtGerbong, java.awt.BorderLayout.CENTER);
-
         pnlFieldsWrap.add(pnlGerbongBox, java.awt.BorderLayout.SOUTH);
-
         pnlFormCard.add(pnlFieldsWrap, java.awt.BorderLayout.CENTER);
 
+        pnlButtons.setOpaque(false);
         pnlButtons.setLayout(new java.awt.GridLayout(2, 2, 8, 8));
 
         btnTambah.setText("+ Tambah Baru");
+        btnTambah.setBackground(new java.awt.Color(243, 112, 33));
+        btnTambah.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnTambah.setForeground(new java.awt.Color(255, 255, 255));
+        btnTambah.setFocusPainted(false);
         pnlButtons.add(btnTambah);
 
         btnUbah.setText("Simpan Ubah");
+        btnUbah.setBackground(new java.awt.Color(27, 54, 93));
+        btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnUbah.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbah.setFocusPainted(false);
         pnlButtons.add(btnUbah);
 
         btnHapus.setText("Hapus Kereta");
+        btnHapus.setBackground(new java.awt.Color(220, 38, 38));
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapus.setFocusPainted(false);
         pnlButtons.add(btnHapus);
 
         btnReset.setText("Bersihkan / Baru");
+        btnReset.setBackground(new java.awt.Color(255, 255, 255));
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnReset.setForeground(new java.awt.Color(15, 23, 42));
+        btnReset.setFocusPainted(false);
         pnlButtons.add(btnReset);
-
         pnlFormCard.add(pnlButtons, java.awt.BorderLayout.SOUTH);
-
         pnlBody.add(pnlFormCard, java.awt.BorderLayout.EAST);
-
         add(pnlBody, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

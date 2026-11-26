@@ -443,12 +443,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlRoot = new javax.swing.JPanel();
-        pnlAuthHost = new javax.swing.JPanel();
         pnlAppShell = new javax.swing.JPanel();
         pnlSidebar = new javax.swing.JPanel();
         pnlBrand = new javax.swing.JPanel();
@@ -458,72 +456,150 @@ public class MainFrame extends javax.swing.JFrame {
         lblNavSection = new javax.swing.JLabel();
         pnlNavHolder = new javax.swing.JPanel();
         pnlNavMenu = new javax.swing.JPanel();
+        btnNavPreview1 = new javax.swing.JButton();
+        btnNavPreview2 = new javax.swing.JButton();
+        btnNavPreview3 = new javax.swing.JButton();
         pnlUserFooter = new javax.swing.JPanel();
         pnlUserMeta = new javax.swing.JPanel();
         lblUserName = new javax.swing.JLabel();
         lblUserSub = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         pnlContent = new javax.swing.JPanel();
+        pnlContentPreview = new javax.swing.JPanel();
+        lblContentPreview = new javax.swing.JLabel();
+        pnlAuthHost = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Access by KAI - Sistem Tiket Kereta");
+        setPreferredSize(new java.awt.Dimension(1280, 760));
 
         pnlRoot.setLayout(new java.awt.CardLayout());
 
-        pnlAuthHost.setLayout(new java.awt.CardLayout());
-        pnlRoot.add(pnlAuthHost, "AUTH");
-
         pnlAppShell.setLayout(new java.awt.BorderLayout());
 
+        pnlSidebar.setBackground(new java.awt.Color(27, 54, 93));
+        pnlSidebar.setBorder(javax.swing.BorderFactory.createEmptyBorder(24, 18, 22, 18));
+        pnlSidebar.setPreferredSize(new java.awt.Dimension(265, 740));
         pnlSidebar.setLayout(new java.awt.BorderLayout(0, 20));
 
+        pnlBrand.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 4, 16, 4));
+        pnlBrand.setOpaque(false);
         pnlBrand.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblBrandTitle.setText("ACCESS BY KAI");
+        lblBrandTitle.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblBrandTitle.setForeground(new java.awt.Color(255, 255, 255));
         pnlBrand.add(lblBrandTitle);
 
         lblBrandSub.setText("Jalur Kereta Api Madura");
+        lblBrandSub.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        lblBrandSub.setForeground(new java.awt.Color(243, 112, 33));
         pnlBrand.add(lblBrandSub);
 
         pnlSidebar.add(pnlBrand, java.awt.BorderLayout.NORTH);
 
+        pnlNavWrap.setOpaque(false);
         pnlNavWrap.setLayout(new java.awt.BorderLayout(0, 10));
 
-        lblNavSection.setText("NAVIGASI UTAMA");
+        lblNavSection.setText("MENU PELANGGAN / ADMIN");
+        lblNavSection.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        lblNavSection.setForeground(new java.awt.Color(148, 163, 184));
         pnlNavWrap.add(lblNavSection, java.awt.BorderLayout.NORTH);
 
+        pnlNavHolder.setOpaque(false);
         pnlNavHolder.setLayout(new java.awt.BorderLayout());
 
+        pnlNavMenu.setOpaque(false);
         pnlNavMenu.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
+
+        btnNavPreview1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNavPreview1.setText("»  Cari & Pesan Tiket");
+        btnNavPreview1.setBackground(new java.awt.Color(243, 112, 33));
+        btnNavPreview1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnNavPreview1.setForeground(new java.awt.Color(255, 255, 255));
+        btnNavPreview1.setFocusPainted(false);
+        btnNavPreview1.setPreferredSize(new java.awt.Dimension(220, 42));
+        pnlNavMenu.add(btnNavPreview1);
+
+        btnNavPreview2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNavPreview2.setText("   Tiket Saya");
+        btnNavPreview2.setBackground(new java.awt.Color(39, 74, 126));
+        btnNavPreview2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnNavPreview2.setForeground(new java.awt.Color(226, 232, 240));
+        btnNavPreview2.setFocusPainted(false);
+        btnNavPreview2.setPreferredSize(new java.awt.Dimension(220, 42));
+        pnlNavMenu.add(btnNavPreview2);
+
+        btnNavPreview3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnNavPreview3.setText("   Cetak Tiket Mandiri");
+        btnNavPreview3.setBackground(new java.awt.Color(39, 74, 126));
+        btnNavPreview3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        btnNavPreview3.setForeground(new java.awt.Color(226, 232, 240));
+        btnNavPreview3.setFocusPainted(false);
+        btnNavPreview3.setPreferredSize(new java.awt.Dimension(220, 42));
+        pnlNavMenu.add(btnNavPreview3);
+
         pnlNavHolder.add(pnlNavMenu, java.awt.BorderLayout.NORTH);
 
         pnlNavWrap.add(pnlNavHolder, java.awt.BorderLayout.CENTER);
 
         pnlSidebar.add(pnlNavWrap, java.awt.BorderLayout.CENTER);
 
+        pnlUserFooter.setBackground(new java.awt.Color(19, 40, 70));
+        pnlUserFooter.setBorder(javax.swing.BorderFactory.createEmptyBorder(14, 14, 14, 14));
         pnlUserFooter.setLayout(new java.awt.BorderLayout(0, 10));
 
+        pnlUserMeta.setOpaque(false);
         pnlUserMeta.setLayout(new java.awt.GridLayout(0, 1, 0, 2));
 
-        lblUserName.setText("Pengguna");
+        lblUserName.setText("Budi Santoso");
+        lblUserName.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        lblUserName.setForeground(new java.awt.Color(255, 255, 255));
         pnlUserMeta.add(lblUserName);
 
-        lblUserSub.setText("Role");
+        lblUserSub.setText("Pelanggan • KTP");
+        lblUserSub.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        lblUserSub.setForeground(new java.awt.Color(203, 213, 225));
         pnlUserMeta.add(lblUserSub);
 
         pnlUserFooter.add(pnlUserMeta, java.awt.BorderLayout.CENTER);
 
         btnLogout.setText("Keluar Akun");
+        btnLogout.setBackground(new java.awt.Color(220, 38, 38));
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setFocusPainted(false);
+        btnLogout.setPreferredSize(new java.awt.Dimension(180, 38));
         pnlUserFooter.add(btnLogout, java.awt.BorderLayout.SOUTH);
 
         pnlSidebar.add(pnlUserFooter, java.awt.BorderLayout.SOUTH);
 
         pnlAppShell.add(pnlSidebar, java.awt.BorderLayout.WEST);
 
+        pnlContent.setBackground(new java.awt.Color(245, 247, 250));
         pnlContent.setLayout(new java.awt.CardLayout());
+
+        pnlContentPreview.setBackground(new java.awt.Color(245, 247, 250));
+        pnlContentPreview.setBorder(javax.swing.BorderFactory.createEmptyBorder(28, 32, 28, 32));
+        pnlContentPreview.setLayout(new java.awt.BorderLayout());
+
+        lblContentPreview.setBackground(new java.awt.Color(255, 255, 255));
+        lblContentPreview.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lblContentPreview.setForeground(new java.awt.Color(27, 54, 93));
+        lblContentPreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContentPreview.setText("Area Konten CardLayout (CariTiketPanel, PilihKeretaPanel, PesanKursiPanel, ETiketPanel, CetakTiketPanel, Panel Admin)");
+        lblContentPreview.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(24, 24, 24, 24)));
+        lblContentPreview.setOpaque(true);
+        pnlContentPreview.add(lblContentPreview, java.awt.BorderLayout.CENTER);
+
+        pnlContent.add(pnlContentPreview, "PREVIEW");
+
         pnlAppShell.add(pnlContent, java.awt.BorderLayout.CENTER);
 
         pnlRoot.add(pnlAppShell, "APP");
+
+        pnlAuthHost.setLayout(new java.awt.CardLayout());
+        pnlRoot.add(pnlAuthHost, "AUTH");
 
         getContentPane().add(pnlRoot, java.awt.BorderLayout.CENTER);
 
@@ -532,8 +608,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnNavPreview1;
+    private javax.swing.JButton btnNavPreview2;
+    private javax.swing.JButton btnNavPreview3;
     private javax.swing.JLabel lblBrandSub;
     private javax.swing.JLabel lblBrandTitle;
+    private javax.swing.JLabel lblContentPreview;
     private javax.swing.JLabel lblNavSection;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblUserSub;
@@ -541,6 +621,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAuthHost;
     private javax.swing.JPanel pnlBrand;
     private javax.swing.JPanel pnlContent;
+    private javax.swing.JPanel pnlContentPreview;
     private javax.swing.JPanel pnlNavHolder;
     private javax.swing.JPanel pnlNavMenu;
     private javax.swing.JPanel pnlNavWrap;

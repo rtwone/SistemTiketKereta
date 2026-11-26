@@ -175,105 +175,157 @@ public class LoginPanel extends javax.swing.JPanel {
         btnLogin = new javax.swing.JButton();
         btnKeRegister = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout());
 
-        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 64));
+        pnlWrapper.setOpaque(false);
+        pnlWrapper.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 115));
 
+        pnlSplitBox.setOpaque(false);
         pnlSplitBox.setLayout(new java.awt.BorderLayout(20, 0));
 
+        pnlHeroSide.setBackground(new java.awt.Color(27, 54, 93));
+        pnlHeroSide.setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        pnlHeroSide.setPreferredSize(new java.awt.Dimension(370, 380));
         pnlHeroSide.setLayout(new java.awt.BorderLayout(0, 20));
 
+        pnlHeroTop.setOpaque(false);
         pnlHeroTop.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
 
         lblBrand.setText("ACCESS BY KAI • MADURA");
+        lblBrand.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblBrand.setForeground(new java.awt.Color(243, 112, 33));
         pnlHeroTop.add(lblBrand);
 
         lblHeroHeadline.setText("Perjalanan Kereta Api");
+        lblHeroHeadline.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblHeroHeadline.setForeground(new java.awt.Color(255, 255, 255));
         pnlHeroTop.add(lblHeroHeadline);
 
         lblHeroHeadline2.setText("Lebih Mudah & Nyaman");
+        lblHeroHeadline2.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblHeroHeadline2.setForeground(new java.awt.Color(255, 255, 255));
         pnlHeroTop.add(lblHeroHeadline2);
-
         pnlHeroSide.add(pnlHeroTop, java.awt.BorderLayout.NORTH);
 
+        pnlHeroFeatures.setOpaque(false);
         pnlHeroFeatures.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
 
         lblFeat1.setText("•  21 Stasiun Jalur Kalianget - Kamal");
+        lblFeat1.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblFeat1.setForeground(new java.awt.Color(226, 232, 240));
         pnlHeroFeatures.add(lblFeat1);
 
         lblFeat2.setText("•  48 Jadwal Harian Multi-Kelas");
+        lblFeat2.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblFeat2.setForeground(new java.awt.Color(226, 232, 240));
         pnlHeroFeatures.add(lblFeat2);
 
         lblFeat3.setText("•  Pilih Kursi Gerbong & E-Tiket Instan");
+        lblFeat3.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblFeat3.setForeground(new java.awt.Color(226, 232, 240));
         pnlHeroFeatures.add(lblFeat3);
-
         pnlHeroSide.add(pnlHeroFeatures, java.awt.BorderLayout.CENTER);
 
+        pnlDemoBox.setOpaque(false);
         pnlDemoBox.setLayout(new java.awt.BorderLayout(0, 8));
 
         lblDemoHint.setText("Pintasan Isi Akun Demo:");
+        lblDemoHint.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblDemoHint.setForeground(new java.awt.Color(148, 163, 184));
         pnlDemoBox.add(lblDemoHint, java.awt.BorderLayout.NORTH);
 
+        pnlDemoButtons.setOpaque(false);
         pnlDemoButtons.setLayout(new java.awt.GridLayout(1, 2, 8, 0));
 
         btnDemoPelanggan.setText("Pelanggan");
+        btnDemoPelanggan.setBackground(new java.awt.Color(255, 255, 255));
+        btnDemoPelanggan.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnDemoPelanggan.setForeground(new java.awt.Color(15, 23, 42));
+        btnDemoPelanggan.setFocusPainted(false);
         pnlDemoButtons.add(btnDemoPelanggan);
 
         btnDemoAdmin.setText("Admin");
+        btnDemoAdmin.setBackground(new java.awt.Color(255, 255, 255));
+        btnDemoAdmin.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnDemoAdmin.setForeground(new java.awt.Color(15, 23, 42));
+        btnDemoAdmin.setFocusPainted(false);
         pnlDemoButtons.add(btnDemoAdmin);
-
         pnlDemoBox.add(pnlDemoButtons, java.awt.BorderLayout.CENTER);
-
         pnlHeroSide.add(pnlDemoBox, java.awt.BorderLayout.SOUTH);
-
         pnlSplitBox.add(pnlHeroSide, java.awt.BorderLayout.WEST);
 
+        pnlCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(32, 38, 32, 38)));
         pnlCard.setLayout(new java.awt.BorderLayout(0, 22));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
 
         lblTitle.setText("Masuk ke Akun Anda");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlHeader.add(lblTitle);
 
         lblSubtitle.setText("Gunakan username admin atau nomor KTP/Paspor pelanggan");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlHeader.add(lblSubtitle);
-
         pnlCard.add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlForm.setOpaque(false);
         pnlForm.setLayout(new java.awt.GridLayout(2, 1, 0, 16));
 
+        pnlIdGroup.setOpaque(false);
         pnlIdGroup.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblIdentifier.setText("Username / Nomor Identitas");
+        lblIdentifier.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblIdentifier.setForeground(new java.awt.Color(15, 23, 42));
         pnlIdGroup.add(lblIdentifier, java.awt.BorderLayout.NORTH);
-        pnlIdGroup.add(txtIdentifier, java.awt.BorderLayout.CENTER);
 
+        txtIdentifier.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtIdentifier.setPreferredSize(new java.awt.Dimension(410, 42));
+        pnlIdGroup.add(txtIdentifier, java.awt.BorderLayout.CENTER);
         pnlForm.add(pnlIdGroup);
 
+        pnlPassGroup.setOpaque(false);
         pnlPassGroup.setLayout(new java.awt.BorderLayout(0, 6));
 
         lblPassword.setText("Password");
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPassword.setForeground(new java.awt.Color(15, 23, 42));
         pnlPassGroup.add(lblPassword, java.awt.BorderLayout.NORTH);
+
+        pwdPassword.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        pwdPassword.setPreferredSize(new java.awt.Dimension(410, 42));
         pnlPassGroup.add(pwdPassword, java.awt.BorderLayout.CENTER);
-
         pnlForm.add(pnlPassGroup);
-
         pnlCard.add(pnlForm, java.awt.BorderLayout.CENTER);
 
+        pnlActions.setOpaque(false);
         pnlActions.setLayout(new java.awt.GridLayout(2, 1, 0, 10));
 
         btnLogin.setText("Masuk ke Aplikasi →");
+        btnLogin.setBackground(new java.awt.Color(243, 112, 33));
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFocusPainted(false);
+        btnLogin.setPreferredSize(new java.awt.Dimension(410, 44));
         pnlActions.add(btnLogin);
 
         btnKeRegister.setText("Belum punya akun? Daftar Pelanggan Baru");
+        btnKeRegister.setBackground(new java.awt.Color(255, 255, 255));
+        btnKeRegister.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnKeRegister.setForeground(new java.awt.Color(15, 23, 42));
+        btnKeRegister.setFocusPainted(false);
+        btnKeRegister.setPreferredSize(new java.awt.Dimension(410, 42));
         pnlActions.add(btnKeRegister);
-
         pnlCard.add(pnlActions, java.awt.BorderLayout.SOUTH);
-
         pnlSplitBox.add(pnlCard, java.awt.BorderLayout.CENTER);
-
         pnlWrapper.add(pnlSplitBox);
-
         add(pnlWrapper, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

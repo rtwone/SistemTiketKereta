@@ -645,126 +645,189 @@ public class CetakTiketPanel extends javax.swing.JPanel {
         pnlTiketHolder = new javax.swing.JPanel();
         pnlTiketList = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlTitleBox.setOpaque(false);
         pnlTitleBox.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Cetak Tiket Mandiri (CTM)");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlTitleBox.add(lblTitle);
 
         lblSubtitle.setText("Simulasi mesin cetak Boarding Pass stasiun KAI • Pilih tiket Lunas untuk mencetak salinan tiket fisik");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlTitleBox.add(lblSubtitle);
-
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.NORTH);
 
+        pnlControlCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlControlCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(14, 18, 14, 18)));
         pnlControlCard.setLayout(new java.awt.BorderLayout(14, 0));
 
         lblPilihTiket.setText("Pilih Tiket Lunas:");
+        lblPilihTiket.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPilihTiket.setForeground(new java.awt.Color(15, 23, 42));
         pnlControlCard.add(lblPilihTiket, java.awt.BorderLayout.WEST);
 
+        pnlInputRow.setOpaque(false);
         pnlInputRow.setLayout(new java.awt.BorderLayout(10, 0));
-        pnlInputRow.add(cmbTiketLunas, java.awt.BorderLayout.CENTER);
-        pnlInputRow.add(txtKodeManual, java.awt.BorderLayout.EAST);
 
+        cmbTiketLunas.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbTiketLunas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TKT-0001 • KA 101 Jokotole (KML → SMP) • 2 Penumpang" }));
+        cmbTiketLunas.setPreferredSize(new java.awt.Dimension(170, 38));
+        pnlInputRow.add(cmbTiketLunas, java.awt.BorderLayout.CENTER);
+
+        txtKodeManual.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        txtKodeManual.setPreferredSize(new java.awt.Dimension(240, 40));
+        pnlInputRow.add(txtKodeManual, java.awt.BorderLayout.EAST);
         pnlControlCard.add(pnlInputRow, java.awt.BorderLayout.CENTER);
 
         btnMulaiCetak.setText("Cetak Tiket Sekarang");
+        btnMulaiCetak.setBackground(new java.awt.Color(243, 112, 33));
+        btnMulaiCetak.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnMulaiCetak.setForeground(new java.awt.Color(255, 255, 255));
+        btnMulaiCetak.setFocusPainted(false);
         pnlControlCard.add(btnMulaiCetak, java.awt.BorderLayout.EAST);
-
         pnlHeader.add(pnlControlCard, java.awt.BorderLayout.CENTER);
-
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlStage.setOpaque(false);
         pnlStage.setLayout(new java.awt.CardLayout());
 
-        pnlIdleWrap.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        pnlIdleWrap.setOpaque(false);
+        pnlIdleWrap.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 95));
 
+        pnlIdleCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlIdleCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(28, 34, 28, 34)));
+        pnlIdleCard.setPreferredSize(new java.awt.Dimension(620, 230));
         pnlIdleCard.setLayout(new java.awt.BorderLayout(0, 14));
 
         lblIdleTitle.setText("Mesin Cetak Tiket Mandiri Siap Digunakan");
+        lblIdleTitle.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblIdleTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlIdleCard.add(lblIdleTitle, java.awt.BorderLayout.NORTH);
 
+        pnlIdleDesc.setOpaque(false);
         pnlIdleDesc.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
 
         lblIdleDesc1.setText("•  Pastikan pesanan tiket Anda sudah berstatus LUNAS.");
+        lblIdleDesc1.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblIdleDesc1.setForeground(new java.awt.Color(15, 23, 42));
         pnlIdleDesc.add(lblIdleDesc1);
 
         lblIdleDesc2.setText("•  Pilih pesanan pada daftar di atas atau ketik Kode Booking, lalu klik Cetak Tiket Sekarang.");
+        lblIdleDesc2.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblIdleDesc2.setForeground(new java.awt.Color(15, 23, 42));
         pnlIdleDesc.add(lblIdleDesc2);
 
         lblIdleDesc3.setText("•  Sistem akan mensimulasikan pencetakan Boarding Pass dan menampilkan salinan tiket fisik resmi.");
+        lblIdleDesc3.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblIdleDesc3.setForeground(new java.awt.Color(15, 23, 42));
         pnlIdleDesc.add(lblIdleDesc3);
-
         pnlIdleCard.add(pnlIdleDesc, java.awt.BorderLayout.CENTER);
 
         btnKeTiketSayaIdle.setText("Lihat Daftar Tiket Saya");
+        btnKeTiketSayaIdle.setBackground(new java.awt.Color(255, 255, 255));
+        btnKeTiketSayaIdle.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnKeTiketSayaIdle.setForeground(new java.awt.Color(15, 23, 42));
+        btnKeTiketSayaIdle.setFocusPainted(false);
         pnlIdleCard.add(btnKeTiketSayaIdle, java.awt.BorderLayout.SOUTH);
-
         pnlIdleWrap.add(pnlIdleCard);
-
         pnlStage.add(pnlIdleWrap, "IDLE");
 
-        pnlPrintWrap.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        pnlPrintWrap.setOpaque(false);
+        pnlPrintWrap.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 95));
 
+        pnlPrintCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrintCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(30, 36, 30, 36)));
+        pnlPrintCard.setPreferredSize(new java.awt.Dimension(620, 240));
         pnlPrintCard.setLayout(new java.awt.BorderLayout(0, 18));
 
+        pnlPrintHead.setOpaque(false);
         pnlPrintHead.setLayout(new java.awt.GridLayout(0, 1, 0, 6));
 
         lblPrintBadge.setText("SIMULASI MESIN CETAK TIKET MANDIRI (CTM)");
+        lblPrintBadge.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblPrintBadge.setForeground(new java.awt.Color(243, 112, 33));
         pnlPrintHead.add(lblPrintBadge);
 
         lblPrintTitle.setText("Sedang Mencetak Tiket Fisik...");
+        lblPrintTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblPrintTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlPrintHead.add(lblPrintTitle);
 
         lblPrintMeta.setText("Kode Booking: -");
+        lblPrintMeta.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblPrintMeta.setForeground(new java.awt.Color(15, 23, 42));
         pnlPrintHead.add(lblPrintMeta);
-
         pnlPrintCard.add(pnlPrintHead, java.awt.BorderLayout.NORTH);
 
+        pnlProgressBox.setOpaque(false);
         pnlProgressBox.setLayout(new java.awt.BorderLayout(0, 10));
+
+        prgCetak.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        prgCetak.setForeground(new java.awt.Color(243, 112, 33));
+        prgCetak.setPreferredSize(new java.awt.Dimension(520, 30));
+        prgCetak.setValue(65);
+        prgCetak.setStringPainted(true);
         pnlProgressBox.add(prgCetak, java.awt.BorderLayout.NORTH);
 
         lblPrintStep.setText("Memverifikasi kode booking...");
+        lblPrintStep.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblPrintStep.setForeground(new java.awt.Color(100, 116, 139));
         pnlProgressBox.add(lblPrintStep, java.awt.BorderLayout.SOUTH);
-
         pnlPrintCard.add(pnlProgressBox, java.awt.BorderLayout.CENTER);
-
         pnlPrintWrap.add(pnlPrintCard);
-
         pnlStage.add(pnlPrintWrap, "PRINTING");
 
+        pnlResultWrap.setOpaque(false);
         pnlResultWrap.setLayout(new java.awt.BorderLayout(0, 14));
 
+        pnlDoneBanner.setBackground(new java.awt.Color(220, 252, 231));
+        pnlDoneBanner.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(12, 16, 12, 16)));
         pnlDoneBanner.setLayout(new java.awt.BorderLayout(12, 0));
 
         lblDoneInfo.setText("•  Tiket Selesai Dicetak!");
+        lblDoneInfo.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblDoneInfo.setForeground(new java.awt.Color(22, 163, 74));
         pnlDoneBanner.add(lblDoneInfo, java.awt.BorderLayout.WEST);
 
+        pnlDoneActions.setOpaque(false);
         pnlDoneActions.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
 
         btnCetakUlang.setText("Cetak Ulang");
+        btnCetakUlang.setBackground(new java.awt.Color(255, 255, 255));
+        btnCetakUlang.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnCetakUlang.setForeground(new java.awt.Color(15, 23, 42));
+        btnCetakUlang.setFocusPainted(false);
         pnlDoneActions.add(btnCetakUlang);
 
         btnLihatETiketDigital.setText("Buka E-Tiket Digital");
+        btnLihatETiketDigital.setBackground(new java.awt.Color(27, 54, 93));
+        btnLihatETiketDigital.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnLihatETiketDigital.setForeground(new java.awt.Color(255, 255, 255));
+        btnLihatETiketDigital.setFocusPainted(false);
         pnlDoneActions.add(btnLihatETiketDigital);
-
         pnlDoneBanner.add(pnlDoneActions, java.awt.BorderLayout.EAST);
-
         pnlResultWrap.add(pnlDoneBanner, java.awt.BorderLayout.NORTH);
 
+
+        pnlTiketHolder.setBackground(new java.awt.Color(245, 247, 250));
         pnlTiketHolder.setLayout(new java.awt.BorderLayout());
 
+        pnlTiketList.setOpaque(false);
         pnlTiketList.setLayout(new java.awt.GridLayout(0, 1, 0, 18));
         pnlTiketHolder.add(pnlTiketList, java.awt.BorderLayout.NORTH);
-
         scrTiketFisik.setViewportView(pnlTiketHolder);
-
         pnlResultWrap.add(scrTiketFisik, java.awt.BorderLayout.CENTER);
-
         pnlStage.add(pnlResultWrap, "DONE");
-
         add(pnlStage, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

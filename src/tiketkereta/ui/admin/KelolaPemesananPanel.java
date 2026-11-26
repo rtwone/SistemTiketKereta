@@ -247,60 +247,105 @@ public class KelolaPemesananPanel extends javax.swing.JPanel {
         btnTandaiLunas = new javax.swing.JButton();
         btnBatalkan = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new java.awt.BorderLayout(12, 0));
 
+        pnlTitleBox.setOpaque(false);
         pnlTitleBox.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblTitle.setText("Kelola Pemesanan");
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTitle.setForeground(new java.awt.Color(27, 54, 93));
         pnlTitleBox.add(lblTitle);
 
         lblSubtitle.setText("Pantau seluruh transaksi tiket dan ubah status menjadi Lunas atau Dibatalkan");
+        lblSubtitle.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblSubtitle.setForeground(new java.awt.Color(100, 116, 139));
         pnlTitleBox.add(lblSubtitle);
-
         pnlHeader.add(pnlTitleBox, java.awt.BorderLayout.CENTER);
 
+        pnlFilter.setOpaque(false);
         pnlFilter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 8, 4));
 
         lblFilter.setText("Status:");
+        lblFilter.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        lblFilter.setForeground(new java.awt.Color(15, 23, 42));
         pnlFilter.add(lblFilter);
 
+        cmbFilter.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        cmbFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Dipesan", "Lunas", "Dibatalkan" }));
+        cmbFilter.setPreferredSize(new java.awt.Dimension(170, 38));
         pnlFilter.add(cmbFilter);
 
         btnRefresh.setText("Muat Ulang");
+        btnRefresh.setBackground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnRefresh.setForeground(new java.awt.Color(15, 23, 42));
+        btnRefresh.setFocusPainted(false);
         pnlFilter.add(btnRefresh);
-
         pnlHeader.add(pnlFilter, java.awt.BorderLayout.EAST);
-
         add(pnlHeader, java.awt.BorderLayout.NORTH);
 
+        pnlCard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCard.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(18, 20, 18, 20)));
         pnlCard.setLayout(new java.awt.BorderLayout(0, 14));
 
-        scrPemesanan.setViewportView(tblPemesanan);
+        scrPemesanan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
 
+        tblPemesanan.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        tblPemesanan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Kode Booking", "Pemesan", "Kereta", "Kelas", "Rute", "Kursi", "Total", "Status"
+            }
+        ));
+        tblPemesanan.setRowHeight(34);
+        scrPemesanan.setViewportView(tblPemesanan);
         pnlCard.add(scrPemesanan, java.awt.BorderLayout.CENTER);
 
+        pnlActions.setBackground(new java.awt.Color(248, 250, 252));
+        pnlActions.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(10, 14, 10, 14)));
         pnlActions.setLayout(new java.awt.BorderLayout());
 
         lblInfo.setText("0 pesanan ditampilkan");
+        lblInfo.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblInfo.setForeground(new java.awt.Color(27, 54, 93));
         pnlActions.add(lblInfo, java.awt.BorderLayout.WEST);
 
+        pnlActionButtons.setOpaque(false);
         pnlActionButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
 
         btnDetail.setText("Lihat Detail");
+        btnDetail.setBackground(new java.awt.Color(27, 54, 93));
+        btnDetail.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnDetail.setForeground(new java.awt.Color(255, 255, 255));
+        btnDetail.setFocusPainted(false);
         pnlActionButtons.add(btnDetail);
 
         btnTandaiLunas.setText("Tandai Lunas");
+        btnTandaiLunas.setBackground(new java.awt.Color(22, 163, 74));
+        btnTandaiLunas.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnTandaiLunas.setForeground(new java.awt.Color(255, 255, 255));
+        btnTandaiLunas.setFocusPainted(false);
         pnlActionButtons.add(btnTandaiLunas);
 
         btnBatalkan.setText("Batalkan Pesanan");
+        btnBatalkan.setBackground(new java.awt.Color(220, 38, 38));
+        btnBatalkan.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnBatalkan.setForeground(new java.awt.Color(255, 255, 255));
+        btnBatalkan.setFocusPainted(false);
         pnlActionButtons.add(btnBatalkan);
-
         pnlActions.add(pnlActionButtons, java.awt.BorderLayout.EAST);
-
         pnlCard.add(pnlActions, java.awt.BorderLayout.SOUTH);
-
         add(pnlCard, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

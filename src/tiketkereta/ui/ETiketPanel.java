@@ -191,92 +191,149 @@ public class ETiketPanel extends javax.swing.JPanel {
         btnCetakFisik = new javax.swing.JButton();
         btnPesanLagi = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(245, 247, 250));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
+        setPreferredSize(new java.awt.Dimension(1120, 680));
         setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlTicketHeader.setBackground(new java.awt.Color(27, 54, 93));
+        pnlTicketHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(22, 26, 22, 26));
         pnlTicketHeader.setLayout(new java.awt.BorderLayout(12, 0));
 
+        pnlHeadLeft.setOpaque(false);
         pnlHeadLeft.setLayout(new java.awt.GridLayout(0, 1, 0, 4));
 
         lblBrand.setText("BOARDING PASS / E-TIKET RESMI • ACCESS BY KAI");
+        lblBrand.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblBrand.setForeground(new java.awt.Color(243, 112, 33));
         pnlHeadLeft.add(lblBrand);
 
         lblBookingCode.setText("TKT-0001");
+        lblBookingCode.setFont(new java.awt.Font("Segoe UI", 1, 24));
+        lblBookingCode.setForeground(new java.awt.Color(255, 255, 255));
         pnlHeadLeft.add(lblBookingCode);
-
         pnlTicketHeader.add(pnlHeadLeft, java.awt.BorderLayout.CENTER);
 
         lblStatusBadge.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblStatusBadge.setText("LUNAS");
+        lblStatusBadge.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblStatusBadge.setForeground(new java.awt.Color(255, 255, 255));
         pnlTicketHeader.add(lblStatusBadge, java.awt.BorderLayout.EAST);
-
         add(pnlTicketHeader, java.awt.BorderLayout.NORTH);
 
+        pnlTicketBody.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTicketBody.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(20, 24, 20, 24)));
         pnlTicketBody.setLayout(new java.awt.BorderLayout(0, 16));
 
+        pnlInfoGrid.setOpaque(false);
         pnlInfoGrid.setLayout(new java.awt.GridLayout(1, 3, 16, 0));
 
+        pnlTileRute.setBackground(new java.awt.Color(248, 250, 252));
+        pnlTileRute.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(14, 16, 14, 16)));
         pnlTileRute.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
 
         lblRuteTag.setText("Rute & Waktu Perjalanan");
+        lblRuteTag.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblRuteTag.setForeground(new java.awt.Color(100, 116, 139));
         pnlTileRute.add(lblRuteTag);
 
         lblRuteVal.setText("-");
+        lblRuteVal.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblRuteVal.setForeground(new java.awt.Color(27, 54, 93));
         pnlTileRute.add(lblRuteVal);
 
         lblJamVal.setText("-");
+        lblJamVal.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblJamVal.setForeground(new java.awt.Color(15, 23, 42));
         pnlTileRute.add(lblJamVal);
-
         pnlInfoGrid.add(pnlTileRute);
 
+        pnlTileKereta.setBackground(new java.awt.Color(248, 250, 252));
+        pnlTileKereta.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)), javax.swing.BorderFactory.createEmptyBorder(14, 16, 14, 16)));
         pnlTileKereta.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
 
         lblKeretaTag.setText("Armada & Kelas Layanan");
+        lblKeretaTag.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblKeretaTag.setForeground(new java.awt.Color(100, 116, 139));
         pnlTileKereta.add(lblKeretaTag);
 
         lblKeretaVal.setText("-");
+        lblKeretaVal.setFont(new java.awt.Font("Segoe UI", 1, 15));
+        lblKeretaVal.setForeground(new java.awt.Color(15, 23, 42));
         pnlTileKereta.add(lblKeretaVal);
 
         lblKelasVal.setText("-");
+        lblKelasVal.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        lblKelasVal.setForeground(new java.awt.Color(27, 54, 93));
         pnlTileKereta.add(lblKelasVal);
-
         pnlInfoGrid.add(pnlTileKereta);
 
+        pnlTileBayar.setBackground(new java.awt.Color(255, 247, 237));
+        pnlTileBayar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 215, 170)), javax.swing.BorderFactory.createEmptyBorder(14, 16, 14, 16)));
         pnlTileBayar.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
 
         lblTotalTag.setText("Total Bayar & Waktu Pesan");
+        lblTotalTag.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblTotalTag.setForeground(new java.awt.Color(100, 116, 139));
         pnlTileBayar.add(lblTotalTag);
 
         lblTotalVal.setText("Rp 0");
+        lblTotalVal.setFont(new java.awt.Font("Segoe UI", 1, 20));
+        lblTotalVal.setForeground(new java.awt.Color(243, 112, 33));
         pnlTileBayar.add(lblTotalVal);
 
         lblWaktuVal.setText("-");
+        lblWaktuVal.setFont(new java.awt.Font("Segoe UI", 0, 12));
+        lblWaktuVal.setForeground(new java.awt.Color(100, 116, 139));
         pnlTileBayar.add(lblWaktuVal);
-
         pnlInfoGrid.add(pnlTileBayar);
-
         pnlTicketBody.add(pnlInfoGrid, java.awt.BorderLayout.NORTH);
 
-        scrPenumpang.setViewportView(tblPenumpang);
+        scrPenumpang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(226, 232, 240)));
 
+        tblPenumpang.setFont(new java.awt.Font("Segoe UI", 0, 13));
+        tblPenumpang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "No", "Nama Penumpang", "Jenis Identitas", "Nomor Identitas", "Nomor Kursi"
+            }
+        ));
+        tblPenumpang.setRowHeight(34);
+        scrPenumpang.setViewportView(tblPenumpang);
         pnlTicketBody.add(scrPenumpang, java.awt.BorderLayout.CENTER);
 
+        pnlFooter.setOpaque(false);
         pnlFooter.setLayout(new java.awt.BorderLayout());
 
         btnTiketSaya.setText("←  Lihat Daftar Tiket Saya");
+        btnTiketSaya.setBackground(new java.awt.Color(255, 255, 255));
+        btnTiketSaya.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnTiketSaya.setForeground(new java.awt.Color(15, 23, 42));
+        btnTiketSaya.setFocusPainted(false);
         pnlFooter.add(btnTiketSaya, java.awt.BorderLayout.WEST);
 
+        pnlFooterRight.setOpaque(false);
         pnlFooterRight.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 0));
 
         btnCetakFisik.setText("Cetak Tiket Fisik");
+        btnCetakFisik.setBackground(new java.awt.Color(27, 54, 93));
+        btnCetakFisik.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnCetakFisik.setForeground(new java.awt.Color(255, 255, 255));
+        btnCetakFisik.setFocusPainted(false);
         pnlFooterRight.add(btnCetakFisik);
 
         btnPesanLagi.setText("Pesan Tiket Baru  →");
+        btnPesanLagi.setBackground(new java.awt.Color(243, 112, 33));
+        btnPesanLagi.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        btnPesanLagi.setForeground(new java.awt.Color(255, 255, 255));
+        btnPesanLagi.setFocusPainted(false);
         pnlFooterRight.add(btnPesanLagi);
-
         pnlFooter.add(pnlFooterRight, java.awt.BorderLayout.EAST);
-
         pnlTicketBody.add(pnlFooter, java.awt.BorderLayout.SOUTH);
-
         add(pnlTicketBody, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
